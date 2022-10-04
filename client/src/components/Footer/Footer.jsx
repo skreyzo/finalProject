@@ -1,21 +1,21 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className={styles.footer}>
       <ul className="nav nav-pills nav-fill">
         <li className="nav-item">
-          <a className="nav-link" aria-current="page" href="/contact">
+          <Link className="nav-link" aria-current="page" to="/contact">
             Contact us
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/join">
+          <Link className="nav-link" to="/join">
             Join us
-          </a>
+          </Link>
         </li>
-
       </ul>
     </div>
   );
