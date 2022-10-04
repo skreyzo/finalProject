@@ -15,7 +15,7 @@ const app = express();
 app.use(morgan("dev"));
 // Чтобы наши статические файлы были видны браузеру, мы должны их подключить
 app.use(express.static(path.join(__dirname, "../public/")));
-app.use(express.json());ls
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Выносим порт в .env и на всякий случай подставляем дефолтный через ||
