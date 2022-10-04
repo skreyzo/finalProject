@@ -1,13 +1,13 @@
 import React from 'react'
-import styles from "./Home.module.css";
+import styles from "./education.module.css";
 
-const Home = (props) => {
+const Education = (props) => {
   return (
     <>    
     <span className={styles.component}> {props.title}</span>
-    <div>Home</div>
+    <div>Education</div>
     </>
   )
 }
 
-export default Home
+export default Education
