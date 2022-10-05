@@ -1,19 +1,16 @@
 import React from "react";
-import styles from "./footer.module.css";
+// import styles from "./footer.module.css";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <div className={styles.footer}>
+    <div >
       <ul className="nav nav-pills nav-fill">
         <li className="nav-item">
-          <a className="nav-link" aria-current="page" href="/contact">
-            Contact us
-          </a>
+          <Link to='/contact'>Contact us</Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/join">
-            Join us
-          </a>
+          <Link to='/join'>Join us</Link>
         </li>
 
       </ul>
@@ -22,4 +19,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

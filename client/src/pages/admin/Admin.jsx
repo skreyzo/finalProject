@@ -1,12 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Box from '@mui/material/Box';
+import AdminButton from '../../components/AdminButton';
 
 const Admin = () => {
   return (
     <div>
-      <Link to="/newnews">New News</Link>
-      <Link to="/newevent">New Event</Link>
-      <Link to="/editcont">Edit Contacts</Link>
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        gap: '10',
+        width: '100%',
+        py: '20px',
+        px: '15px'
+      }}>
+        <AdminButton title="New News" path="/newnews"></AdminButton>
+        <AdminButton title="New Event" path="/newevent"></AdminButton>
+        <AdminButton title="Edit About Us" path="/admin/editaboutus"></AdminButton>
+        <AdminButton title="Edit HomePage" path="/admin/edithomepage"></AdminButton>
+      </Box>
     </div>
   );
 };
