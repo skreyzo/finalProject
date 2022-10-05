@@ -1,12 +1,15 @@
 import Footer from './pages/footer/Footer';
 import Main from './navigate/Main';
 import { BrowserRouter } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+/* import Box from '@mui/material/Box';
+import Container from '@mui/material/Container'; */
+
+import { store } from "./store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
-    <BrowserRouter>
+/*     <BrowserRouter>
       <Container maxWidth={false} disableGutters={true}
         sx={{
           className: 'footer',
@@ -30,15 +33,8 @@ function App() {
           <Footer sx={{}} />
         </Box>
       </Container>
-    </BrowserRouter>
-import Footer from "./pages/footer/Footer";
-import Main from "./navigate/Main";
-import { BrowserRouter } from "react-router-dom";
-import { store } from "./store";
-import { Provider } from "react-redux";
+    </BrowserRouter> */
 
-function App() {
-  return (
     <Provider store={store}>
       <BrowserRouter>
         <Main />
