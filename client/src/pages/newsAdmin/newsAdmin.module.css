@@ -1,0 +1,9 @@
+.component {
+    display: inline-block;
+    line-height: 25px;
+    text-align: center;
+    width: 150px;
+    height: 60px;
+    border: 1px dashed #3b9147;
+    margin: 10px;
+  }
