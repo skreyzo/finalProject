@@ -1,12 +1,13 @@
-import React, { useDebugValue } from "react";
+import React from "react";
 import { useState } from "react";
 
-export default function NewsForm() {
+//todo сделать защиту от добавления новости из пустых строчек
+export default function NewsForm({addNewsHandler}) {
   const [values, setValue] = useState({ title: "", body: "" });
 
   const onSubmitHandler = (event) => {
     event.preventDefault()
-    console.log('state', values);
+    addNewsHandler(values)
     setValue({ title: "", body: "" });
 
 
@@ -34,7 +35,7 @@ export default function NewsForm() {
 
         placeholder="Текст поста..."
       />
-      <button type="submit">Сохранить</button>
+      <button type="submit">Submit</button>
     </form>
   );
 }
