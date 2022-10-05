@@ -1,6 +1,5 @@
-import './App.css';
-import Footer from './components/Footer/Footer';
-import Main from './components/Main/Main';
+import Footer from './pages/footer/Footer';
+import Main from './navigate/Main';
 import { BrowserRouter } from 'react-router-dom';
 
 function App() {
