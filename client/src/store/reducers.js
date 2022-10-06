@@ -1,3 +1,5 @@
+import ACTypes from "./types";
+
 const initState = {
   news: [
     { id: "1", title: "Название 1", body: "Текст статьи 1" },
@@ -11,9 +13,19 @@ export const reducers = (state = initState, action) => {
       const filteredNews = state.news.filter(
         (news) => news.id !== action.payload.id
       );
-      console.log(action)
+      console.log(action);
 
       return { ...state, news: filteredNews };
+
+    case ACTypes.ADD_HOMEPAGE:
+      const text = action.payload;
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          { ...text, id: new Date().valueOf().toString(36) },
+        ],
+      };
 
     default:
       return state;

@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const { Home } = require('../../db/models');
 
 exports.getGreeting = async (req, res) => {
@@ -9,8 +8,8 @@ exports.getGreeting = async (req, res) => {
 exports.putGreeting = async (req, res) => {
   console.log(req.body)  
   try {
-  const findGreeting = await Home.findOne({ where: { id: 1 } });
-
+  //const findGreeting = await Home.findOne({ where: { id: 1 } });
+  const greeting = await Todolist.create(req.body);
   res.json({greeting});
 
   } catch (err) {

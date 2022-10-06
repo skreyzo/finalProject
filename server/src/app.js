@@ -24,5 +24,5 @@ app.use('/admin/edithomepage', homeRoutes);
 
 const PORT = process.env.PORT || 3100;
 app.listen(PORT, () => {
-  console.log(`Сервер запущен на http://localhost:${PORT} `);
+  console.log(`Server started at http://localhost:${PORT} `);
 });

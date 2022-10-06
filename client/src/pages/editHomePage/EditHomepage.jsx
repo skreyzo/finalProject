@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import styles from "./edithomepage.module.css";
+import { useDispatch } from "react-redux";
 
 const EditHomepage = () => {
+
+const dispatch = useDispatch();
 
   const [values, setValue] = useState({ value: '' });
 
@@ -12,13 +15,12 @@ const EditHomepage = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(event.target)
-    if (!values.value) return alert('Поле не может быть пустым');
+    if (!values.value) return alert('The field can not be empty');
 
     try {
-      
+      //dispatch(setLoading(true));
       const response = await fetch("http://localhost:3100/admin/edithomepage", {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -26,17 +28,20 @@ const EditHomepage = () => {
       });
       if (!response.ok)
         throw new Error(
-          `Ошибка при добавлении: ${response.statusText} ${response.status}`
+          `Error when adding: ${response.statusText} ${response.status}`
         );
       const data = await response.json();
       if (data.err) throw new Error(data.err);
-      
+
+      //dispatch(addTodo(data.todo)); // запись с redux
       setValue({value: ''})   // очищаем поле ввода
 
     } catch (err) {
       console.log(err);
       alert(err.message);
-    } 
+    } finally {
+      //dispatch(setLoading(false));
+    }
   };
 
   return (    

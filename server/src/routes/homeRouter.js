@@ -9,7 +9,7 @@ const {
 
 router
   .route("/")
-  .get(getGreeting)
-  .put(putGreeting);
+  .get(getGreeting)  
+  .post(putGreeting);
 
 module.exports = router;
