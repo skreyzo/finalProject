@@ -1,4 +1,7 @@
+
 require('dotenv').config();
+
+
 
 const path = require('path');
 const express = require('express');
@@ -11,10 +14,40 @@ const router = require('./routers/index');
 
 const checkConnectDb = require('../db/checkDbConnection');
 
+const expressMiddlewares = require('./middlewares/expressMiddlewares')
+
 const errorMiddleware = require('./middlewares/error-middleware');
 const authMiddleware = require('./middlewares/auth-middleware');
 
 const app = express();
+// импорт роутов
+
+const homeRoutes = require('./routes/homeRouter');
+const aboutRoutes = require('./routes/aboutRouter');
+const newsRoutes= require('./routes/newsRouter');
+
+
+expressMiddlewares(app);
+
+// app.use((req, res, next) => {
+//   console.log("\n\x1b[33m", 'req.session.user :', req.session?.user);
+//   next();
+// });
+
+//роутеры
+app.use('/admin/edithomepage', homeRoutes);
+app.use('/about', aboutRoutes);
+app.use('/admin/editnewspage', newsRoutes )
+
+
+
+
+
+
+
+
+
+
 
 // Выносим порт в .env и на всякий случай подставляем дефолтный через ||
 const { DEV_PORT, SESSION_SECRET } = process.env;
@@ -32,20 +65,6 @@ app.use(authMiddleware);
 app.use(errorMiddleware);
 
 app.use('/api', router);
-
-// const sessionConfig = {
-//   name: 'your coockie name', // * Название куки
-//   store: new FileStore(), // * подключение стора (БД для куки) для хранения
-//   secret: SESSION_SECRET ?? 'your key', // * ключ для шифрования куки
-//   resave: false, // * если true, пересохраняет сессию, даже если она не поменялась
-//   saveUninitialized: false, // * Если false, куки появляются только при установке req.session
-//   cookie: {
-//     maxAge: 1000 * 60 * 60 * 24 * 10, // * время жизни в ms (10 дней)
-//     httpOnly: true, // * куки только по http
-//   },
-// };
-
-// app.use(session(sessionConfig));
 
 app.listen(DEV_PORT, () => {
   console.log(`server started PORT: ${DEV_PORT}`);

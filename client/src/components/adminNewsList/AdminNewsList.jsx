@@ -1,14 +1,18 @@
 import React from "react";
-import News from "../../pages/news/News";
+import { useSelector } from 'react-redux'
+import NewsAdmin from "../../pages/newsAdmin/NewsAdmin";
 import NewsForm from "../../pages/newsForm/NewsForm";
 
-const AdminNewsList = ({ news }) => {
+const AdminNewsList = () => {
+
+    const news = useSelector((store) => store.news)
+
   return (
     <div>
       <NewsForm />
       <h1>Всего новостей: {news.length} </h1>
       {news.map((el) => {
-        return <News key={el.id} news={el.title} body={el.body} />;
+        return <NewsAdmin key={el.id} news={el.title} body={el.body} newsId={el.id} />;
       })}
     </div>
   );
