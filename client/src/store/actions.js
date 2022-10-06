@@ -4,3 +4,4 @@ import ACTypes from "./types";
 
 export const addHomePage = (textHP) => ({type: ACTypes.ADD_HOMEPAGE, payload: textHP});
 
+

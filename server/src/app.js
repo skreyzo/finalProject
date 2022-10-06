@@ -9,7 +9,11 @@ const dbCheck = require('../db/dbCheck');
 
 // импорт роутов
 const homeRoutes = require('./routes/homeRouter');
+
+const aboutRoutes = require('./routes/aboutRouter');
+
 const newsRoutes= require('./routes/newsRouter');
+
 
 dbCheck();
 
@@ -22,7 +26,11 @@ expressMiddlewares(app);
 
 //роутеры
 app.use('/admin/edithomepage', homeRoutes);
+
+app.use('/about', aboutRoutes);
+
 app.use('/admin/editnewspage', newsRoutes )
+
 
 const PORT = process.env.PORT || 3100;
 app.listen(PORT, () => {
