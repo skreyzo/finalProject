@@ -17,12 +17,29 @@ export const reducers = (state = initState, action) => {
 
       return { ...state, news: filteredNews };
 
+
+    default:
+      return state;
+  }
+};
+
+
+/* const initStateHP = {
+  news: [
+    { id: "1", title: "Название 1", body: "Текст статьи 1" },
+    { id: "2", title: "Название 2", body: "Текст статьи 2" },
+  ],
+};
+
+export const reducersHP = (state = initStateHP, action) => {
+  switch (action.type) {
+
     case ACTypes.ADD_HOMEPAGE:
       const text = action.payload;
       return {
         ...state,
-        todos: [
-          ...state.todos,
+        news: [
+          ...state.news,
           { ...text, id: new Date().valueOf().toString(36) },
         ],
       };
@@ -30,4 +47,4 @@ export const reducers = (state = initState, action) => {
     default:
       return state;
   }
-};
+}; */

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Home.init({
-    greeting: DataTypes.STRING,
+    greeting: DataTypes.TEXT,
     bigfoto: DataTypes.STRING
   }, {
     sequelize,

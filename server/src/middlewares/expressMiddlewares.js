@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const app = express();
 
 const expressMiddlewares = (app) => {
   app.use(express.static(path.resolve('public')));
