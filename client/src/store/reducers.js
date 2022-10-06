@@ -1,27 +1,19 @@
 import ACTypes from "./types";
 
 const initState = {
-  news: [
-    {
-      id: "1",
-      title: "Наводнение в африке",
-      body: "Негры никогда не видели столько воды",
-    },
-    {
-      id: "2",
-      title: "ВМФ Беларуси",
-      body: "На ВМС Беларуси появился новый крейсер",
-    },
-  ],
+  news: [],
 };
 
 export const reducers = (state = initState, action) => {
   switch (action.type) {
+    case "initState":
+      const newsList = action.payload.data.getNewsList;
+      return { ...state, news: newsList };
+
     case "DELETE_NEWS":
       const filteredNews = state.news.filter(
         (news) => news.id !== action.payload.id
       );
-
 
       return { ...state, news: filteredNews };
 
@@ -33,11 +25,8 @@ export const reducers = (state = initState, action) => {
         news: [
           ...state.news,
           { ...values, id: new Date().valueOf().toString(36) },
-
-      console.log(action);
-
-     
-
+        ],
+      };
     case ACTypes.ADD_HOMEPAGE:
       const text = action.payload;
       return {
@@ -45,7 +34,6 @@ export const reducers = (state = initState, action) => {
         todos: [
           ...state.todos,
           { ...text, id: new Date().valueOf().toString(36) },
-
         ],
       };
 
