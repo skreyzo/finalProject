@@ -9,6 +9,7 @@ const dbCheck = require('../db/dbCheck');
 
 // импорт роутов
 const homeRoutes = require('./routes/homeRouter');
+const aboutRoutes = require('./routes/aboutRouter');
 
 dbCheck();
 
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 
 //роутеры
 app.use('/admin/edithomepage', homeRoutes);
+app.use('/about', aboutRoutes);
 
 const PORT = process.env.PORT || 3100;
 app.listen(PORT, () => {
