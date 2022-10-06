@@ -1,21 +1,25 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 //todo сделать защиту от добавления новости из пустых строчек
-export default function NewsForm({addNewsHandler}) {
+export default function NewsForm() {
   const [values, setValue] = useState({ title: "", body: "" });
 
+  const dispatch = useDispatch();
+
+
+
   const onSubmitHandler = (event) => {
-    event.preventDefault()
-    addNewsHandler(values)
+    event.preventDefault();
+    dispatch({ type: "ADD_NEWS", payload: { values }})
+
+
     setValue({ title: "", body: "" });
-
-
-
   };
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
-    setValue({...values, [name]: value});
+    setValue({ ...values, [name]: value });
   };
 
   return (
@@ -32,7 +36,6 @@ export default function NewsForm({addNewsHandler}) {
         type="text"
         name="body"
         value={values.body}
-
         placeholder="Текст поста..."
       />
       <button type="submit">Submit</button>

@@ -1,7 +1,15 @@
 const initState = {
   news: [
-    { id: "1", title: "Название 1", body: "Текст статьи 1" },
-    { id: "2", title: "Название 2", body: "Текст статьи 2" },
+    {
+      id: "1",
+      title: "Наводнение в африке",
+      body: "Негры никогда не видели столько воды",
+    },
+    {
+      id: "2",
+      title: "ВМФ Беларуси",
+      body: "На ВМС Беларуси появился новый крейсер",
+    },
   ],
 };
 
@@ -11,9 +19,19 @@ export const reducers = (state = initState, action) => {
       const filteredNews = state.news.filter(
         (news) => news.id !== action.payload.id
       );
-      console.log(action)
 
       return { ...state, news: filteredNews };
+
+    case "ADD_NEWS":
+      const { values } = action.payload;
+
+      return {
+        ...state,
+        news: [
+          ...state.news,
+          { ...values, id: new Date().valueOf().toString(36) },
+        ],
+      };
 
     default:
       return state;
