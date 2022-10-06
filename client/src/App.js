@@ -33,6 +33,7 @@ function App() {
             <Footer sx={{}} />
           </Box>
         </Container>
+
       </BrowserRouter>
     </Provider>
   );
