@@ -1,3 +1,5 @@
+import ACTypes from "./types";
+
 const initState = {
   news: [
     {
@@ -20,6 +22,7 @@ export const reducers = (state = initState, action) => {
         (news) => news.id !== action.payload.id
       );
 
+
       return { ...state, news: filteredNews };
 
     case "ADD_NEWS":
@@ -30,6 +33,19 @@ export const reducers = (state = initState, action) => {
         news: [
           ...state.news,
           { ...values, id: new Date().valueOf().toString(36) },
+
+      console.log(action);
+
+     
+
+    case ACTypes.ADD_HOMEPAGE:
+      const text = action.payload;
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          { ...text, id: new Date().valueOf().toString(36) },
+
         ],
       };
 
