@@ -27,17 +27,8 @@ export const reducers = (state = initState, action) => {
           { ...values, id: new Date().valueOf().toString(36) },
         ],
       };
-    case ACTypes.ADD_HOMEPAGE:
-      const text = action.payload;
-      return {
-        ...state,
-        todos: [
-          ...state.todos,
-          { ...text, id: new Date().valueOf().toString(36) },
-        ],
-      };
 
     default:
       return state;
   }
-};
+}; 

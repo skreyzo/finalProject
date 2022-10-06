@@ -6,42 +6,42 @@ const EditHomepage = () => {
 
 const dispatch = useDispatch();
 
-  const [values, setValue] = useState({ value: '' });
+  const [textHomePage, setTextHomePage] = useState({ textHP: '' });
 
   const onChangeHandler = (event) => {
     //console.log(event.target.value)
-    setValue({ value:  event.target.value });
+    setTextHomePage({ value:  event.target.value });
   };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    if (!values.value) return alert('The field can not be empty');
 
-    try {
-      //dispatch(setLoading(true));
+
+     try {
+      
       const response = await fetch("http://localhost:3100/admin/edithomepage", {
-        method: "POST",
+        method: "PUT",
+        credentials: "include",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json",          
         },
-        body: JSON.stringify({...values, done: false}),
+        body: JSON.stringify(textHomePage),
       });
       if (!response.ok)
         throw new Error(
           `Error when adding: ${response.statusText} ${response.status}`
         );
       const data = await response.json();
+      console.log(data)  
       if (data.err) throw new Error(data.err);
 
       //dispatch(addTodo(data.todo)); // запись с redux
-      setValue({value: ''})   // очищаем поле ввода
+      setTextHomePage({value: ''})   // очищаем поле ввода
 
     } catch (err) {
       console.log(err);
       alert(err.message);
-    } finally {
-      //dispatch(setLoading(false));
-    }
+    } 
   };
 
   return (    
@@ -57,7 +57,7 @@ const dispatch = useDispatch();
           placeholder="Greetings" 
           />
         <button type="submit">Save</button>
-        <button type="submit">Edit</button>
+       
       </form>      
     </div>
   )
