@@ -10,6 +10,6 @@ const {
 router
   .route("/")
   .get(getGreeting)  
-  .post(putGreeting);
+  .put(putGreeting);
 
 module.exports = router;

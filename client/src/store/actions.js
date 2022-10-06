@@ -1,5 +1,7 @@
 import ACTypes from "./types";
 
 //Action Creator Functions
-export const addHomePage = (text) => ({type: ACTypes.ADD_HOMEPAGE, payload: text});
+
+export const addHomePage = (textHP) => ({type: ACTypes.ADD_HOMEPAGE, payload: textHP});
+
 

@@ -34,9 +34,9 @@ function App() {
             <Footer sx={{}} />
           </Box>
         </Container>
+
       </BrowserRouter>
     </Provider>
   );
 }
-
 export default App;
