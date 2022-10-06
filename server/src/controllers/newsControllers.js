@@ -23,5 +23,3 @@ exports.editNews = async (req, res) => {
 exports.deleteNews = async (req, res) => {
 
 };
-
-
