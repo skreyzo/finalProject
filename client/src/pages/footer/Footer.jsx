@@ -12,7 +12,6 @@ const Footer = () => {
         <li className="nav-item">
           <Link to='/join'>Join us</Link>
         </li>
-
       </ul>
     </div>
   );
