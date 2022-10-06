@@ -1,6 +1,7 @@
 const { News } = require("../../db/models");
 
 exports.getNews = async (req, res) => {
+  console.log('get=====>>>>>')
   const getNewsList = await News.findAll();
   res.json({ getNewsList });
 };
