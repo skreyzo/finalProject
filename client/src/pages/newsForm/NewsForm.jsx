@@ -14,7 +14,7 @@ export default function NewsForm() {
 console.log(event);
     // if (event.value) return alert('Поле не может быть пустым');
     try {
-      const response = await fetch("http://localhost:3100/admin/editnewspage", {
+      const response = await fetch("http://localhost:3010/admin/editnewspage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

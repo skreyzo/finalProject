@@ -21,7 +21,7 @@ const AboutUs = () => {
 
   React.useEffect(() => {
     (async () => {
-      const res = await fetch('http://localhost:3100/about', {
+      const res = await fetch('http://localhost:3010/about', {
         method: "GET",
         credentials: "include",
       });

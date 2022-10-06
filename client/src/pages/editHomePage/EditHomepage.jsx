@@ -19,7 +19,7 @@ const dispatch = useDispatch();
 
      try {
       
-      const response = await fetch("http://localhost:3100/admin/edithomepage", {
+      const response = await fetch("http://localhost:3010/admin/edithomepage", {
         method: "PUT",
         credentials: "include",
         headers: {
