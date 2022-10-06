@@ -1,4 +1,5 @@
 import { Routes, Link, Route } from "react-router-dom";
+import { useEffect } from "react";
 
 import AboutUs from '../pages/aboutUs/AboutUs';
 import Home from '../pages/home/Home';
@@ -14,43 +15,19 @@ import NewsList from '../pages/newsList/NewsList';
 import AdminNewsList from '../components/adminNewsList/AdminNewsList';
 import Box from '@mui/material/Box';
 
-/* const Main = () => {
 
-  const news = [
-    { id: "1", title: "Название 1", body: "Текст статьи 1" },
-    { id: "2", title: "Название 2", body: "Текст статьи 2" },
-    { id: "3", title: "Название 3", body: "Текст статьи 3" },
-    { id: "4", title: "Название 4", body: "Текст статьи 4" },
-    { id: "5", title: "Название 5", body: "Текст статьи 5" },
+const checkIsAdmin = () => {
+  // const res = await fetch('http://localhost:3100')
 
-  ];
-
-  return (
-    <>
-
-} */
-
-        
-
-       
-
+}
 
 const Main = () => {
 
-  //! доделать после привзки редакса
-  // const deleteNews = (e) => {
-  //   const filteredNews = newsData.filter(
-  //     (nws) => nws.value !== nws.target.textContent
-  //   );
-  //   setNewsData(filteredNews);
-  // };
-  
-  const addNewsHandler = (data) => {
+  const isAdmin = true; // захардкодил
 
-  };
-  
-  //! доделать после привзки редакса
-
+// React.useEffect(() => {
+// checkIsAdmin()
+// }, [])
 
   return (
 <>
@@ -75,17 +52,7 @@ const Main = () => {
         </Box>
       </Box>  
 
-{/*      <div className={styles.wrapper}>
-      <p>Hola friends! </p>
-      <Link to="/">Home</Link>
-      <Link to="/news">News</Link>
-      <Link to="/events">Events</Link>
-      <Link to="/education">Education</Link>
-      <Link to="/aboutUs">AboutUs</Link>
-      <Link to="/donate">Donate</Link>
-      <Link to="/signin">SignIn</Link>
-      <Link to="/signup">SignUp</Link>
-      <Link to="/admin">Admin</Link>  */}
+
 
       <Routes>
         <Route path="/" element={<Home title={"Home Page"} />}></Route>
@@ -115,7 +82,6 @@ const Main = () => {
           path="/newnews"
           element={
             <AdminNewsList
-              addNewsHandler={addNewsHandler}
               title={"Admin Page"}
             />
           }
