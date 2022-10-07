@@ -17,6 +17,10 @@ module.exports = {
   plugins: [
     'react',
   ],
-  rules: {
+  rules: {    
   },
+  quotes: [
+  "error",
+  "single"
+  ], 
 };
