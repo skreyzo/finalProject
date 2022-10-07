@@ -1,47 +1,57 @@
-import React, { useState } from 'react'
-import Box from '@mui/material/Box';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 
 const EditHomepage = () => {
-
   const [textHomePage, setTextHomePage] = useState({});
-  const [editHomePageText, setEditHomePageText] = useState(false);
-  const [editField, setEditField] = useState('');
-  const [file, setFile] = useState(null) 
+  const [editHomePageText, setEditHomePageText] = useState(true);
+  const [editField, setEditField] = useState({});
+  const [file, setFile] = useState(null);
 
   React.useEffect(() => {
     (async () => {
-      const res = await fetch('http://localhost:3010/about', {
+      const res = await fetch("http://localhost:3010/admin/edithomepage", {
         method: "GET",
         credentials: "include",
       });
       const data = (await res.json()) || [];
-      console.log('data fetch homepage GET', data);
-      setTextHomePage(data);
-      setEditField(data.toptext);
+      console.log("data fetch homepage GET", data);
+      setEditField(data);
+      console.log("editField", editField);
     })();
   }, []);
 
+  /*   React.useEffect(() => {
+    (async () => {
+      const res = await fetch('http://localhost:3010/admin/edithomepage', {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = (await res.json()) || [];
+      //console.log('data:', data);
+      setTextOnHomePage(data);
+    })();
+  }, []); */
+
   const handleEditHomePageText = () => {
-    setEditHomePageText(true);    
-  }
+    setEditHomePageText(!editHomePageText);
+  };
 
   const onChangeHandler = (event) => {
     //console.log(event.target.value)
-    setTextHomePage({ value:  event.target.value });
+    setTextHomePage({ value: event.target.value });
   };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-     try {      
+    try {
       const response = await fetch("http://localhost:3010/admin/edithomepage", {
-        method: "PUT",        
+        method: "PUT",
         headers: {
-          "Content-Type": "application/json",          
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(textHomePage),
       });
@@ -49,79 +59,110 @@ const EditHomepage = () => {
         throw new Error(
           `Error when adding: ${response.statusText} ${response.status}`
         );
-      const data = await response.json();  
-      console.log('data fetch homepage PUT', data)     
-      if (data.err) throw new Error(data.err);      
-      setTextHomePage({value: ''})   // очищаем поле ввода
+
+      setEditHomePageText(!editHomePageText);
+
+      const data = await response.json();
+      setTextHomePage(textHomePage);
+      console.log("data fetch homepage PUT", data);
+      console.log("textHomePage fetch homepage PUT", textHomePage);
+
+      if (data.err) throw new Error(data.err);
+      //setTextHomePage({value: ''})   // очищаем поле ввода
     } catch (err) {
       console.log(err);
       alert(err.message);
-    } 
+    }
   };
 
-  return (    
+  return (
     <>
-      <Typography sx={{
-        textAlign: 'center',
-        fontSize: '25px',
-        mb: '15px',
-      }}>Edit Home Page</Typography>
+      <Typography
+        sx={{
+          textAlign: "center",
+          fontSize: "25px",
+          mb: "15px",
+        }}
+      >
+        Edit Home Page
+      </Typography>
 
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '50px',
-        mx: 'auto',
-        alignItems: 'center'
-      }}>
-        <Typography sx={{
-          textAlign: 'center',
-          fontSize: '25px',
-        }}>Edit something</Typography>
-        <Box sx={{
-          display: 'flex',
-          gap: '10px',
-          alignItems: 'end',
-          width: '60%',
-          mx: 'auto'
-        }}>
-            <TextareaAutosize
-            aria-label="minimum height"
-            minRows={4}
-            placeholder="Your Text here..."
-            style={{ width: 350 }}
-            /> 
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "50px",
+          mx: "auto",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontSize: "25px",
+          }}
+        >
+          Edit something
+        </Typography>
 
-          {!handleEditHomePageText ? (
+        
+        {editHomePageText ? (
+          <>
+        <Typography variant="h5" align="left" color="text.secondary" paragraph>
+          {editField.greeting}
+        </Typography> 
+          </>
+        ) : (
+          <Typography variant="h5" align="left" color="text.secondary" paragraph>
+          {textHomePage.value}
+        </Typography>
+        )
+        }
+
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            alignItems: "end",
+            width: "60%",
+            mx: "auto",
+          }}
+        >
+          {editHomePageText ? (
             <>
-              <Typography variant="h5" align="left" color="text.secondary" paragraph>
-                {textHomePage.greeting}
-              </Typography>
+              <Button variant="contained" onClick={handleEditHomePageText}>
+                Edit
+              </Button>
             </>
-          ) :
+          ) : (
             <>
-              <TextareaAutosize
-                aria-label="minimum height"
-                minRows={4}
-                placeholder="Your Text here..."
-                style={{ width: 350 }}
-                defaultValue={textHomePage.greeting}
-                onChange={(e) => setEditField(e.target.value)}
-              />
-              <Button variant="contained" onClick={onSubmitHandler}>Save</Button>
+              <form onSubmit={onSubmitHandler}>
+                <TextareaAutosize
+                  aria-label="minimum height"
+                  minRows={4}
+                  placeholder="Your Text here..."
+                  style={{ width: 350 }}
+                  defaultValue={textHomePage.value}
+                  onChange={onChangeHandler}
+                />
+                <Button variant="contained" type="submit">
+                  Save
+                </Button>
+              </form>
             </>
-          }
-
-          
-          <Button variant="contained" onClick={handleEditHomePageText}>Edit</Button>
+          )}
         </Box>
-        <Box sx={{
-          display: 'flex',
-          gap: '37px',
-          width: '60%',
-          mx: 'auto'
-        }}>
-{/*           <form
+        {/* {textHomePage.value} */}
+
+        <Box
+          sx={{
+            display: "flex",
+            gap: "37px",
+            width: "60%",
+            mx: "auto",
+          }}
+        >
+          {/*           <form
             encType="multipart/form-data"
             onSubmit={submitPost}
           >
@@ -147,7 +188,7 @@ const EditHomepage = () => {
         </Box>
       </Box>
     </>
-/*     <div>
+    /*     <div>
       <div>EditHomepage</div>
       <form
       onSubmit={onSubmitHandler}
@@ -162,11 +203,7 @@ const EditHomepage = () => {
        
       </form>      
     </div> */
-  )
-}
+  );
+};
 
-export default EditHomepage
-
-
-
-
+export default EditHomepage;
