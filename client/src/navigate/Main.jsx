@@ -25,9 +25,9 @@ import Box from "@mui/material/Box";
 
 
 
-const checkIsAdmin = () => {
-  // const res = await fetch('http://localhost:3100')
-};
+// const checkIsAdmin = () => {
+//   // const res = await fetch('http://localhost:3100')
+// };
 
 
 
@@ -45,7 +45,7 @@ const Main = () => {
       }); 
       if (!response.ok) throw new Error(`Ошибка`);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       dispatch({ type: "initState", payload: { data } } )
       if (data.err) throw new Error(data.err);
     } catch (err) {
@@ -54,7 +54,7 @@ const Main = () => {
     }
   };
 
-  const isAdmin = true; // захардкодил
+  // const isAdmin = true; // захардкодил
 
   const dispatch = useDispatch();
 
