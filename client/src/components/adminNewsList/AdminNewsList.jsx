@@ -5,7 +5,8 @@ import NewsForm from "../../pages/newsForm/NewsForm";
 
 const AdminNewsList = () => {
 
-    const news = useSelector((store) => store.news)
+    const news = useSelector((store) => store.news.news)
+    console.log('~ news=============', news)
 
   return (
     <div>
