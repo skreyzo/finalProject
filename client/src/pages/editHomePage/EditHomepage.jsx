@@ -8,8 +8,7 @@ import TextField from "@mui/material/TextField";
 const EditHomepage = () => {
   const [textHomePage, setTextHomePage] = useState({});
   const [editHomePageText, setEditHomePageText] = useState(true);
-  const [editField, setEditField] = useState({});
-  const [file, setFile] = useState(null);
+  const [editField, setEditField] = useState({});  
 
   React.useEffect(() => {
     (async () => {
@@ -23,18 +22,6 @@ const EditHomepage = () => {
       console.log("editField", editField);
     })();
   }, []);
-
-  /*   React.useEffect(() => {
-    (async () => {
-      const res = await fetch('http://localhost:3010/admin/edithomepage', {
-        method: "GET",
-        credentials: "include",
-      });
-      const data = (await res.json()) || [];
-      //console.log('data:', data);
-      setTextOnHomePage(data);
-    })();
-  }, []); */
 
   const handleEditHomePageText = () => {
     setEditHomePageText(!editHomePageText);
@@ -103,20 +90,8 @@ const EditHomepage = () => {
           }}
         >
           Edit something
-        </Typography>
-        
-{/*         {editHomePageText ? (
-          <>
-        <Typography variant="h5" align="left" color="text.secondary" paragraph>
-          {editField.greeting}
-        </Typography> 
-          </>
-        ) : (
-          <Typography variant="h5" align="left" color="text.secondary" paragraph>
-          {textHomePage.value}
-        </Typography>
-        )
-        } */}
+        </Typography>      
+
 
         <Box
           sx={{
@@ -153,7 +128,7 @@ const EditHomepage = () => {
             </>
           )}
         </Box>
-        {/* {textHomePage.value} */}
+   
 
         <Box
           sx={{

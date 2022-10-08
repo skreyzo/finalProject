@@ -6,9 +6,12 @@ import { useDispatch } from "react-redux";
 
 const AdminNewsList = () => {
   const dispatch = useDispatch();
-  const news = useSelector((store) => store.news);
+
+  //const news = useSelector((store) => store.news);
   // const newsId = news.newsId;
 
+   const news = useSelector((store) => store.news.news)
+   console.log('~ news=============', news)
 
   const delNewsHandler = async (id) => {
     // console.log("id", id);
@@ -33,10 +36,6 @@ const AdminNewsList = () => {
       console.log(err);
     }
   };
-
-    //const news = useSelector((store) => store.news.news)
-    //console.log('~ news=============', news)
-
 
   return (
     <div>
