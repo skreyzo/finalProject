@@ -35,9 +35,6 @@ module.exports = router;
 
 
 
-
-
-
 /* const { Router } = require('express');
 const { body } = require('express-validator');
 const userController = require('../controllers/user-controller');
