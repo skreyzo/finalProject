@@ -104,9 +104,8 @@ const EditHomepage = () => {
         >
           Edit something
         </Typography>
-
         
-        {editHomePageText ? (
+{/*         {editHomePageText ? (
           <>
         <Typography variant="h5" align="left" color="text.secondary" paragraph>
           {editField.greeting}
@@ -117,7 +116,7 @@ const EditHomepage = () => {
           {textHomePage.value}
         </Typography>
         )
-        }
+        } */}
 
         <Box
           sx={{
@@ -129,10 +128,12 @@ const EditHomepage = () => {
           }}
         >
           {editHomePageText ? (
-            <>
+          <>
+
               <Button variant="contained" onClick={handleEditHomePageText}>
                 Edit
               </Button>
+
             </>
           ) : (
             <>
@@ -142,7 +143,7 @@ const EditHomepage = () => {
                   minRows={4}
                   placeholder="Your Text here..."
                   style={{ width: 350 }}
-                  defaultValue={textHomePage.value}
+                  defaultValue={editField.greeting}
                   onChange={onChangeHandler}
                 />
                 <Button variant="contained" type="submit">
