@@ -1,4 +1,4 @@
-import ACTypes from "./types";
+// import ACTypes from "./types";
 
 const initState = {
   news: [],

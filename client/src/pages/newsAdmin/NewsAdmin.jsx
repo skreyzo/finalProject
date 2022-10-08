@@ -1,22 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 // import styles from "./news.module.css";
 
-const NewsAdmin = (news) => {
-  const newsId = news.newsId;
-  const dispatch = useDispatch();
-
-  return (
+const NewsAdmin = ({el,  delNewsHandler}) => {
+ return (
     <>
-      <div>{news.news}</div>
-      <div>{news.body}</div>
-      <button
-        onClick={() =>
-          dispatch({ type: "DELETE_NEWS", payload: { id: newsId } })
-        }
-      >
-        Delete
-      </button>
+      <div>{el.title}</div>
+      <div>{el.body}</div>
+      <div>
+        <button onClick={() => delNewsHandler(el.id)}>Delete</button>
+      </div>
+
       <button>Edit</button>
     </>
   );
