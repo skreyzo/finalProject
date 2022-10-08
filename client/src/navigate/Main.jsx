@@ -1,6 +1,7 @@
 import { Routes, Link, Route } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import {useSelector} from "react-redux";
 
 import AboutUs from "../pages/aboutUs/AboutUs";
 import Home from "../pages/home/Home";
@@ -14,6 +15,11 @@ import styles from "./main.module.css";
 import Admin from "../pages/admin/Admin";
 import NewsList from "../pages/newsList/NewsList";
 import AdminNewsList from "../components/adminNewsList/AdminNewsList";
+
+import Registration from "../components/registration/Registration";
+import Authorization from "../components/authorization/SignIn";
+import {logout} from "../reducers/userReducer"
+
 import Box from "@mui/material/Box";
 
 
@@ -56,6 +62,8 @@ const Main = () => {
     newsHandler();
   }, []);
 
+  const isAuth = useSelector(state => state.user.isAuth)
+
   return (
     <>
       <Box sx={{ position: "relative" }}>
@@ -87,12 +95,24 @@ const Main = () => {
           <Link className={styles.nav_link} to="/donate">
             Donate
           </Link>
+          {!isAuth &&
+          <React.Fragment>
           <Link className={styles.nav_link} to="/signin">
             SignIn
           </Link>
           <Link className={styles.nav_link} to="/signup">
             SignUp
           </Link>
+          </React.Fragment>
+          }
+          {isAuth &&
+          <React.Fragment>
+          <Link className={styles.nav_link} onClick={() => dispatch(logout())}>
+            Logout
+          </Link>
+          </React.Fragment>
+          }
+
           <Link className={styles.nav_link} to="/admin">
             Admin
           </Link>
@@ -133,9 +153,18 @@ const Main = () => {
           path="/newnews"
           element={<AdminNewsList title={"Admin Page"} />}
         ></Route>
-
-        <Route path="/signin"></Route>
-        <Route path="/signup"></Route>
+        <Route 
+        path="/signup"
+        element={<Registration title={"Registration"} />}
+        ></Route>
+        <Route 
+        path="/signin"
+        element={<Authorization title={"SignIn"} />}
+        ></Route>
+        {/* <Route 
+        path="/logout"
+        element={<lo title={"Logout"} />}
+        ></Route> */}
       </Routes>
     </>
   );

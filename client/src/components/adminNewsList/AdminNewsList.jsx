@@ -9,6 +9,7 @@ const AdminNewsList = () => {
   const news = useSelector((store) => store.news);
   // const newsId = news.newsId;
 
+
   const delNewsHandler = async (id) => {
     // console.log("id", id);
 
@@ -32,6 +33,10 @@ const AdminNewsList = () => {
       console.log(err);
     }
   };
+
+    //const news = useSelector((store) => store.news.news)
+    //console.log('~ news=============', news)
+
 
   return (
     <div>

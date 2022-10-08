@@ -1,8 +1,8 @@
-import { legacy_createStore as createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { legacy_createStore as createStore } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { reducers } from './reducers';
+// import { reducers } from './reducers';
 
-const composeEnhancers = composeWithDevTools();
+// const composeEnhancers = composeWithDevTools();
 
-export const store = createStore(reducers, composeEnhancers);
+// export const store = createStore(reducers, composeEnhancers);
