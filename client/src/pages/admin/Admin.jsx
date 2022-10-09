@@ -17,7 +17,7 @@ const Admin = () => {
         px: '15px'
       }}>
         <AdminButton title="New News" path="/newnews"></AdminButton>
-        <AdminButton title="New Event" path="/newevent"></AdminButton>
+        <AdminButton title="Add Event" path="/admin/addevent"></AdminButton>
         <AdminButton title="Edit About Us" path="/admin/editaboutus"></AdminButton>
         <AdminButton title="Edit HomePage" path="/admin/edithomepage"></AdminButton>
       </Box>
