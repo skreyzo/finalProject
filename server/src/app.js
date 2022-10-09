@@ -32,7 +32,8 @@ const aboutRoutes = require('./routes/aboutRouter');
 
 const editAboutRoutes = require('./routes/editAboutRouter');
 const editHomeRoutes = require('./routes/editHomeRouter');
-const editNewsRoutes= require('./routes/newsRouter');
+const editNewsRoutes = require('./routes/newsRouter');
+const addEventRoutes = require('./routes/addEventRouter');
 
 
 // expressMiddlewares(app);
@@ -80,6 +81,7 @@ app.use('/homepage', homeRoutes);
 app.use('/editabout', editAboutRoutes);
 app.use('/admin/edithomepage', editHomeRoutes);
 app.use('/admin/editnewspage', editNewsRoutes );
+app.use('/admin/addevent', addEventRoutes);
 
 app.use('/api', router);
 

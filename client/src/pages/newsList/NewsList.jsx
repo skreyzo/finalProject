@@ -2,6 +2,7 @@ import React from "react";
 import News from "../news/News";
 
 const NewsList = ({ newsData }) => {
+  console.log({ newsData })  
 
 
   return (
