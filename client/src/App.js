@@ -16,7 +16,8 @@ function App() {
             className: 'footer',
             maxWidth: '1200px',
             mx: "auto",
-            px: '10px'
+            px: '10px',
+            wordWrap: 'break-word',
           }}>
           <Box sx={{
             display: 'flex',

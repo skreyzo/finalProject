@@ -21,6 +21,7 @@ const app = express();
 
 const homeRoutes = require('./routes/homeRouter');
 const aboutRoutes = require('./routes/aboutRouter');
+const editAboutRoutes = require('./routes/editAboutRouter');
 const newsRoutes= require('./routes/newsRouter');
 
 // expressMiddlewares(app);
@@ -61,6 +62,8 @@ app.use(express.static(path.join(__dirname, '../public/')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+console.log('__dirname', __dirname);
+
 app.use(cookieParser());
 app.use(authMiddleware);
 app.use(errorMiddleware);
@@ -68,6 +71,7 @@ app.use(errorMiddleware);
 //роутеры
 app.use('/admin/edithomepage', homeRoutes);
 app.use('/about', aboutRoutes);
+app.use('/editabout', editAboutRoutes);
 app.use('/admin/editnewspage', newsRoutes )
 app.use('/api', router);
 
