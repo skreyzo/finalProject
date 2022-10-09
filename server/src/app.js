@@ -27,11 +27,13 @@ app.use(cors(corsOptions));
 
 // импорт роутов
 
-const homeRoutes = require('./routes/homeRouter');
+const homeRoutes = require('./routes/homeRouter')
 const aboutRoutes = require('./routes/aboutRouter');
 
 const editAboutRoutes = require('./routes/editAboutRouter');
-const newsRoutes= require('./routes/newsRouter');
+const editHomeRoutes = require('./routes/editHomeRouter');
+const editNewsRoutes = require('./routes/newsRouter');
+const addEventRoutes = require('./routes/addEventRouter');
 
 
 // expressMiddlewares(app);
@@ -72,11 +74,14 @@ app.use(authMiddleware);
 app.use(errorMiddleware);
 
 // роутеры
-app.use('/admin/edithomepage', homeRoutes);
+
 app.use('/about', aboutRoutes);
+app.use('/homepage', homeRoutes);
 
 app.use('/editabout', editAboutRoutes);
-app.use('/admin/editnewspage', newsRoutes )
+app.use('/admin/edithomepage', editHomeRoutes);
+app.use('/admin/editnewspage', editNewsRoutes );
+app.use('/admin/addevent', addEventRoutes);
 
 app.use('/api', router);
 

@@ -1,0 +1,8 @@
+.aboutMainPicture {
+    max-width: 70%;
+    min-width: 200px;
+    overflow: hidden;    
+  }
+  img {
+    width: 100%;
+    }

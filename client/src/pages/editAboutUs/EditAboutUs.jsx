@@ -33,8 +33,7 @@ const EditAboutUs = () => {
     //console.log('editTopText', editTopText);
   }
   const handleOnEdit = (e) => {
-   setEditorValue(e.target.value);
-   
+   setEditorValue(e.target.value);  
  
   }
   

@@ -2,6 +2,7 @@ const { About } = require('../../db/models');
 const multer=require('multer');
 const path = require('path');
 
+//!multer storage
 const storage=multer.diskStorage({
   destination:(req,file,cb)=>{
       cb(null,"public/uploads/")
@@ -33,6 +34,7 @@ exports.editAbout = async (req, res) => {
   }
 }
 
+//!multer controllers
 exports.addBigPhoto = async (req,res)=>{
   try {
     upload.single('loading_teamPhoto')(req, res, async function (err) {

@@ -2,14 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getGreeting,
-  putGreeting,
+    getGreeting,
 } = require("../controllers/homeControllers");
 
 
 router
   .route("/")
-  .get(getGreeting)  
-  .put(putGreeting);
-
+  .get(getGreeting,)  
+  
 module.exports = router;

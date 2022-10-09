@@ -12,7 +12,5 @@ router
   .put(editAbout)
   .post(addBigPhoto)
 
-
-
-
 module.exports = router;
+
