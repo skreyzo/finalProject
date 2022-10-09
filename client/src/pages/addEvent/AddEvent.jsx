@@ -102,7 +102,7 @@ const AddEvent = () => {
               style={{ width: 200 }}
               maxRows={10}
               /* value={value} */
-              onChange={onDiscriptionChangeHandler}
+              /* onChange={onDiscriptionChangeHandler} */
             />
             <br />
             <TextField
