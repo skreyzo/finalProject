@@ -1,0 +1,9 @@
+.aboutMainPicture {
+  max-width: 70%;
+  min-width: 200px;
+  overflow: hidden;
+  /* background-image: url('~/public/img/community.jpg'); */
+}
+img {
+  width: 100%;
+  }

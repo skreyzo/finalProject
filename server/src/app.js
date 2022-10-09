@@ -29,7 +29,10 @@ app.use(cors(corsOptions));
 
 const homeRoutes = require('./routes/homeRouter');
 const aboutRoutes = require('./routes/aboutRouter');
-const newsRoutes = require('./routes/newsRouter');
+
+const editAboutRoutes = require('./routes/editAboutRouter');
+const newsRoutes= require('./routes/newsRouter');
+
 
 // expressMiddlewares(app);
 //!
@@ -62,6 +65,8 @@ app.use(express.static(path.join(__dirname, '../public/')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+console.log('__dirname', __dirname);
+
 app.use(cookieParser());
 app.use(authMiddleware);
 app.use(errorMiddleware);
@@ -69,7 +74,10 @@ app.use(errorMiddleware);
 // роутеры
 app.use('/admin/edithomepage', homeRoutes);
 app.use('/about', aboutRoutes);
-app.use('/admin/editnewspage', newsRoutes);
+
+app.use('/editabout', editAboutRoutes);
+app.use('/admin/editnewspage', newsRoutes )
+
 app.use('/api', router);
 
 app.listen(DEV_PORT, () => {

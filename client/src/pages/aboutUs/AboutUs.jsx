@@ -14,10 +14,10 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 import { useDispatch } from "react-redux";
 
-
 const AboutUs = () => {
-  const dispatch = useDispatch();
+  const localhost = 'http://localhost:3010/';
   const [gotData, setgotData] = useState({});
+  const [nameMainPhoto, setNameMainPhoto] = useState('');
 
   React.useEffect(() => {
     (async () => {
@@ -26,14 +26,19 @@ const AboutUs = () => {
         credentials: "include",
       });
       const data = (await res.json()) || [];
-      //console.log('data:', data);
+      console.log('data:', data);
       setgotData(data);
+      setNameMainPhoto(data.mainphotolink);
     })();
-  }, [dispatch]);
+  }, []);
+  // console.log('url+nameMainPhoto>>>>>>>', localhost+gotData.mainphotolink);
+  // console.log('nameMainPhoto>>>>>>>', nameMainPhoto);
 
   return (
     <>
-      <div className={styles.aboutMainPicture}></div>
+      <div className={styles.aboutMainPicture} >
+        <img src={`${localhost+nameMainPhoto}`} />
+      </div>
       {/* <span className={styles.component} > {props.title}</span> */}
       {/* <div>AboutUs</div> */}
       <Typography variant="h5" align="left" color="text.secondary" paragraph>
