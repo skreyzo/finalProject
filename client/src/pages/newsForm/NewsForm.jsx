@@ -11,7 +11,6 @@ export default function NewsForm() {
     event.preventDefault();
     dispatch({ type: "ADD_NEWS", payload: { values } });
     //todo сделать защиту от добавления новости из пустых строчек
-console.log(event);
     // if (event.value) return alert('Поле не может быть пустым');
     try {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
@@ -41,22 +40,55 @@ console.log(event);
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
+    <>
+      {/* <form onSubmit={onSubmitHandler}>
       <input
         onChange={onChangeHandler}
         type="text"
         name="title"
         value={values.title}
-        placeholder="Название поста..."
+        placeholder="Title..."
       />
       <input
         onChange={onChangeHandler}
         type="text"
         name="body"
         value={values.body}
-        placeholder="Текст поста..."
+        placeholder="Description..."
       />
       <button type="submit">Submit</button>
-    </form>
+  */}
+
+      <form onSubmit={onSubmitHandler}>
+        <div className="mb-3">
+          <label htmlFor="exampleFormControlInput1" className="form-label">
+            Title
+          </label>
+          <input
+            className="form-control"
+            id="exampleFormControlInput1"
+            onChange={onChangeHandler}
+            type="text"
+            name="title"
+            value={values.title}
+            placeholder="Title..."
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="exampleFormControlTextarea1" className="form-label">
+            Description
+          </label>
+          <textarea
+            className="form-control"
+            onChange={onChangeHandler}
+            type="text"
+            name="body"
+            value={values.body}
+            placeholder="Description..."
+            rows="3"
+          ></textarea>
+        </div>
+      </form>
+    </>
   );
 }

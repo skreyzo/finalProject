@@ -4,12 +4,13 @@ import { BrowserRouter } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { store } from "./store";
+// import { store } from "./store";
+import { store } from "./reducers/index";
 import { Provider } from "react-redux";
 
 function App() {
   return (
-    <Provider store={store}>
+    <Provider /* store={store} */ store={store}>
       <BrowserRouter>
         <Container maxWidth={false} disableGutters={true}
           sx={{

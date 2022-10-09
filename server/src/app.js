@@ -11,28 +11,32 @@ const router = require('./routers/index');
 
 const checkConnectDb = require('../db/checkDbConnection');
 
-const expressMiddlewares = require('./middlewares/expressMiddlewares')
-
 const errorMiddleware = require('./middlewares/error-middleware');
 const authMiddleware = require('./middlewares/auth-middleware');
 
+// const corsMiddleware = require('./middlewares/cors-middleware');
+
+const { DEV_PORT, CLIENT_URL, SESSION_SECRET } = process.env;
+
 const app = express();
+const corsOptions = {
+  credentials: true,
+  origin: process.env.CLIENT_URL, // адрес сервера React
+};
+app.use(cors(corsOptions));
+
 // импорт роутов
 
 const homeRoutes = require('./routes/homeRouter');
 const aboutRoutes = require('./routes/aboutRouter');
+
 const editAboutRoutes = require('./routes/editAboutRouter');
 const newsRoutes= require('./routes/newsRouter');
 
+
 // expressMiddlewares(app);
 //!
-  const corsOptions = {
-    credentials: true,
-    origin: 'http://localhost:3000' // адрес сервера React
-  }
-  app.use(cors(corsOptions));
 // app.use(cors());
-
 
 /*   const sessionConfig = {
     name: 'sid',
@@ -44,7 +48,7 @@ const newsRoutes= require('./routes/newsRouter');
       secure: process.env.NODE_ENV === 'production', // В продакшне нужно "secure: true" для работы через протокол HTTPS
       maxAge: 1000 * 60 * 60 * 24 * 10,
     },
-  }  
+  }
 
   app.use(session(sessionConfig)); */
 
@@ -54,7 +58,6 @@ const newsRoutes= require('./routes/newsRouter');
 // });
 
 // Выносим порт в .env и на всякий случай подставляем дефолтный через ||
-const { DEV_PORT, SESSION_SECRET } = process.env;
 
 app.use(morgan('dev'));
 // Чтобы наши статические файлы были видны браузеру, мы должны их подключить
@@ -68,11 +71,13 @@ app.use(cookieParser());
 app.use(authMiddleware);
 app.use(errorMiddleware);
 
-//роутеры
+// роутеры
 app.use('/admin/edithomepage', homeRoutes);
 app.use('/about', aboutRoutes);
+
 app.use('/editabout', editAboutRoutes);
 app.use('/admin/editnewspage', newsRoutes )
+
 app.use('/api', router);
 
 app.listen(DEV_PORT, () => {

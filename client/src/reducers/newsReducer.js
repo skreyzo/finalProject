@@ -1,10 +1,10 @@
-import ACTypes from "./types";
+// import ACTypes from "./types";
 
 const initState = {
   news: [],
 };
 
-export const reducers = (state = initState, action) => {
+export const newsReducer = (state = initState, action) => {
   switch (action.type) {
     case "initState":
       const newsList = action.payload.data.getNewsList;
