@@ -15,26 +15,17 @@ exports.putNews = async (req, res) => {
   }
 };
 
-exports.editNews = async (req, res) => {
+exports.editNews = () => {};
 
-};
-
-
-
-exports.deleteNews = async (req, res) => {
-  const { id} = req.body;
-  console.log(id);
-
-
+exports.deleteNews = async () => {
   try {
     const createNewsList = await News.destroy({
       where: {
-        id
-      }
-  });
+        id,
+      },
+    });
     res.json({ createNewsList });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
-
 };
