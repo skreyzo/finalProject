@@ -46,3 +46,18 @@ exports.addEventInfo = async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 };
+
+exports.deleteEvent = async (req, res) => {  
+  const { id } = req.body;
+  console.log('id', req.body)
+  try {
+    const createEventList = await Event.destroy({
+      where: {
+        id,
+      },
+    });    
+    res.json({ createEventList });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};

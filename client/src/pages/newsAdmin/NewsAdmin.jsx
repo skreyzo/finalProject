@@ -16,12 +16,6 @@ const NewsAdmin = ({el,  delNewsHandler}) => {
       <form action={`admin/editnewspage/${el.id}`}>
       <button type="submit">Edit news</button>
     </form>
-
-
-
-
-
-
   </>
   );
 };
