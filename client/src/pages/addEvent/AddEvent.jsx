@@ -1,46 +1,59 @@
 import React, { useState } from "react";
 import styles from "./addevent.module.css";
 import Box from "@mui/material/Box";
-import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
-//import FormHelperText from "@mui/material/FormHelperText";
-//import InputBase from "@mui/material/InputBase";
-import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
-//import InputLabel from "@mui/material/InputLabel";
 
-const AddEvent = () => {
+
+const AddEvent = () => {  
   const localhost = "http://localhost:3010";
 
-  const [title, setTitle] = useState({title: '', discription: ''});
-/*   const [discription, setDiscription] = useState({});
-  const [ticketQTY, setTicketQTY] = useState("");
-  const [price, setPrice] = useState("");
-  const [address, setAddress] = useState(""); */
-  //const [eventPhoto, setEventPhoto] = useState(editField.bigfoto);
+  const [eventValue, setEventValue] = useState({
+    title: '',
+    description: '',
+    ticket: 0,
+    price: 0,
+    address: '',    
+  });
+  const [filePhotoEvent, setFilePhotoEvent] = useState(null);
 
-  const onTitleChangeHandler = (event) => {
-    setTitle({ title: event.target.value });
-    console.log("title", title);
+  const onChangeHandler = (event) => {    
+    const { name, value } = event.target;
+    setEventValue({ ...eventValue, [name]: value });    
   };
 
-/*   const onDiscriptionChangeHandler = (event) => {
+  /*   const addDataHandler = (data) => {
+    seteventValue((prevState) => {
+      return [...prevState, {...data, id: (new Date().getTime()).toString(36)}]
+    })
+  } */
+
+  /*   const onDiscriptionChangeHandler = (event) => {
     setDiscription({ discription: event.target.value });
-    console.log("discription", discription);
+    console.log("description", description);
   }; */
 
+  //! multer upload
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    try {
+    try {      
+      const data = new FormData();
+      data.append("loading_eventPhoto", filePhotoEvent);
+      data.append("title", eventValue.title);
+      data.append("description", eventValue.description);
+      data.append("ticket", eventValue.ticket);
+      data.append("price", eventValue.price);
+      data.append("address", eventValue.address);
+      console.log(data)
       const response = await fetch("http://localhost:3010/admin/addevent", {
         method: "POST",
-        headers: {
+/*         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify(title),
-      });      
+        }, */
+        //body: JSON.stringify(eventValue),
+        body: data,
+      });
     } catch (err) {
       console.log(err);
       alert(err.message);
@@ -89,68 +102,88 @@ const AddEvent = () => {
           <form onSubmit={onSubmitHandler}>
             <TextField
               id="outlined-basic"
-              label="Title..."                         
+              label="Title..."
               style={{ width: 200 }}
               variant="outlined"
-              onChange={onTitleChangeHandler}
+              margin="normal"
+              name="title"
+              onChange={onChangeHandler}
+              value={eventValue.title}
             />
-            <br />
+
             <TextField
               id="outlined-multiline-flexible"
-              label="Discription..."
-              multiline                            
+              label="Description..."
+              multiline
               style={{ width: 200 }}
               maxRows={10}
-              /* value={value} */
-              /* onChange={onDiscriptionChangeHandler} */
+              margin="normal"
+              name="description"
+              onChange={onChangeHandler}
+              value={eventValue.description}
             />
-            <br />
+
             <TextField
               id="outlined-basic"
-              label="TicketQTY..."
+              label="Ticket..."
               style={{ width: 200 }}
               variant="outlined"
-              onChange={onTitleChangeHandler}
+              margin="normal"
+              type="number"
+              name="ticket"
+              onChange={onChangeHandler}
+              value={eventValue.ticket}
             />
-            <br />
+
             <TextField
               id="outlined-basic"
               label="Price..."
               style={{ width: 200 }}
               variant="outlined"
-              onChange={onTitleChangeHandler}
+              margin="normal"
+              type="number"
+              name="price"
+              onChange={onChangeHandler}
+              value={eventValue.price}
             />
-            <br />
+
             <TextField
               id="outlined-basic"
               label="Address..."
               style={{ width: 200 }}
               variant="outlined"
-              onChange={onTitleChangeHandler}
+              margin="normal"
+              name="address"
+              onChange={onChangeHandler}
+              value={eventValue.address}
             />
             <br />
-
-            <Button variant="contained" type="submit">
+            <Box
+          sx={{
+            display: "flex",
+            gap: "37px",
+            width: "-60%",
+            mx: "auto",
+          }}       
+          >
+            <Button variant="contained" component="label">
+              Select Event Photo
+              <input
+                name="eventphotolink"
+                hidden
+                accept="image/*"
+                type="file"                
+                onChange={(e) => {
+                  setFilePhotoEvent(e.target.files[0]);
+                }} 
+              />
+            </Button>          
+        </Box>
+        <br />
+            <Button variant="contained" type="submit" margin="normal">
               Save
             </Button>
           </form>
-
-          {/*           <form onSubmit={onSubmitHandler}>
-
-            
-            
-            <Input
-              aria-label="minimum height"
-              placeholder="Title..."
-              style={{ width: 350 }}
-              defaultValue={editField.greeting}
-              onChange={onTitleChangeHandler}
-            />
-
-            <Button variant="contained" type="submit">
-              Save
-            </Button>
-          </form> */}
         </Box>
 
         {/*         <div className={styles.aboutMainPicture}>
