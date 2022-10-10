@@ -4,18 +4,14 @@ import NewsAdmin from "../../pages/newsAdmin/NewsAdmin";
 import NewsForm from "../../pages/newsForm/NewsForm";
 import { useDispatch } from "react-redux";
 
+
+
 const AdminNewsList = () => {
   const dispatch = useDispatch();
 
-  //const news = useSelector((store) => store.news);
-  // const newsId = news.newsId;
-
-   const news = useSelector((store) => store.news.news)
-   console.log('~ news=============', news)
+  const news = useSelector((store) => store.news.news);
 
   const delNewsHandler = async (id) => {
-    // console.log("id", id);
-
     try {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
         method: "DELETE",
@@ -37,8 +33,11 @@ const AdminNewsList = () => {
     }
   };
 
+  const editNewsHandler = async (id) => {};
+
   return (
     <div>
+      <h1>Add a new post</h1>
       <NewsForm />
       <h1>Total News: {news.length} </h1>
       {news.map((el) => {
@@ -46,6 +45,8 @@ const AdminNewsList = () => {
           <NewsAdmin key={el.id} el={el} delNewsHandler={delNewsHandler} />
         );
       })}
+
+
     </div>
   );
 };

@@ -23,20 +23,21 @@ import { logout } from "../reducers/userReducer";
 
 import Box from "@mui/material/Box";
 
+import EditNews from "../pages/editNews/EditNews";
+import FullNews from "../pages/fullNews/FullNews";
+
+
 // const checkIsAdmin = () => {
 //   // const res = await fetch('http://localhost:3100')
 // };
 
 const Main = () => {
-  
+
   const newsHandler = async (event) => {
     try {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(),
+        credentials: "include",
       });
       if (!response.ok) throw new Error(`Ошибка`);
       const data = await response.json();
@@ -163,6 +164,16 @@ const Main = () => {
           path="/signin"
           element={<Authorization title={"SignIn"} />}
         ></Route>
+        <Route
+          path="/admin/editnewspage/:id"
+          element={<EditNews title={"Edit news title"} />}
+        ></Route>
+        <Route
+          path="/news/:id"
+          element={<FullNews title={"Full News"} />}
+        ></Route>
+
+
         {/* <Route 
         path="/logout"
         element={<lo title={"Logout"} />}
