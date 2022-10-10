@@ -13,7 +13,7 @@ const NewsAdmin = ({el,  delNewsHandler}) => {
       <div>
         <button onClick={() => delNewsHandler(el.id)}>Delete</button>
       </div>
-      <form action="admin/editnewspage/{el.id}">
+      <form action={`admin/editnewspage/${el.id}`}>
       <button type="submit">Edit news</button>
     </form>
 

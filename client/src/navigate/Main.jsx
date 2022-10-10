@@ -22,6 +22,7 @@ import { logout } from "../reducers/userReducer";
 
 import Box from "@mui/material/Box";
 import EditNews from "../pages/editNews/EditNews";
+import FullNews from "../pages/fullNews/FullNews";
 
 // const checkIsAdmin = () => {
 //   // const res = await fetch('http://localhost:3100')
@@ -159,6 +160,11 @@ const Main = () => {
           path="/admin/editnewspage/:id"
           element={<EditNews title={"Edit news title"} />}
         ></Route>
+        <Route
+          path="/news/:id"
+          element={<FullNews title={"Full News"} />}
+        ></Route>
+
         {/* <Route 
         path="/logout"
         element={<lo title={"Logout"} />}
