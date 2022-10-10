@@ -7,9 +7,6 @@ import { useSelector } from "react-redux";
 const NewsList = () => {
   const news = useSelector((store) => store.news.news);
 
-
-
-
   return (
     <div>
       <h1>Всего новостей: {news.length} </h1>

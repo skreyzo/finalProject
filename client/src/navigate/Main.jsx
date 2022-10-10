@@ -10,6 +10,7 @@ import Events from "../pages/events/Events";
 import Donate from "../pages/donate/Donate";
 import EditAboutUs from "../pages/editAboutUs/EditAboutUs";
 import EditHomepage from "../pages/editHomePage/EditHomepage";
+import AddEvent from "../pages/addEvent/AddEvent";
 
 import styles from "./main.module.css";
 import Admin from "../pages/admin/Admin";
@@ -21,14 +22,17 @@ import Authorization from "../components/authorization/SignIn";
 import { logout } from "../reducers/userReducer";
 
 import Box from "@mui/material/Box";
+
 import EditNews from "../pages/editNews/EditNews";
 import FullNews from "../pages/fullNews/FullNews";
+
 
 // const checkIsAdmin = () => {
 //   // const res = await fetch('http://localhost:3100')
 // };
 
 const Main = () => {
+
   const newsHandler = async (event) => {
     try {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
@@ -143,9 +147,13 @@ const Main = () => {
           path="/admin/edithomepage"
           element={<EditHomepage title={"EditHomepage"} />}
         ></Route>
+        <Route
+          path="/admin/addevent"
+          element={<AddEvent title={"AddEvent"} />}
+        ></Route>
 
         <Route
-          path="/newnews"
+          path="/admin/newnews"
           element={<AdminNewsList title={"Admin Page"} />}
         ></Route>
         <Route
@@ -164,6 +172,7 @@ const Main = () => {
           path="/news/:id"
           element={<FullNews title={"Full News"} />}
         ></Route>
+
 
         {/* <Route 
         path="/logout"
