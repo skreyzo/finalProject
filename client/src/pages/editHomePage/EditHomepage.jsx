@@ -25,9 +25,9 @@ const EditHomepage = () => {
       setEditField(data);
       setTextHomePage(data.greeting);
       setNameHomePhoto(data.bigfoto);
-      console.log("data fetch homepage GET", data);
+/*       console.log("data fetch homepage GET", data);
       console.log("textHomePage fetch homepage GET", textHomePage);
-      console.log("nameHomePhoto", nameHomePhoto);
+      console.log("nameHomePhoto", nameHomePhoto); */
     })();
   }, []);
 
