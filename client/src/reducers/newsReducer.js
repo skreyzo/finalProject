@@ -1,4 +1,3 @@
-// import ACTypes from "./types";
 
 const initState = {
   news: [],

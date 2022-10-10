@@ -9,7 +9,6 @@ const {
 
 router
   .route("/")
-  .post(addEventInfo)  
-  //.put(putGreeting);
+  .post(addEventInfo)    
 
 module.exports = router;

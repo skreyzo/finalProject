@@ -33,8 +33,7 @@ const AddEvent = () => {
     setDiscription({ discription: event.target.value });
     console.log("description", description);
   }; */
-
-  //! multer upload
+  
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {      
@@ -44,8 +43,7 @@ const AddEvent = () => {
       data.append("description", eventValue.description);
       data.append("ticket", eventValue.ticket);
       data.append("price", eventValue.price);
-      data.append("address", eventValue.address);
-      console.log(data)
+      data.append("address", eventValue.address);      
       const response = await fetch("http://localhost:3010/admin/addevent", {
         method: "POST",
 /*         headers: {
@@ -99,6 +97,7 @@ const AddEvent = () => {
             mx: "auto",
           }}
         >
+          
           <form onSubmit={onSubmitHandler}>
             <TextField
               id="outlined-basic"
@@ -184,7 +183,7 @@ const AddEvent = () => {
               Save
             </Button>
           </form>
-        </Box>
+        </Box>     
 
         {/*         <div className={styles.aboutMainPicture}>
           <img
