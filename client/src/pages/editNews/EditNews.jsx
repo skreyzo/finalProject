@@ -7,7 +7,6 @@ const EditNews = () => {
   const news = useSelector((store) => store.news.news);
   const filtered = news.filter((news) => news.id === Number(id));
   const card = filtered[0];
-  //   console.log(card.title);
 
   return (
     <>

@@ -33,7 +33,7 @@ exports.addEventInfo = async (req, res) => {
   try {
     upload.single("loading_eventPhoto")(req, res, async function (err) {
       const { title, description, ticket, price, address } = req.body;
-      if (req.file.filename) {
+      if (req.file) {
         const addLink = await Event.create({
           title,
           description,
