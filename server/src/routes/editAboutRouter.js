@@ -22,7 +22,6 @@ router
   .route("/delperson")
   .delete(delPerson)
 
-
-
-
 module.exports = router;
+
+

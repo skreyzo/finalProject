@@ -54,12 +54,14 @@ const EditAboutUs = () => {
   }
 
   const handleOnEdit = (e) => {
+
     setEditorValue(e.target.value);
     console.log('setEditorValue>>>>>>>>>>', editorValue);
     const value = e.target.value;
     console.log('value>>>>>>>>>>', value);
     const changed = value === gotDataAbout.toptext;
     return changed ? setViewSave(true) : setViewSave(false);
+
   }
 
   const handleSaveTopText = async (e) => {

@@ -41,24 +41,6 @@ export default function NewsForm() {
 
   return (
     <>
-      {/* <form onSubmit={onSubmitHandler}>
-      <input
-        onChange={onChangeHandler}
-        type="text"
-        name="title"
-        value={values.title}
-        placeholder="Title..."
-      />
-      <input
-        onChange={onChangeHandler}
-        type="text"
-        name="body"
-        value={values.body}
-        placeholder="Description..."
-      />
-      <button type="submit">Submit</button>
-  */}
-
       <form onSubmit={onSubmitHandler}>
         <div className="mb-3">
           <label htmlFor="exampleFormControlInput1" className="form-label">
@@ -87,6 +69,9 @@ export default function NewsForm() {
             placeholder="Description..."
             rows="3"
           ></textarea>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
         </div>
       </form>
     </>
