@@ -33,7 +33,7 @@ import FullNews from "../pages/fullNews/FullNews";
 
 const Main = () => {
 
-  const newsHandler = async (event) => {
+  const newsHandler = async () => {
     try {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
         method: "GET",
@@ -165,7 +165,7 @@ const Main = () => {
           element={<Authorization title={"SignIn"} />}
         ></Route>
         <Route
-          path="/admin/editnewspage/:id"
+          path="admin/admin/editnewspage/:id"
           element={<EditNews title={"Edit news title"} />}
         ></Route>
         <Route
