@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.FLOAT,
     address: DataTypes.STRING,
     coordinat: DataTypes.STRING,
-    eventphotolink: DataTypes.STRING
+    eventphotolink: DataTypes.STRING,
+    eventdate: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Event',

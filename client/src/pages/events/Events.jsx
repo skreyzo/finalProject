@@ -1,44 +1,86 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
+import Stack from "@mui/material/Stack";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useDispatch, useSelector } from "react-redux";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Unstable_Grid2";
 
 const Events = () => {
+  const localhost = "http://localhost:3010/";
 
-  const event = useSelector((store) => store.event.event);
-  console.log('event', event)
+  const [event, setEvent] = useState([]);
 
-  
+  React.useEffect(() => {
+    (async () => {
+      const res = await fetch("http://localhost:3010/eventpage", {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = (await res.json()) || [];
+      //console.log("data:", data);
+      setEvent(data);      
+    })();
+  }, []);
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          height="140"
-          image="https://static-cse.canva.com/blob/847064/29.jpg"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {event.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {/* {event.body} */}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <form action={`/events/${event.id}`}>
-            <Button type="submit" size="small">
-              More details
-            </Button>
-          </form>
-        </CardActions>
-      </Card>
+      {event.map((el) => (
+        
+        <Card sx={{ display: "flex", margin: "50px" }} key={el.id}>
+          <CardMedia
+            component="img"
+            sx={{ width: 351 }}
+            image={localhost + el.eventphotolink}
+            alt="There is a photo here"
+          />
+
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <CardContent sx={{ flex: "1 0 auto" }}>
+              <Typography component="div" variant="h5">
+                {el.title}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
+              >
+                {`${el.description.slice(0, 250)}...`}
+              </Typography>
+            </CardContent>
+            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+              <Typography component="div" variant="h6">
+                {`date: ${el.date}`}
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+              <Typography component="div" variant="h6">
+                {`address: ${el.address}`}
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+              <Stack direction="row" spacing={2}>
+                <Typography component="div" variant="h6">
+                  {`tickets: ${el.ticket}`}
+                </Typography>
+                <Typography component="div" variant="h6">
+                  {`price: ${el.price}`}
+                </Typography>
+                <Button size="small" component={Link} to={`/events/${el.id}`}>
+                  Details
+                </Button>
+              </Stack>
+            </Box>
+          </Box>
+        </Card>
+      ))}
     </>
   );
 };
