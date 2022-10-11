@@ -3,7 +3,9 @@ const LOGOUT = "LOGOUT"
 
 const defaultState = {
     currentUser: {},
-    isAuth: false
+    isAuth: false,
+    isAdmin: false,
+
 }
 
 export default function userReducer(state = defaultState, action) {
@@ -12,14 +14,16 @@ export default function userReducer(state = defaultState, action) {
             return {
                 ...state,
                 currentUser: action.payload,
-                isAuth: true
+                isAuth: true,
+                isAdmin: action.payload.isAdmin,
             }
         case LOGOUT:
-            localStorage.removeItem('refreshToken')
+            localStorage.removeItem('token')
             return {
                 ...state,
                 currentUser: {},
-                isAuth: false
+                isAuth: false,
+                isAdmin: false,
             }
         default:
             return state

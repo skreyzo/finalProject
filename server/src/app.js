@@ -21,7 +21,7 @@ const { DEV_PORT, CLIENT_URL, SESSION_SECRET } = process.env;
 const app = express();
 const corsOptions = {
   credentials: true,
-  origin: process.env.CLIENT_URL, // адрес сервера React
+  origin: '*', // адрес сервера React
 };
 app.use(cors(corsOptions));
 
@@ -54,6 +54,14 @@ const addEventRoutes = require('./routes/addEventRouter');
 
   app.use(session(sessionConfig)); */
 
+
+
+
+app.use((req, res, next) => {
+  res.cookie('testCookie', 'TestTestTestTestTest', { maxAge: 10000000000 });
+  next();
+});
+
 // app.use((req, res, next) => {
 //   console.log("\n\x1b[33m", 'req.session.user :', req.session?.user);
 //   next();
@@ -64,12 +72,12 @@ const addEventRoutes = require('./routes/addEventRouter');
 app.use(morgan('dev'));
 // Чтобы наши статические файлы были видны браузеру, мы должны их подключить
 app.use(express.static(path.join(__dirname, '../public/')));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 console.log('__dirname', __dirname);
 
-app.use(cookieParser());
 app.use(authMiddleware);
 app.use(errorMiddleware);
 
