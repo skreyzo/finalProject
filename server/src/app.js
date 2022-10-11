@@ -75,7 +75,7 @@ app.use(errorMiddleware);
 app.use('/admin/edithomepage', homeRoutes);
 app.use('/about', aboutRoutes);
 
-app.use('/editabout', editAboutRoutes);
+app.use('/admin/editabout', editAboutRoutes);
 app.use('/admin/editnewspage', newsRoutes )
 
 app.use('/api', router);
