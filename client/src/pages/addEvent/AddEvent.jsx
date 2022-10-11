@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import styles from "./addevent.module.css";
 import Box from "@mui/material/Box";
@@ -87,7 +88,7 @@ const AddEvent = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ id }),
-      });      
+      });
       if (response.ok) dispatch({ type: "DELETE_EVENT", payload: { id } });
     } catch (err) {
       console.log(err);
@@ -235,7 +236,13 @@ const AddEvent = () => {
                   <br />
                   Price: {el.price}
                   <br />
-                  <Button size="small">Details</Button>
+                  <Button
+                    size="small"
+                    component={Link}
+                    to={`/admin/addevent/${el.id}`}
+                  >
+                    Details
+                  </Button>
                   <Button
                     size="small"
                     color="error"

@@ -18,13 +18,19 @@ const authMiddleware = require('./middlewares/auth-middleware');
 
 const { DEV_PORT, CLIENT_URL, SESSION_SECRET } = process.env;
 
-const app = express();
-const corsOptions = {
+ const app = express();
+
+/*const corsOptions = {
   credentials: true,
   origin: '*', // адрес сервера React
-};
-app.use(cors(corsOptions));
+}; */
 
+const corsOptions = {
+  credentials: true,
+  origin: process.env.CLIENT_URL
+};  
+
+app.use(cors(corsOptions));
 // импорт роутов
 
 const homeRoutes = require('./routes/homeRouter');
