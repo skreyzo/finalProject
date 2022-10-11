@@ -10,6 +10,7 @@ import Events from "../pages/events/Events";
 import Donate from "../pages/donate/Donate";
 import EditAboutUs from "../pages/editAboutUs/EditAboutUs";
 import EditHomepage from "../pages/editHomePage/EditHomepage";
+
 import AddEvent from "../pages/addEvent/AddEvent";
 
 import styles from "./main.module.css";
@@ -126,13 +127,13 @@ const Main = () => {
               </Link>
             </React.Fragment>
           )}
-          {isAdmin &&(
+          {/* {isAdmin &&( */}
             <React.Fragment>
           <Link className={styles.nav_link} to="/admin">
             Admin
           </Link>
             </React.Fragment>
-          )}
+          {/* )} */}
         </Box>
       </Box>
 
@@ -168,6 +169,14 @@ const Main = () => {
         <Route
           path="/admin/addevent"
           element={<AddEvent title={"AddEvent"} />}
+        ></Route>
+        <Route
+          path="admin/addevent/:id"
+          element={<EditNews title={"Edit news title"} />}
+        ></Route>
+        <Route
+          path="/events/:id"
+          element={<FullNews title={"Events"} />}
         ></Route>
 
         <Route
