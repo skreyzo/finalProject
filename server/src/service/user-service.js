@@ -84,22 +84,23 @@ const logout = async (refreshToken) => {
 };
 
 const refresh = async (refreshToken) => {
-  if (!refreshToken) {
-    throw ApiError.UnauthorizedError();
-  }
-  const userData = validateRefreshToken(refreshToken);
-  const tokenFromDb = await findToken(refreshToken);
-  if (!userData || !tokenFromDb) {
-    throw ApiError.UnauthorizedError();
-  }
+  // if (!refreshToken) {
+  //   throw ApiError.UnauthorizedError();
+  // }
+  // const userData = validateRefreshToken(refreshToken);
+  // const tokenFromDb = await findToken(refreshToken);
+  // if (!userData || !tokenFromDb) {
+  //   throw ApiError.UnauthorizedError();
+  // }
 
-  const user = await User.findByPk(userData.id);
+  // const user = await User.findByPk(userData.id);
 
-  const userDto = new UserDto(user);
-  const tokens = generateTokens({ ...userDto });
+  // const userDto = new UserDto(user);
+  // const tokens = generateTokens({ ...userDto });
 
-  await saveToken(userDto.id, tokens.refreshToken);
-  return { ...tokens, user: userDto };
+  // await saveToken(userDto.id, tokens.refreshToken);
+  // return { ...tokens, user: userDto };
+  console.log('refresh is  work')
 };
 
 module.exports = {

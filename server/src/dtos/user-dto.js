@@ -9,5 +9,6 @@ module.exports = class UserDto {
     this.id = model.id;
     this.email = model.email;
     this.isActivated = model.isActivated;
+    this.isAdmin = model.isAdmin;
   }
 };

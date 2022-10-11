@@ -13,6 +13,7 @@ const generateTokens = (payload) => {
 const validateAccessToken = (token) => {
   try {
     const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET); // верификация токена
+    console.log('~ userData verify access=========>>>>>>>>', userData)
     return userData;
   } catch (error) {
     return null;
@@ -22,6 +23,7 @@ const validateAccessToken = (token) => {
 const validateRefreshToken = (token) => {
   try {
     const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+    console.log('~ userData verify=========>>>>>>>>', userData)
     return userData;
   } catch (error) {
     return null;
