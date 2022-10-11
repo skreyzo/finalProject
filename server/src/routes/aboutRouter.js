@@ -3,12 +3,16 @@ const router = express.Router();
 
 const {
   getAboutData,
+  getOurTeamData,
 } = require("../controllers/aboutControllers");
 
 
 router
   .route("/")
-  .get(getAboutData)  
-  //.post(putGreeting);
+  .get(getAboutData)
+
+router
+  .route("/team")
+  .get(getOurTeamData)
 
 module.exports = router;

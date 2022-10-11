@@ -41,7 +41,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-public\uploads/
+
+public/uploads/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -132,3 +133,5 @@ dist
 
 #ignoring sessions
 sessions
+
+public/uploads

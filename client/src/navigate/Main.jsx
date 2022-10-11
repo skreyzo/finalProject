@@ -19,7 +19,8 @@ import AdminNewsList from "../components/adminNewsList/AdminNewsList";
 
 import Registration from "../components/registration/Registration";
 import Authorization from "../components/authorization/SignIn";
-import { logout } from "../reducers/userReducer";
+// import { logout } from "../reducers/userReducer";
+import { auth, logout } from "../actions/user";
 
 import Box from "@mui/material/Box";
 
@@ -33,7 +34,7 @@ import FullNews from "../pages/fullNews/FullNews";
 
 const Main = () => {
 
-  const newsHandler = async (event) => {
+  const newsHandler = async () => {
     try {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
         method: "GET",
@@ -54,11 +55,25 @@ const Main = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() =>{
+    if(localStorage.getItem('token')) {
+      console.log('в сторе токен есть!!!!')
+      dispatch(auth())
+    } else {
+      console.log('в сторе токена НЕТ!!!!')
+    }
+  }, [])
+
   React.useEffect(() => {
     newsHandler();
   }, []);
 
   const isAuth = useSelector((state) => state.user.isAuth);
+  console.log('~ isAuth', isAuth)
+  const isAdmin = useSelector((state) => state.user.isAdmin);
+  console.log('~ isAdmin', isAdmin)
+
+
 
   return (
     <>
@@ -111,10 +126,13 @@ const Main = () => {
               </Link>
             </React.Fragment>
           )}
-
+          {isAdmin &&(
+            <React.Fragment>
           <Link className={styles.nav_link} to="/admin">
             Admin
           </Link>
+            </React.Fragment>
+          )}
         </Box>
       </Box>
 
@@ -165,7 +183,7 @@ const Main = () => {
           element={<Authorization title={"SignIn"} />}
         ></Route>
         <Route
-          path="/admin/editnewspage/:id"
+          path="admin/admin/editnewspage/:id"
           element={<EditNews title={"Edit news title"} />}
         ></Route>
         <Route

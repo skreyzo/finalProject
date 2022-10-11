@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { addPersons } from "../../reducers/aboutReducer";
 import styles from "./aboutus.module.css";
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 import CardItem from '../../components/cardItemAbout/CardItem_About';
-import images from '../../community.jpg';
 
 import IconButton from '@mui/material/IconButton';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
-import { useDispatch } from "react-redux";
-
 const AboutUs = () => {
-  const localhost = 'http://localhost:3010/';
+  const localhost = 'http://localhost:3010';
+  const editPage = false;
+  const dispatch = useDispatch();
+
+  const newRosterTeam = useSelector((store) => (store.about.team));
+
   const [gotData, setgotData] = useState({});
   const [nameMainPhoto, setNameMainPhoto] = useState('');
 
@@ -28,16 +32,22 @@ const AboutUs = () => {
       const data = (await res.json()) || [];
       console.log('data:', data);
       setgotData(data);
-      setNameMainPhoto(data.mainphotolink);
+      setNameMainPhoto(localhost + data.mainphotolink);
+
+      const resOurTeam = await fetch('http://localhost:3010/about/team', {
+        method: "GET",
+        credentials: "include",
+      });
+      const dataOurTeam = (await resOurTeam.json()) || [];
+      console.log('dataOurTeam>>>>>>>>>>>>>>>', dataOurTeam);
+      dispatch(addPersons(dataOurTeam));
     })();
   }, []);
-  // console.log('url+nameMainPhoto>>>>>>>', localhost+gotData.mainphotolink);
-  // console.log('nameMainPhoto>>>>>>>', nameMainPhoto);
 
   return (
     <>
       <div className={styles.aboutMainPicture} >
-        <img src={`${localhost+nameMainPhoto}`} />
+        <img src={`${nameMainPhoto}`} />
       </div>
       {/* <span className={styles.component} > {props.title}</span> */}
       {/* <div>AboutUs</div> */}
@@ -49,8 +59,24 @@ const AboutUs = () => {
         flexWrap: 'wrap',
         justifyContent: 'space-around',
       }}>
-        <CardItem />
-        <CardItem />
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+        }}>
+          {newRosterTeam.map((item, index) => {
+            return <Box key={index} >
+              <CardItem id={item.id}
+                firstname={item.firstname}
+                lastname={item.lastname}
+                position={item.position}
+                image={item.personimage}
+                editpage={editPage}
+              />
+            </Box>
+          })}
+        </Box>
       </Box>
       <Typography variant="h5" align="left" color="text.secondary" paragraph>
         {gotData.bottomtext}

@@ -26,7 +26,8 @@ const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const userData = await login(email, password);
-    res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
+    res.cookie('refreshToken', userData.refreshToken);
+    console.log('~ userData >?>?>?>>>?>?>>', userData)
     return res.json(userData);
   } catch (error) {
     next(error);
@@ -45,6 +46,7 @@ const logoutUser = async (req, res, next) => {
     next(error);
   }
 };
+
 const activateUser = async (req, res, next) => {
   try {
     const activationLink = req.params.link;
@@ -54,9 +56,13 @@ const activateUser = async (req, res, next) => {
     next(error);
   }
 };
+
 const refreshUserToken = async (req, res, next) => {
   try {
     const { refreshToken } = req.cookies;
+    console.log('~ req.cookies=======', req.cookies)
+    
+    console.log('~ refreshToken =====>>>>refreshUserToken', refreshToken)
     const userData = await refresh(refreshToken);
     res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
     return res.json(userData);
@@ -65,16 +71,11 @@ const refreshUserToken = async (req, res, next) => {
   }
 };
 
-const display = (req, res) => {
-  try {
-    res.json('hellooooooo');
-  } catch (error) {
-    console.log(error);
-  }
-};
+
+
 
 module.exports = {
-  display, registrationUser, loginUser, logoutUser, activateUser, refreshUserToken,
+registrationUser, loginUser, logoutUser, activateUser, refreshUserToken,
 };
 
 
