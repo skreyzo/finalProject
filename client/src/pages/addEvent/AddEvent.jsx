@@ -21,8 +21,8 @@ const AddEvent = () => {
   const [eventValue, setEventValue] = useState({
     title: "",
     description: "",
-    ticket: "",
-    price: "",
+    ticket: 0,
+    price: 0,
     address: "",
   });
   const [filePhotoEvent, setFilePhotoEvent] = useState(null);
@@ -69,8 +69,8 @@ const AddEvent = () => {
       setEventValue({
         title: "",
         description: "",
-        ticket: "",
-        price: "",
+        ticket: 0,
+        price: 0,
         address: "",
       });
     } catch (err) {
