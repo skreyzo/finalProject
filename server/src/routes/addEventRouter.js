@@ -3,13 +3,13 @@ const router = express.Router();
 
 const {
     addEventInfo,
-  putGreeting,
+    deleteEvent,
 } = require("../controllers/addEventControllers");
 
 
 router
   .route("/")
-  .post(addEventInfo)  
-  //.put(putGreeting);
+  .post(addEventInfo) 
+  .delete(deleteEvent)   
 
 module.exports = router;

@@ -27,7 +27,8 @@ app.use(cors(corsOptions));
 
 // импорт роутов
 
-const homeRoutes = require('./routes/homeRouter')
+const homeRoutes = require('./routes/homeRouter');
+const eventRoutes = require('./routes/eventRouter')
 const aboutRoutes = require('./routes/aboutRouter');
 
 const editAboutRoutes = require('./routes/editAboutRouter');
@@ -85,6 +86,7 @@ app.use(errorMiddleware);
 
 app.use('/about', aboutRoutes);
 app.use('/homepage', homeRoutes);
+app.use('/eventpage', eventRoutes);
 
 app.use('/admin/editabout', editAboutRoutes);
 app.use('/admin/edithomepage', editHomeRoutes);
