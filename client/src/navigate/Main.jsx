@@ -27,6 +27,7 @@ import Box from "@mui/material/Box";
 
 import EditNews from "../pages/editNews/EditNews";
 import FullNews from "../pages/fullNews/FullNews";
+import TheEvent from "../pages/theEvent/TheEvent";
 
 
 // const checkIsAdmin = () => {
@@ -107,6 +108,9 @@ const Main = () => {
           <Link className={styles.nav_link} to="/donate">
             Donate
           </Link>
+          <Link className={styles.nav_link} to="/events/:id">
+            Donate
+          </Link>
           {!isAuth && (
             <React.Fragment>
               <Link className={styles.nav_link} to="/signin">
@@ -143,6 +147,7 @@ const Main = () => {
         <Route
           path="/events"
           element={<Events title={"Events Page"} />}
+          
         ></Route>
         <Route
           path="/education"
@@ -171,12 +176,8 @@ const Main = () => {
           element={<AddEvent title={"AddEvent"} />}
         ></Route>
         <Route
-          path="admin/addevent/:id"
-          element={<EditNews title={"Edit news title"} />}
-        ></Route>
-        <Route
           path="/events/:id"
-          element={<FullNews title={"Events"} />}
+          element={<TheEvent title={"Events"} />}
         ></Route>
 
         <Route
