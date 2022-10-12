@@ -16,7 +16,7 @@ const Home = () => {
         credentials: "include",
       });
       const data = (await res.json()) || [];
-      //console.log('data:', data);
+      // console.log('data:', data);
       setTextHomePage(data);
       setNameHomePhoto(data.bigfoto);
     })();
