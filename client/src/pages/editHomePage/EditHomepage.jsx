@@ -72,7 +72,9 @@ const EditHomepage = () => {
   const upload = async (e) => {
     e.preventDefault();
     const data = new FormData();
+    
     data.append("loading_greetingPhoto", filePhotoHome);
+    console.log('data=====>>>', data)
     const res = await fetch("http://localhost:3010/admin/edithomepage", {
       method: "POST",
       body: data,
