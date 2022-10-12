@@ -28,14 +28,13 @@ import Box from "@mui/material/Box";
 import EditNews from "../pages/editNews/EditNews";
 import FullNews from "../pages/fullNews/FullNews";
 import TheEvent from "../pages/theEvent/TheEvent";
-
+import Profile from "../pages/Profile/Profile"
 
 // const checkIsAdmin = () => {
 //   // const res = await fetch('http://localhost:3100')
 // };
 
 const Main = () => {
-
   const newsHandler = async () => {
     try {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
@@ -57,25 +56,23 @@ const Main = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() =>{
-    if(localStorage.getItem('token')) {
-      console.log('в сторе токен есть!!!!')
-      dispatch(auth())
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      console.log("в сторе токен есть!!!!");
+      dispatch(auth());
     } else {
-      console.log('в сторе токена НЕТ!!!!')
+      console.log("в сторе токена НЕТ!!!!");
     }
-  }, [])
+  }, []);
 
   React.useEffect(() => {
     newsHandler();
   }, []);
 
   const isAuth = useSelector((state) => state.user.isAuth);
-  console.log('~ isAuth', isAuth)
+  console.log("~ isAuth", isAuth);
   const isAdmin = useSelector((state) => state.user.isAdmin);
-  console.log('~ isAdmin', isAdmin)
-
-
+  console.log("~ isAdmin", isAdmin);
 
   return (
     <>
@@ -108,9 +105,7 @@ const Main = () => {
           <Link className={styles.nav_link} to="/donate">
             Donate
           </Link>
-          <Link className={styles.nav_link} to="/events/:id">
-            Donate
-          </Link>
+
           {!isAuth && (
             <React.Fragment>
               <Link className={styles.nav_link} to="/signin">
@@ -129,14 +124,21 @@ const Main = () => {
               >
                 Logout
               </Link>
+                    {/* исправить когда починятся куки */} 
             </React.Fragment>
           )}
+          
+          <Link className={styles.nav_link} to="/profile/2">
+            Profile
+          </Link>     
+ 
+                  
           {/* {isAdmin &&( */}
-            <React.Fragment>
-          <Link className={styles.nav_link} to="/admin">
-            Admin
-          </Link>
-            </React.Fragment>
+          <React.Fragment>
+            <Link className={styles.nav_link} to="/admin">
+              Admin
+            </Link>
+          </React.Fragment>
           {/* )} */}
         </Box>
       </Box>
@@ -147,7 +149,6 @@ const Main = () => {
         <Route
           path="/events"
           element={<Events title={"Events Page"} />}
-          
         ></Route>
         <Route
           path="/education"
@@ -162,6 +163,11 @@ const Main = () => {
           element={<Donate title={"Donate Page"} />}
         ></Route>
         <Route path="/admin" element={<Admin title={"Admin Page"} />}></Route>
+        {/* исправить когда починятся куки */}
+        <Route
+          path="/profile/2"
+          element={<Profile title={"Profile Page"} />}
+        ></Route>
 
         <Route
           path="/admin/editaboutus"
@@ -200,7 +206,6 @@ const Main = () => {
           path="/news/:id"
           element={<FullNews title={"Full News"} />}
         ></Route>
-
 
         {/* <Route 
         path="/logout"
