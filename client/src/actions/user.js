@@ -8,7 +8,8 @@ export const registration = async (email, password) => {
         const response = await axios.post(`${API_URL}/registration`, {
             email,
             password
-        })
+        },
+        {withCredentials: true})
         alert(response.data.message)
     } catch (error) {
         alert(error.response.data.message)
@@ -51,7 +52,7 @@ export const auth =  () => {
             localStorage.setItem('token', response.data.accessToken)
             console.log('~ response.data.accessToken>>>>>>>>>>>', response.data.accessToken)
         } catch (e) {
-            alert("Ошибка Авторизации!!!!")  // e.response.data.message
+            // alert("Ошибка Авторизации!!!!")  // e.response.data.message
             // localStorage.removeItem('token')
         }
     }

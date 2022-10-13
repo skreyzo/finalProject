@@ -29,9 +29,9 @@ const Input = (props) => {
     <Box
       component="form"
       sx={{
-        margin: '30px',
+        marginTop: '100px',
         display: 'grid',
-        gridTemplateColumns: { sm: '1fr 1fr', mt: '100px' },
+        gridTemplateColumns: { sm: '1fr 1fr', mt: '10px' },
         gap: 2,
       }}
     >

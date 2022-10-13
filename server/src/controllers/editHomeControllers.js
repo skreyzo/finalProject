@@ -18,16 +18,32 @@ const upload=multer({
 });
 
 //!multer controllers
-exports.addGreetPhoto = async (req,res)=>{
-  try {
-    upload.single('loading_greetingPhoto')(req, res, async function (err) {
-    const addLink = await Home.update({bigfoto: `/uploads/${req.file.filename}`}, {where: {id: 1}});
-    const getDBData = await Home.findByPk(1);
-    res.json(getDBData);    
-    })          
-  } catch (error) {
-    console.log(error);
-  }
+// exports.addGreetPhoto = async (req,res)=>{
+//   try {
+//     upload.single('loading_greetingPhoto')(req, res, async function (err) {
+//       console.log('~ req.file========', req.file)
+//       console.log('~ req.body========', req.body)
+//     const addLink = await Home.update({bigfoto: `/uploads/${req.file.filename}`}, {where: {id: 1}});
+//     const getDBData = await Home.findByPk(1);
+//     res.json(getDBData);    
+//     })          
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+exports.addGreetPhoto = async (req,res) => {
+  console.log('~ req.body', req.body)
+  return {
+}
+  // try {
+  //   upload.single('loading_greetingPhoto')(req, res, async function (err) {
+  //   const addLink = await Home.update({bigfoto: `/uploads/${req.file.filename}`}, {where: {id: 1}});
+  //   const getDBData = await Home.findByPk(1);
+  //   res.json(getDBData);
+  //   })
+  // } catch (error) {
+  //   console.log(error);
+  // }
 }
 
 exports.putGreeting = async (req, res) => {

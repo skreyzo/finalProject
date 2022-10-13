@@ -21,7 +21,7 @@ const { DEV_PORT, CLIENT_URL, SESSION_SECRET } = process.env;
 const app = express();
 const corsOptions = {
   credentials: true,
-  origin: '*', // адрес сервера React
+  origin: "http://localhost:3000", // адрес сервера React
 };
 app.use(cors(corsOptions));
 
