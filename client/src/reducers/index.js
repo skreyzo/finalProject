@@ -5,7 +5,7 @@ import userReducer from "./userReducer";
 import { newsReducer } from './newsReducer';
 
 import { eventReducer } from './eventReducer';
-
+//import { orderReducer } from './orderReducer';
 import aboutReducer from "./aboutReducer";
 import contactsReducer from "./contactsReducer";
 
@@ -17,6 +17,7 @@ const rootReducer = combineReducers({
     event: eventReducer,
     about: aboutReducer,
     contacts: contactsReducer,
+    //userEvent: orderReducer,
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

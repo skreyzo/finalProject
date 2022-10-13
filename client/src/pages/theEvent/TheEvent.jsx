@@ -59,6 +59,18 @@ const TheEvent = () => {
       setRegInfo({
         ticketQT: 0,        
       });
+
+/*       const res = await fetch(`http://localhost:3010/eventpage/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        }, 
+        body: JSON.stringify(regInfo),
+       // body: data,
+      });
+      setRegInfo({
+        ticketQT: 0,        
+      }); */
     } catch (err) {
       console.log(err);
       alert(err.message);

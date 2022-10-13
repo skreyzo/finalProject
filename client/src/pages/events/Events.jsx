@@ -39,7 +39,7 @@ const Events = () => {
     <>
       {eventStore.map((el) => (
         
-        <Card sx={{ display: "flex", margin: "50px" }} key={el.id}>
+        <Card sx={{ display: "flex", margin: "100px" }} key={el.id}>
           <CardMedia
             component="img"
             sx={{ width: 351 }}
