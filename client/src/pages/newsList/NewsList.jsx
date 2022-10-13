@@ -1,6 +1,8 @@
 import React from "react";
 import News from "../news/News";
 import { useSelector } from "react-redux";
+import styles from './newsList.module.css'
+
 
 
 
@@ -8,10 +10,10 @@ const NewsList = () => {
   const news = useSelector((store) => store.news.news);
 
   return (
-    <div>
-      <h1>Всего новостей: {news.length} </h1>
+    <div className={styles.container}>
+      <h1>Total news: {news.length} </h1>
       {news.map((el) => {
-        return <News key={el.id} news={el.title} body={el.body} id={el.id}  />;
+        return <News key={el.id} news={el.title} body={el.body} id={el.id} pic={el.pic}  />;
       })}
     </div>
   );

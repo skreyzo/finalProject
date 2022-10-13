@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import NewsAdmin from "../../pages/newsAdmin/NewsAdmin";
 import NewsForm from "../../pages/newsForm/NewsForm";
 import { useDispatch } from "react-redux";
+import styles from './AdminNewsList.module.css'
 
 
 
@@ -36,8 +37,8 @@ const AdminNewsList = () => {
   const editNewsHandler = async (id) => {};
 
   return (
-    <div>
-      <h1>Add a new post</h1>
+    <div className={styles.container}>
+
       <NewsForm />
       <h1>Total News: {news.length} </h1>
       {news.map((el) => {

@@ -45,14 +45,11 @@ const Main = () => {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
         method: "GET",
         credentials: "include",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify(),
+
       });
       if (!response.ok) throw new Error(`Ошибка`);
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
       dispatch({ type: "initState", payload: { data } });
       if (data.err) throw new Error(data.err);
     } catch (err) {
