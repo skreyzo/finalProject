@@ -89,7 +89,7 @@ const Main = () => {
     <>
     <NavBar />
     <SideBar />
-      <Box sx={{ position: "relative" }}>
+      {/* <Box sx={{ position: "relative" }}>
         <Box
           sx={{
             display: "flex",
@@ -100,7 +100,7 @@ const Main = () => {
             px: "15px",
           }}
         >
-          {/* <Link className={styles.nav_link} to="/">
+           <Link className={styles.nav_link} to="/">
             Home
           </Link>
           <Link className={styles.nav_link} to="/news">
@@ -118,11 +118,11 @@ const Main = () => {
           <Link className={styles.nav_link} to="/donate">
             Donate
 
-          </Link> */}
+          </Link>
 
           
 
-{/*           {!isAuth && (
+         {!isAuth && (
             <React.Fragment>
               <Link className={styles.nav_link} to="/signin">
                 SignIn
@@ -142,9 +142,9 @@ const Main = () => {
               </Link>
                                        
             </React.Fragment>
-          )} */}
+          )} 
           
-{/*           <Link className={styles.nav_link} to="/profile/2">
+         <Link className={styles.nav_link} to="/profile/2">
             Profile
           </Link>     
                   
@@ -154,11 +154,11 @@ const Main = () => {
               Admin
             </Link>
           </React.Fragment>
-           )}  */}
+           )}  
 
         </Box>
       </Box>
-
+ */}
       <Routes>
         <Route path="/" element={<Home title={"Home Page"} />}></Route>
         <Route path="/news" element={<NewsList title={"News Page"} />}></Route>
