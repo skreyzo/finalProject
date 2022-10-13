@@ -21,7 +21,11 @@ exports.addEventInfo = async (req, res) => {
   try {
     upload.single("loading_eventPhoto")(req, res, async function (err) {
 
-      const { title, description, ticket, price, address } = req.body;      
+      const { title, description, ticket, price, address, dataTime } = req.body;
+      let month = dataTime.slice(4,7)
+      month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(month)+1;
+      const formatDataTime =  `${dataTime.slice(16, 21)} ${dataTime.slice(8, 10)}-${month}-${dataTime.slice(11, 15)}`;
+      
 
       if (req.file) {
         const addLink = await Event.create({
@@ -30,6 +34,7 @@ exports.addEventInfo = async (req, res) => {
           ticket,
           price,
           address,
+          dataTime: formatDataTime,
           eventphotolink: `/uploads/${req.file.filename}`,
         });
         res.json(addLink);
@@ -40,6 +45,7 @@ exports.addEventInfo = async (req, res) => {
           ticket,
           price,
           address,
+          dataTime: formatDataTime
         });
         res.json(event);
       }

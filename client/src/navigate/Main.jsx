@@ -147,7 +147,6 @@ const Main = () => {
           <Link className={styles.nav_link} to="/profile/2">
             Profile
           </Link>     
- 
                   
           {/* {isAdmin &&( */}
           <React.Fragment>

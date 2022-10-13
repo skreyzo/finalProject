@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
+import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
@@ -28,22 +29,34 @@ const CardItem = (props) => {
 
   return (
     <>
-      <Card sx= {{
-          maxWidth: 250,
-          position: 'relative'
-        }}>
+      <Card sx={{
+        height: '100%',
+        width: '100%',
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
         <CardMedia
           component="img"
-          height="100"
           image={localhost + props.image}
-          alt="photo" />
+          alt="photo"
+          />
         <CardContent >
-          <Typography gutterBottom variant="h5" component="div">
-            {`${props.firstname} ${props.lastname}`}
-          </Typography>
-          <Typography variant="h6" color="text.secondary">
-            {props.position}
-          </Typography>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+            <Typography gutterBottom variant="h5" component="div">
+              {props.firstname}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="div">
+              {props.lastname}
+            </Typography>
+            <Typography variant="h6" color="text.secondary">
+              {props.position}
+            </Typography>
+          </Box>
         </CardContent>
         <CardActions>
         </CardActions>

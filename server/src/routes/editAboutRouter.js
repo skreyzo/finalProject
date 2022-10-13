@@ -6,6 +6,7 @@ const {
   addBigPhoto,
   addNewPerson,
   delPerson,
+  addContacts,
 } = require("../controllers/editAboutControllers");
 
 
@@ -21,6 +22,10 @@ router
 router
   .route("/delperson")
   .delete(delPerson)
+
+router
+  .route("/addcontacts")
+  .post(addContacts)
 
 module.exports = router;
 

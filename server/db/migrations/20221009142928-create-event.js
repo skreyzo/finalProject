@@ -24,6 +24,9 @@ module.exports = {
       address: {
         type: Sequelize.STRING
       },
+      dataTime: {
+        type: Sequelize.STRING
+      },
       coordinat: {
         type: Sequelize.STRING
       },

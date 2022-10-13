@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     ticket: DataTypes.INTEGER,
     price: DataTypes.FLOAT,
     address: DataTypes.STRING,
+    dataTime: DataTypes.STRING,
     coordinat: DataTypes.STRING,
     eventphotolink: DataTypes.STRING,
     eventdate: DataTypes.STRING

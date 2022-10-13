@@ -1,11 +1,20 @@
 import React, { useState } from "react";
+
+import dayjs from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import styles from "./addevent.module.css";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -13,6 +22,13 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 const AddEvent = () => {
   const localhost = "http://localhost:3010";
+
+
+  const [valueDataTime, setValueDataTime] = useState(dayjs(new Date()));
+  const handleChange = (newValue) => {
+    const {$L,$u, $d} = newValue;
+    setValueDataTime($d);
+  };    
 
   //!Redux
   const dispatch = useDispatch();
@@ -58,6 +74,10 @@ const AddEvent = () => {
       data.append("ticket", eventValue.ticket);
       data.append("price", eventValue.price);
       data.append("address", eventValue.address);
+
+      data.append("dataTime", valueDataTime);
+      console.log(data)
+
       const response = await fetch("http://localhost:3010/admin/addevent", {
         method: "POST",
         /*         headers: {
@@ -200,11 +220,23 @@ const AddEvent = () => {
                 mx: "auto",
               }}
             >
+
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Stack spacing={3}>
+                  <DateTimePicker
+                    label="Date&Time picker"
+                    value={valueDataTime}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Stack>
+              </LocalizationProvider>
               <Button variant="contained" component="label">
                 Select Event Photo
                 <input
                   name="eventphotolink"
                   hidden
+
                   accept="image/*"
                   type="file"
                   onChange={(e) => {
@@ -214,6 +246,7 @@ const AddEvent = () => {
               </Button>
             </Box>
             <br />
+
             <Button variant="contained" type="submit" margin="normal">
               Save
             </Button>
