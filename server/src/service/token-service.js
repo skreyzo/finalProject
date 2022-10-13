@@ -41,7 +41,7 @@ const saveToken = async (userId, refreshToken) => {
   } else {
     console.log('~ refreshToken', refreshToken)
     console.log('~ userId', userId)
-    const token = await Token.create({refreshToken: '123', userId: userId});
+    const token = await Token.create({refreshToken, userId});
     console.log('40 token=service>>>>>>>>>>', token)
     return token;
   }

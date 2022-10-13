@@ -26,7 +26,6 @@ exports.addEventInfo = async (req, res) => {
       month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(month)+1;
       const formatDataTime =  `${dataTime.slice(16, 21)} ${dataTime.slice(8, 10)}-${month}-${dataTime.slice(11, 15)}`;
       
-
       if (req.file) {
         const addLink = await Event.create({
           title,

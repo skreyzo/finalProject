@@ -288,12 +288,15 @@ const EditAboutUs = () => {
           <Box sx={{
             display: 'flex',
             flexWrap: 'wrap',
+            gap: '50px',
+            px: '50px',
+            justifyContent: 'center',
           }}>
             {newRosterTeam?.map((item, index) => {
               return <Box sx={{
                 display: 'flex',                
                 flexBasis: '50%',
-                my: '10px',
+                my: '10px',              
               }} key={index} >
                 <CardItem id={item.id}
                   firstname={item.firstname}
