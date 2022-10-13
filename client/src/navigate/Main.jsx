@@ -120,9 +120,9 @@ const Main = () => {
 
           </Link> */}
 
-          </Link>
+          
 
-          {!isAuth && (
+{/*           {!isAuth && (
             <React.Fragment>
               <Link className={styles.nav_link} to="/signin">
                 SignIn
@@ -140,21 +140,21 @@ const Main = () => {
               >
                 Logout
               </Link>
-                    {/* исправить когда починятся куки */} 
+                                       
             </React.Fragment>
-          )}
+          )} */}
           
-          <Link className={styles.nav_link} to="/profile/2">
+{/*           <Link className={styles.nav_link} to="/profile/2">
             Profile
           </Link>     
                   
-          {/* {isAdmin &&( */}
+         {isAdmin &&( 
           <React.Fragment>
             <Link className={styles.nav_link} to="/admin">
               Admin
             </Link>
           </React.Fragment>
-          {/* )} */}
+           )}  */}
 
         </Box>
       </Box>
