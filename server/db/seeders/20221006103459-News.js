@@ -13,7 +13,7 @@ module.exports = {
           pic: "https://bitok.blog/uploads/images/80E6xGuRD0vftC1ZcvoAO-Bj4P0eMy5M.jpg",
 
           createdAt: new Date(),
-          updatedAt: new Date(),git 
+          updatedAt: new Date(),
         },
         {
           id: "2",
