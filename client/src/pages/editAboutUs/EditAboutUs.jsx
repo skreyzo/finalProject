@@ -16,7 +16,6 @@ const EditAboutUs = () => {
   const editPage = true;
   const dispatch = useDispatch();
   const newRosterTeam = useSelector((store) => (store.about.team));
-  //console.log('YYYYYYYYYYYYYYYYYYYY')
 
   const [gotDataAbout, setGotDataAbout] = useState({});
   const [activeEditor, setactiveEditor] = useState(false);

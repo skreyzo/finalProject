@@ -15,16 +15,16 @@ function App() {
         <Container maxWidth={false} disableGutters={true}
           sx={{
             className: 'footer',
-            maxWidth: '1200px',
+            maxWidth: '100vw',
             mx: "auto",
-            px: '10px',
+            // px: '10px',
             wordWrap: 'break-word',
           }}>
           <Box sx={{
             display: 'flex',
             minHeight: '100vh',
             flexDirection: 'column',
-            backgroundColor: '#808080',
+            backgroundColor: 'white',
           }}>
             <Box sx={{
               flexShrink: 1,

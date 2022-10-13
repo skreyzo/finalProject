@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styles from "./home.module.css";
 
+import { Box, CardMedia } from "@mui/material";
+import Image from 'mui-image'
+
 import Typography from "@mui/material/Typography";
 
 const Home = () => {
@@ -16,7 +19,7 @@ const Home = () => {
         credentials: "include",
       });
       const data = (await res.json()) || [];
-      //console.log('data:', data);
+      // console.log('data:', data);
       setTextHomePage(data);
       setNameHomePhoto(localhost + data.bigfoto);
       console.log('data.bigfoto======>', data.bigfoto)
@@ -29,9 +32,30 @@ const Home = () => {
         <img src={`${nameHomePhoto}`} alt="There is a photo here" />
       </div>
 
-      <Typography variant="h5" align="left" color="text.secondary" paragraph>
+      {/* <Typography variant="h5" align="left" color="text.secondary" paragraph>
         {textHomePage.greeting}
-      </Typography>
+      </Typography> */}
+
+      <Box
+      border="solid 3px red"
+      width='100vw'
+      height="80vh"
+      >
+        <Box display="flex" >
+          <Box 
+          width='40vw'
+          height="40vh">
+            <Image src="../../public/img/sahiy-header.jpg" alt="sahiy-header" />
+          </Box>
+          <Box >
+            <Typography position="relative" marginLeft="500px" fontSize="60px" fontWeight="900">About us</Typography>
+            <Typography position="relative" marginLeft="500px" fontSize="60px" fontWeight="900">About us</Typography>
+          </Box>
+        </Box>
+        
+       
+        
+      </Box>
     </>
   );
 };

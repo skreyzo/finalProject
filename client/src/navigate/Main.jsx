@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
+import NavBar from "../components/appBar/NavBar";
+
 import AboutUs from "../pages/aboutUs/AboutUs";
 import Home from "../pages/home/Home";
 import Education from "../pages/education/Education";
@@ -30,16 +32,23 @@ import FullNews from "../pages/fullNews/FullNews";
 import TheEvent from "../pages/theEvent/TheEvent";
 import Profile from "../pages/Profile/Profile"
 
+import SideBar from "../components/sideBar/SideBar";
+
 // const checkIsAdmin = () => {
 //   // const res = await fetch('http://localhost:3100')
 // };
 
 const Main = () => {
+
   const newsHandler = async () => {
     try {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
         method: "GET",
         credentials: "include",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify(),
       });
       if (!response.ok) throw new Error(`Ошибка`);
       const data = await response.json();
@@ -56,6 +65,7 @@ const Main = () => {
 
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       console.log("в сторе токен есть!!!!");
@@ -64,6 +74,7 @@ const Main = () => {
       console.log("в сторе токена НЕТ!!!!");
     }
   }, []);
+
 
   React.useEffect(() => {
     newsHandler();
@@ -76,6 +87,8 @@ const Main = () => {
 
   return (
     <>
+    <NavBar />
+    <SideBar />
       <Box sx={{ position: "relative" }}>
         <Box
           sx={{
@@ -87,7 +100,7 @@ const Main = () => {
             px: "15px",
           }}
         >
-          <Link className={styles.nav_link} to="/">
+          {/* <Link className={styles.nav_link} to="/">
             Home
           </Link>
           <Link className={styles.nav_link} to="/news">
@@ -104,6 +117,9 @@ const Main = () => {
           </Link>
           <Link className={styles.nav_link} to="/donate">
             Donate
+
+          </Link> */}
+
           </Link>
 
           {!isAuth && (
@@ -140,6 +156,7 @@ const Main = () => {
             </Link>
           </React.Fragment>
           {/* )} */}
+
         </Box>
       </Box>
 

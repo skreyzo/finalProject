@@ -1,0 +1,18 @@
+.ListItemButton{
+    padding: 10px;
+    min-width: 30px;
+    padding-left: 0px;
+    width: 20px;
+}
+.ListItemButton:hover{
+    background-color: rgb(255, 255, 255, 0.2);
+    color: hsl(192, 87%, 75%);
+    border: 1px solid rgba(158, 158, 158, 0.61);
+    border-radius: 10px;
+    
+}
+
+.icon__sideBare {
+    color:#007FFF;
+    margin-left: -4px;
+}
