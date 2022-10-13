@@ -84,6 +84,7 @@ const logout = async (refreshToken) => {
 };
 
 const refresh = async (refreshToken) => {
+  console.log('==========~ refreshToken', refreshToken)
   if (!refreshToken) {
     throw ApiError.UnauthorizedError();
   }

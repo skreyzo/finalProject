@@ -8,15 +8,16 @@ import { Typography, Button } from "@mui/material";
 import styles from "./signIn.module.css";
 
 const SignIn = () => {
-    const [email, setEmail] = useState("")
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState("")
     const dispatch = useDispatch()
 
-    // const resetValueInput = (event) => {
-    //     event.preventDefault();
-    //     setEmail('');
-    //     setPassword('');
-    // }
+    const resetValueInput = (event) => {
+        event.preventDefault();
+        dispatch(signIn(email, password))
+        setEmail('');
+        setPassword('');
+    }
 
     return (
         <div className={styles.authorization}>
@@ -27,9 +28,12 @@ const SignIn = () => {
             >  
             Please log in
             </Typography> 
-            <Input value={email} setValue={setEmail} type="email" label="Enter your email..."/>
-            <Input value={password} setValue={setPassword} type="password" label="Enter your password..."/>
-            <Button style={{marginLeft: "60%"}} variant="outlined" className="registration__btn" onClick={() => dispatch(signIn(email, password))}>Log In</Button>
+            <form onSubmit={resetValueInput}>
+                <Input value={email} setValue={setEmail} type="email" label="Enter your email..."/>
+                <Input value={password} setValue={setPassword} type="password" label="Enter your password..."/>
+                <Button style={{marginLeft: "60%"}} variant="outlined" className="registration__btn" type="submit">Log In</Button>
+            </form>
+            
         </div>
     );
 };

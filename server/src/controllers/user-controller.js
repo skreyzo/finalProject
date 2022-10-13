@@ -27,7 +27,6 @@ const loginUser = async (req, res, next) => {
     const { email, password } = req.body;
     const userData = await login(email, password);
     res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
-    console.log('~ userData >?>?>?>>>?>?>>', userData)
     return res.json(userData);
   } catch (error) {
     next(error);
@@ -35,8 +34,9 @@ const loginUser = async (req, res, next) => {
 };
 
 const logoutUser = async (req, res, next) => {
+  console.log('~ req ------req.cookie', req.cookie)
   try {
-    const { refreshToken } = req.cookies;
+    const { refreshToken } = req.body; //req.cookies
     console.log('~ refreshToken ======from cookie----------', refreshToken)
     const token = await logout(refreshToken);
     res.clearCookie('refreshToken');
@@ -58,12 +58,15 @@ const activateUser = async (req, res, next) => {
 };
 
 const refreshUserToken = async (req, res, next) => {
+  console.log('~ ================req.body', req.body)
+  
   try {
-    const { refreshToken } = req.cookies;
-    console.log('~ req.cookies=======', req.cookies)
+    const { refreshToken } = req.body; //req.cookies
+    console.log('~ req.cookies=======', req.body)
     
     console.log('~ refreshToken =====>>>>refreshUserToken', refreshToken)
     const userData = await refresh(refreshToken);
+    console.log('~69 userData======refreshUserToken', userData)
     res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
     return res.json(userData);
   } catch (error) {

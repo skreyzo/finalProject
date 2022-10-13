@@ -4,6 +4,8 @@ const multer=require('multer');
 const path = require('path');
 const { Home } =require("../../db/models")
 
+const authMiddleware = require('../middlewares/auth-middleware');
+
 //!multer storage
 const storage=multer.diskStorage({
   destination:(req,file,cb)=>{
