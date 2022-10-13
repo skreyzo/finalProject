@@ -17,6 +17,7 @@ exports.putNews = async (req, res) => {
 
 exports.editNews = () => {};
 
+
 exports.deleteNews = async (req, res) => {
   const { id } = req.body;
   try {

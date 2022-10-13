@@ -69,19 +69,48 @@ const EditHomepage = () => {
   };
 
   //! multer upload
-  const upload = async (e) => {
+   const upload = async (e) => {
+     e.preventDefault();
+     const data = new FormData();
+     data.append("loading_greetingPhoto", filePhotoHome);
+  //   const foto = data.get("loading_greetingPhoto")
+  //   console.log('~ foto=====homePage', foto )
+     const res = await fetch("http://localhost:3010/admin/edithomepage", {
+       method: "POST",
+  //     headers: { "Content-Type": "application/json", },
+  //     body: JSON.stringify("hello"),
+       body: data,
+     });
+     const resHomePhoto = await res.json();
+     setNameHomePhoto(resHomePhoto.bigfoto);
+  //   console.log("resHomePhoto fetch POST", resHomePhoto.bigfoto);
+   };
+  /*const upload = async (e) => {
     e.preventDefault();
     const data = new FormData();
+
+    console.log("filePhotoHome========", filePhotoHome)
     data.append("loading_greetingPhoto", filePhotoHome);
+    data.append("greetingPhoto", "hello");
+    const foto = data.get("loading_greetingPhoto")
+    console.log('~ foto=====homePage', foto )
+
+    
+    data.append("loading_greetingPhoto", filePhotoHome);*/
+
+    console.log('data=====>>>', data)
     const res = await fetch("http://localhost:3010/admin/edithomepage", {
       method: "POST",
+      //  headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
       body: data,
     });
     const resHomePhoto = await res.json();
     setNameHomePhoto(resHomePhoto.bigfoto);
     console.log("resHomePhoto fetch POST", resHomePhoto.bigfoto);
   };
-
+  
   return (
     <>
       <Typography

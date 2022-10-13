@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING,
     dataTime: DataTypes.STRING,
     coordinat: DataTypes.STRING,
-    eventphotolink: DataTypes.STRING
+    eventphotolink: DataTypes.STRING,
+    eventdate: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Event',

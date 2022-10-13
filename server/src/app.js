@@ -18,22 +18,34 @@ const authMiddleware = require('./middlewares/auth-middleware');
 
 const { DEV_PORT, CLIENT_URL, SESSION_SECRET } = process.env;
 
-const app = express();
-const corsOptions = {
+ const app = express();
+
+/*const corsOptions = {
   credentials: true,
   origin: process.env.CLIENT_URL, // адрес сервера React
 };
 app.use(cors(corsOptions));
+  origin: '*', // адрес сервера React
+}; */
 
+
+const corsOptions = {
+  credentials: true,
+  origin: process.env.CLIENT_URL
+};  
+
+app.use(cors(corsOptions));
 // импорт роутов
 
-const homeRoutes = require('./routes/homeRouter')
+const homeRoutes = require('./routes/homeRouter');
+const eventRoutes = require('./routes/eventRouter')
 const aboutRoutes = require('./routes/aboutRouter');
 
 const editAboutRoutes = require('./routes/editAboutRouter');
 const editHomeRoutes = require('./routes/editHomeRouter');
 const editNewsRoutes = require('./routes/newsRouter');
 const addEventRoutes = require('./routes/addEventRouter');
+const profileRoutes = require('./routes/profileRouter')
 
 
 // expressMiddlewares(app);
@@ -85,6 +97,8 @@ app.use(errorMiddleware);
 
 app.use('/about', aboutRoutes);
 app.use('/homepage', homeRoutes);
+app.use('/eventpage', eventRoutes);
+app.use('/profile', profileRoutes);
 
 app.use('/admin/editabout', editAboutRoutes);
 app.use('/admin/edithomepage', editHomeRoutes);

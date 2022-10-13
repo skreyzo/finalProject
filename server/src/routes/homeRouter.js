@@ -8,6 +8,6 @@ const {
 
 router
   .route("/")
-  .get(getGreeting,)  
+  .get(getGreeting)  
   
 module.exports = router;

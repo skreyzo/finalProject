@@ -1,5 +1,3 @@
-// import ACTypes from "./types";
-
 const initState = {
   news: [],
 };
@@ -7,7 +5,7 @@ const initState = {
 export const newsReducer = (state = initState, action) => {
   switch (action.type) {
     case "initState":
-      const newsList = action.payload.data.getNewsList;
+      const newsList = action.payload.data.getNewsList;      
       return { ...state, news: newsList };
 
     case "DELETE_NEWS":

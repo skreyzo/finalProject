@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
+import NavBar from "../components/appBar/NavBar";
+
 import AboutUs from "../pages/aboutUs/AboutUs";
 import Home from "../pages/home/Home";
 import Education from "../pages/education/Education";
@@ -10,6 +12,7 @@ import Events from "../pages/events/Events";
 import Donate from "../pages/donate/Donate";
 import EditAboutUs from "../pages/editAboutUs/EditAboutUs";
 import EditHomepage from "../pages/editHomePage/EditHomepage";
+
 import AddEvent from "../pages/addEvent/AddEvent";
 
 import styles from "./main.module.css";
@@ -26,7 +29,10 @@ import Box from "@mui/material/Box";
 
 import EditNews from "../pages/editNews/EditNews";
 import FullNews from "../pages/fullNews/FullNews";
+import TheEvent from "../pages/theEvent/TheEvent";
+import Profile from "../pages/Profile/Profile"
 
+import SideBar from "../components/sideBar/SideBar";
 
 // const checkIsAdmin = () => {
 //   // const res = await fetch('http://localhost:3100')
@@ -39,6 +45,10 @@ const Main = () => {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
         method: "GET",
         credentials: "include",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify(),
       });
       if (!response.ok) throw new Error(`Ошибка`);
       const data = await response.json();
@@ -55,28 +65,30 @@ const Main = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() =>{
-    if(localStorage.getItem('token')) {
-      console.log('в сторе токен есть!!!!')
-      dispatch(auth())
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      console.log("в сторе токен есть!!!!");
+      dispatch(auth());
     } else {
-      console.log('в сторе токена НЕТ!!!!')
+      console.log("в сторе токена НЕТ!!!!");
     }
-  }, [])
+  }, []);
+
 
   React.useEffect(() => {
     newsHandler();
   }, []);
 
   const isAuth = useSelector((state) => state.user.isAuth);
-  console.log('~ isAuth', isAuth)
+  console.log("~ isAuth", isAuth);
   const isAdmin = useSelector((state) => state.user.isAdmin);
-  console.log('~ isAdmin', isAdmin)
-
-
+  console.log("~ isAdmin", isAdmin);
 
   return (
     <>
+    <NavBar />
+    <SideBar />
       <Box sx={{ position: "relative" }}>
         <Box
           sx={{
@@ -88,7 +100,7 @@ const Main = () => {
             px: "15px",
           }}
         >
-          <Link className={styles.nav_link} to="/">
+          {/* <Link className={styles.nav_link} to="/">
             Home
           </Link>
           <Link className={styles.nav_link} to="/news">
@@ -105,7 +117,11 @@ const Main = () => {
           </Link>
           <Link className={styles.nav_link} to="/donate">
             Donate
+
+          </Link> */}
+
           </Link>
+
           {!isAuth && (
             <React.Fragment>
               <Link className={styles.nav_link} to="/signin">
@@ -124,15 +140,22 @@ const Main = () => {
               >
                 Logout
               </Link>
+                    {/* исправить когда починятся куки */} 
             </React.Fragment>
           )}
+          
+          <Link className={styles.nav_link} to="/profile/2">
+            Profile
+          </Link>     
+                  
           {/* {isAdmin &&( */}
-            <React.Fragment>
-          <Link className={styles.nav_link} to="/admin">
-            Admin
-          </Link>
-            </React.Fragment>
+          <React.Fragment>
+            <Link className={styles.nav_link} to="/admin">
+              Admin
+            </Link>
+          </React.Fragment>
           {/* )} */}
+
         </Box>
       </Box>
 
@@ -156,6 +179,11 @@ const Main = () => {
           element={<Donate title={"Donate Page"} />}
         ></Route>
         <Route path="/admin" element={<Admin title={"Admin Page"} />}></Route>
+        {/* исправить когда починятся куки */}
+        <Route
+          path="/profile/2"
+          element={<Profile title={"Profile Page"} />}
+        ></Route>
 
         <Route
           path="/admin/editaboutus"
@@ -168,6 +196,10 @@ const Main = () => {
         <Route
           path="/admin/addevent"
           element={<AddEvent title={"AddEvent"} />}
+        ></Route>
+        <Route
+          path="/events/:id"
+          element={<TheEvent title={"Events"} />}
         ></Route>
 
         <Route
@@ -190,7 +222,6 @@ const Main = () => {
           path="/news/:id"
           element={<FullNews title={"Full News"} />}
         ></Route>
-
 
         {/* <Route 
         path="/logout"
