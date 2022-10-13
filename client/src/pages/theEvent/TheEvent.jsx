@@ -47,7 +47,7 @@ const TheEvent = () => {
       console.log('regInfo============>', regInfo)
       data.append("ticketQT", regInfo);
       console.log('data============>', data) */
-      console.log('regInfo============>', regInfo)
+      //console.log('regInfo============>', regInfo)
       const response = await fetch(`http://localhost:3010/eventpage/${id}`, {
         method: "POST",
         headers: {

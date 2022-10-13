@@ -20,10 +20,13 @@ exports.regEvent = async (req, res) => {
     console.log('req.body========>', req.body)
     const { ticketQT } = req.body
     console.log('ticketQT========>', ticketQT)
-    //console.log('eventId========>', eventId)
-/*     const theEvent = await Event.findAll({
+    const eventId = req.params.id;
+    console.log('eventId========>', eventId)
+    const toEvent = await Event.findAll({
         where: { id: eventId },
         raw: true,
-    }); */
-    res.json(ticketQT);
+    });
+    console.log('toEvent========>', toEvent)
+
+    //res.json(ticketQT);
 };
