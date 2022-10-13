@@ -55,7 +55,7 @@ const NavBar = ({ mode, setMode }) => {
     >
       <Container fixed style={{ minWidth: "97vw" }}>
         {/* <Box> */}
-        <img src="../../../public/img/sahiy-logo (1).png" alt="sahiy-logo" />
+
         {/* </Box> */}
         <StyledToolbar>
           <Typography style={{ flexGrow: 1 }} variant="h6">
