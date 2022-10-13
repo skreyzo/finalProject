@@ -11,7 +11,7 @@ module.exports = {
       price: 2.5,
       address: '221b, Baker Street, London',
       coordinat: '',
-      eventphotolink: '/public/eventimg/Без названия.jpg',
+      eventphotolink: '/img/Без названия.jpg',
       eventdate: '',
       createdAt: new Date(),
       updatedAt: new Date(),

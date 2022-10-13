@@ -98,18 +98,18 @@ const EditHomepage = () => {
     
     data.append("loading_greetingPhoto", filePhotoHome);*/
 
-    console.log('data=====>>>', data)
+/*     console.log('data=====>>>', data)
     const res = await fetch("http://localhost:3010/admin/edithomepage", {
       method: "POST",
-      //  headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
+        headers: {
+           "Content-Type": "multipart/form-data",
+         },
       body: data,
     });
     const resHomePhoto = await res.json();
     setNameHomePhoto(resHomePhoto.bigfoto);
     console.log("resHomePhoto fetch POST", resHomePhoto.bigfoto);
-  };
+  }; */
   
   return (
     <>
