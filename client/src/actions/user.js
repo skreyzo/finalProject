@@ -8,7 +8,8 @@ export const registration = async (email, password) => {
         const response = await axios.post(`${API_URL}/registration`, {
             email,
             password
-        })
+        },
+        {withCredentials: true})
         alert(response.data.message)
     } catch (error) {
         alert(error.response.data.message)
