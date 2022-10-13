@@ -16,23 +16,13 @@ const upload = multer({
   storage: storage,
 });
 
-/* //!multer controllers
-exports.addGreetPhoto = async (req,res)=>{
-  try {
-    upload.single('loading_greetingPhoto')(req, res, async function (err) {
-    const addLink = await Home.update({bigfoto: `/uploads/${req.file.filename}`}, {where: {id: 1}});
-    const getDBData = await Home.findByPk(1);
-    res.json(getDBData);    
-    })          
-  } catch (error) {
-    console.log(error);
-  }
-} */
-
+//!multer storage
 exports.addEventInfo = async (req, res) => {
   try {
     upload.single("loading_eventPhoto")(req, res, async function (err) {
-      const { title, description, ticket, price, address } = req.body;
+
+      const { title, description, ticket, price, address } = req.body;      
+
       if (req.file) {
         const addLink = await Event.create({
           title,
@@ -54,6 +44,21 @@ exports.addEventInfo = async (req, res) => {
         res.json(event);
       }
     });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
+exports.deleteEvent = async (req, res) => {  
+  const { id } = req.body;
+  console.log('id', req.body)
+  try {
+    const createEventList = await Event.destroy({
+      where: {
+        id,
+      },
+    });    
+    res.json({ createEventList });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }

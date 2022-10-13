@@ -12,6 +12,7 @@ import Events from "../pages/events/Events";
 import Donate from "../pages/donate/Donate";
 import EditAboutUs from "../pages/editAboutUs/EditAboutUs";
 import EditHomepage from "../pages/editHomePage/EditHomepage";
+
 import AddEvent from "../pages/addEvent/AddEvent";
 
 import styles from "./main.module.css";
@@ -28,6 +29,7 @@ import Box from "@mui/material/Box";
 
 import EditNews from "../pages/editNews/EditNews";
 import FullNews from "../pages/fullNews/FullNews";
+import TheEvent from "../pages/theEvent/TheEvent";
 
 
 import SideBar from "../components/sideBar/SideBar";
@@ -99,7 +101,41 @@ const Main = () => {
           </Link>
           <Link className={styles.nav_link} to="/donate">
             Donate
+
           </Link> */}
+
+          </Link>
+          <Link className={styles.nav_link} to="/events/:id">
+            Donate
+          </Link>
+          {!isAuth && (
+            <React.Fragment>
+              <Link className={styles.nav_link} to="/signin">
+                SignIn
+              </Link>
+              <Link className={styles.nav_link} to="/signup">
+                SignUp
+              </Link>
+            </React.Fragment>
+          )}
+          {isAuth && (
+            <React.Fragment>
+              <Link
+                className={styles.nav_link}
+                onClick={() => dispatch(logout())}
+              >
+                Logout
+              </Link>
+            </React.Fragment>
+          )}
+          {/* {isAdmin &&( */}
+            <React.Fragment>
+          <Link className={styles.nav_link} to="/admin">
+            Admin
+          </Link>
+            </React.Fragment>
+          {/* )} */}
+
         </Box>
       </Box>
 
@@ -109,6 +145,7 @@ const Main = () => {
         <Route
           path="/events"
           element={<Events title={"Events Page"} />}
+          
         ></Route>
         <Route
           path="/education"
@@ -135,6 +172,10 @@ const Main = () => {
         <Route
           path="/admin/addevent"
           element={<AddEvent title={"AddEvent"} />}
+        ></Route>
+        <Route
+          path="/events/:id"
+          element={<TheEvent title={"Events"} />}
         ></Route>
 
         <Route

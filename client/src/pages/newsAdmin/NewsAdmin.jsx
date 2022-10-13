@@ -79,6 +79,7 @@ const NewsAdmin = ({ el, delNewsHandler }) => {
         </CardActions>
       </Card> */}
     </>
+
   );
 };
 

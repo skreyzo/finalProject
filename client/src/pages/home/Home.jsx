@@ -19,16 +19,17 @@ const Home = () => {
         credentials: "include",
       });
       const data = (await res.json()) || [];
-      //console.log('data:', data);
+      // console.log('data:', data);
       setTextHomePage(data);
-      setNameHomePhoto(data.bigfoto);
+      setNameHomePhoto(localhost + data.bigfoto);
+      console.log('data.bigfoto======>', data.bigfoto)
     })();
   }, []);
 
   return (
     <>
       <div className={styles.aboutMainPicture}>
-        <img src={`${localhost + nameHomePhoto}`} alt="There is a photo here" />
+        <img src={`${nameHomePhoto}`} alt="There is a photo here" />
       </div>
 
       {/* <Typography variant="h5" align="left" color="text.secondary" paragraph>
