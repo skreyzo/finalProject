@@ -1,28 +1,29 @@
+const INIT_EVENTS = "INIT_EVENTS"
+const DEL_EVENT = "DEL_EVENT"
+const ADD_EVENT = "ADD_EVENT"
+
 const initState = {
     event: [],
   };
   
   export const eventReducer = (state = initState, action) => {
     switch (action.type) {
-      case "INIT_EVENT":
-        const eventList = action.payload.dataEvent;        
-        //console.log('action.payload.dataEvent', action.payload)        
+      case "INIT_EVENTS":
+        const eventList = action.payload;                        
         return { ...state, event: eventList };
   
-      case "DELETE_EVENT":
-        const filteredEvent = state.event.filter(
-          (event) => event.id !== action.payload.id
+      case "DEL_EVENT":
+        //console.log('action.payload.ID', action.payload);
+        const filteredEvent = state.event.filter((event) => 
+          event.id !== action.payload
         );         
         return { ...state, event: filteredEvent };
   
       case "ADD_EVENT":
-        const { eventValue } = action.payload;  
+        const eventValue = action.payload;  
+        //console.log('action.payload.FROM', action.payload);        
         return {
-          ...state,
-          event: [
-            ...state.event,
-            { ...eventValue },
-          ],
+          ...state, event: [...state.event, eventValue ],
         };
   
       default:
@@ -30,3 +31,6 @@ const initState = {
     }
   }; 
   
+  export const initEvents = events => ({type: INIT_EVENTS, payload: events});
+  export const delEvent = idevent => ({type: DEL_EVENT, payload: idevent});
+  export const addEvent = event => ({type: ADD_EVENT, payload: event});

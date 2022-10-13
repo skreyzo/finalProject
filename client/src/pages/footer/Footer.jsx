@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { defContacts } from "../../reducers/contactsReducer";
-// import styles from "./footer.module.css";
-import { Link } from 'react-router-dom';
 import styles from "./footer.module.css";
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 // import FacebookIcon from '@mui/icons-material/Facebook';
@@ -31,7 +30,7 @@ const Footer = () => {
     })();
   }, []);
   return (
-    <div >
+    <div className={styles.footer}>
       <Box sx={{
         display: 'flex',
         alignItems: 'center'
@@ -68,7 +67,8 @@ const Footer = () => {
           <Box sx={{
             display: 'flex',
             flex: '50%',
-            gap: '10px',            
+            gap: '10px',
+            justifyContent: 'end',            
           }}>
             <span className={styles.icon}>
               <img src="http://localhost:3010/img/facebook.svg" alt="" />
@@ -79,14 +79,17 @@ const Footer = () => {
             <span className={styles.icon}>
               <img src="http://localhost:3010/img/instagram.svg" alt="" />
             </span>
-          </Box>
-          <Box>
-            <Typography>
+          </Box>          
+        </Box>
+      </Box>
+      <Box sx={{
+        textAlign: 'center',
+        mt: '15px'
+    }}>
+            <Typography >
             © Copyright 2022 Community Co. All rights reserved. Community Co®
             </Typography>
           </Box>
-        </Box>
-      </Box>
 
     </div>
   );

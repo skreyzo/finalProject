@@ -23,24 +23,31 @@ const NewsAdmin = ({ el, delNewsHandler }) => {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={4}>
+        <Grid container spacing={5}>
+          <Grid item xs={16}>
             <Item>
               <CardMedia
                 component="img"
                 height="10"
-                image="https://static-cse.canva.com/blob/847064/29.jpg"
+                image={el.pic}
                 alt="news"
               />
-            </Item>
-
-            <Item> {el.title}</Item>
-            <Item> {el.body}</Item>
-            <Item>
+           <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {el.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {el.body}
+          </Typography>
+        </CardContent>
             <CardActions>
+
+
+
           <Button onClick={() => delNewsHandler(el.id)} size="small">
             Delete
           </Button>
+          
           <form action={`admin/editnewspage/${el.id}`}>
             <Button type="submit" size="small">
               Edit

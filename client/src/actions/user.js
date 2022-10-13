@@ -3,16 +3,21 @@ import {setUser} from "../reducers/userReducer";
 
 export const API_URL = `http://localhost:3010/api`
 
-export const registration = async (email, password) => {
+export const registration = async (firstName, lastName, email, password) => {
     try {
         const response = await axios.post(`${API_URL}/registration`, {
+            firstName, 
+            lastName, 
             email,
-            password
+            password,
         },
         {withCredentials: true})
-        alert(response.data.message)
+        // alert(response.data.message)
+        alert('The new user has been registered successfully')
+        
     } catch (error) {
-        alert(error.response.data.message)
+        // alert(error.response.data.message)
+        alert('failed to register user')
     }
 
 }

@@ -45,14 +45,11 @@ const Main = () => {
       const response = await fetch("http://localhost:3010/admin/editnewspage", {
         method: "GET",
         credentials: "include",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify(),
+
       });
       if (!response.ok) throw new Error(`Ошибка`);
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
       dispatch({ type: "initState", payload: { data } });
       if (data.err) throw new Error(data.err);
     } catch (err) {
@@ -89,7 +86,7 @@ const Main = () => {
     <>
     <NavBar />
     <SideBar />
-      <Box sx={{ position: "relative" }}>
+      {/* <Box sx={{ position: "relative" }}>
         <Box
           sx={{
             display: "flex",
@@ -100,7 +97,7 @@ const Main = () => {
             px: "15px",
           }}
         >
-          {/* <Link className={styles.nav_link} to="/">
+           <Link className={styles.nav_link} to="/">
             Home
           </Link>
           <Link className={styles.nav_link} to="/news">
@@ -118,11 +115,11 @@ const Main = () => {
           <Link className={styles.nav_link} to="/donate">
             Donate
 
-          </Link> */}
+          </Link>
 
           
 
-{/*           {!isAuth && (
+         {!isAuth && (
             <React.Fragment>
               <Link className={styles.nav_link} to="/signin">
                 SignIn
@@ -142,9 +139,9 @@ const Main = () => {
               </Link>
                                        
             </React.Fragment>
-          )} */}
+          )} 
           
-{/*           <Link className={styles.nav_link} to="/profile/2">
+         <Link className={styles.nav_link} to="/profile/2">
             Profile
           </Link>     
                   
@@ -154,11 +151,11 @@ const Main = () => {
               Admin
             </Link>
           </React.Fragment>
-           )}  */}
+           )}  
 
         </Box>
       </Box>
-
+ */}
       <Routes>
         <Route path="/" element={<Home title={"Home Page"} />}></Route>
         <Route path="/news" element={<NewsList title={"News Page"} />}></Route>
