@@ -4,6 +4,7 @@ const router = express.Router();
 const {
     getEvent,
     getTheEvent,
+    regEvent,
 } = require("../controllers/eventControllers");
 
 
@@ -14,5 +15,6 @@ router
 router
   .route("/:id")
   .get(getTheEvent)  
+  .post(regEvent)
   
 module.exports = router;

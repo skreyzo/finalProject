@@ -43,6 +43,7 @@ const AddEvent = () => {
   const [filePhotoEvent, setFilePhotoEvent] = useState(null);
   const [listOfEvent, setListOfEvent] = useState([]);
 
+
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setEventValue({ ...eventValue, [name]: value });
