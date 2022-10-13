@@ -1,8 +1,9 @@
 
    .aboutMainPicture {
-    height:300px; 
+    height: 600px; 
     width: 100%; 
     overflow: hidden;
+    margin-bottom: 70px;
     /* background-image: url('~/public/img/community.jpg'); */
   }
   img {

@@ -44,7 +44,8 @@ const AboutUs = () => {
       </div>
       {/* <span className={styles.component} > {props.title}</span> */}
       {/* <div>AboutUs</div> */}
-      <Typography variant="h5" align="left" color="text.secondary" paragraph>
+      <Typography variant="h5" align="center" color="text.secondary" paragraph
+      >
         {gotData.toptext}
       </Typography>
       <Box sx={{
@@ -54,12 +55,21 @@ const AboutUs = () => {
       }}>
 
         <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
+          display: 'flex',                
+          flexBasis: '50%',
+          //my: '10px',  
+          // display: 'flex',
+          fleWrap: 'wrap',  
+          gap: '50px', 
+          my: '150px',      
         }}>
           {newRosterTeam.map((item, index) => {
-            return <Box key={index} >
+            return <Box sx={{
+              display: 'flex',                
+                flexBasis: '50%',
+                my: '10px',  
+            }} 
+              key={index} >
               <CardItem id={item.id}
                 firstname={item.firstname}
                 lastname={item.lastname}
