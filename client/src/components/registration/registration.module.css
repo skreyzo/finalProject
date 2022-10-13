@@ -1,0 +1,10 @@
+.registration {
+    width: 800px; 
+    position: absolute;
+    top: 20%;
+    right: 0;
+    bottom: 30%;
+    left: 0;
+    margin: auto;
+}
+
