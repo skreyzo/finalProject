@@ -3,15 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPersons } from "../../reducers/aboutReducer";
 import styles from "./aboutus.module.css";
 import Box from '@mui/material/Box';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-
 import CardItem from '../../components/cardItemAbout/CardItem_About';
-
-import IconButton from '@mui/material/IconButton';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TelegramIcon from '@mui/icons-material/Telegram';
-import InstagramIcon from '@mui/icons-material/Instagram';
 
 const AboutUs = () => {
   const localhost = 'http://localhost:3010';
@@ -80,54 +73,7 @@ const AboutUs = () => {
       </Box>
       <Typography variant="h5" align="left" color="text.secondary" paragraph>
         {gotData.bottomtext}
-      </Typography>
-
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        my: '50px',
-      }}>
-        <Box sx={{
-          flexBasis: '50%',
-          ml: '10%',
-        }}>
-          <Typography sx={{
-            textAlign: 'center',
-            fontSize: '25px',
-          }}>Contacts</Typography>
-          <Box sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}>
-            <Typography>Address</Typography>
-            <Typography>Phone</Typography>
-            <Typography>Email</Typography>
-          </Box>
-        </Box>
-        <Box sx={{
-          flexBasis: '50%',
-        }}>
-          <Typography sx={{
-            textAlign: 'center',
-            fontSize: '25px',
-          }}>Follow Us</Typography>
-          <Box sx={{
-            textAlign: 'center',
-          }}>
-            <IconButton >
-              <FacebookIcon />
-            </IconButton>
-            <IconButton >
-              <TelegramIcon />
-            </IconButton>
-            <IconButton >
-              <InstagramIcon />
-            </IconButton>
-          </Box>
-        </Box>
-      </Box>
+      </Typography>      
     </>
   )
 }

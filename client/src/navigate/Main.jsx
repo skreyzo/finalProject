@@ -126,13 +126,13 @@ const Main = () => {
               </Link>
             </React.Fragment>
           )}
-          {isAdmin &&(
+          {/* {isAdmin &&( */}
             <React.Fragment>
           <Link className={styles.nav_link} to="/admin">
             Admin
           </Link>
             </React.Fragment>
-          )}
+          {/* )} */}
         </Box>
       </Box>
 

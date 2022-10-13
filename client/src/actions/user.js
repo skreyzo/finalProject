@@ -51,7 +51,7 @@ export const auth =  () => {
             localStorage.setItem('token', response.data.accessToken)
             console.log('~ response.data.accessToken>>>>>>>>>>>', response.data.accessToken)
         } catch (e) {
-            alert("Ошибка Авторизации!!!!")  // e.response.data.message
+            //alert("Ошибка Авторизации!!!!")  // e.response.data.message
             // localStorage.removeItem('token')
         }
     }

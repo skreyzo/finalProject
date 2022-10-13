@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { addPersons, addNewPerson } from "../../reducers/aboutReducer"; //импорт action
+import { addPersons, addNewPerson } from "../../reducers/aboutReducer";
+import { newContacts } from "../../reducers/contactsReducer";
 import styles from "./editaboutus.module.css";
 import Box from '@mui/material/Box';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
@@ -19,14 +20,15 @@ const EditAboutUs = () => {
   //console.log('YYYYYYYYYYYYYYYYYYYY')
 
   const [gotDataAbout, setGotDataAbout] = useState({});
-  const [activeEditor, setactiveEditor] = useState(false);
+  const [mainTextEditor, setMainTextEditor] = useState(false);
   const [editorValue, setEditorValue] = useState('');
   const [file, setFile] = useState([]);
   const [nameMainPhoto, setNameMainPhoto] = useState(gotDataAbout.mainphotolink);
   const [viewSave, setViewSave] = useState(true);
   const [addToRoster, setAddToRoster] = useState(false);
   const [personFormValues, setPersonFormValues] = useState({ firstname: '', lastname: '', personimage: '' });
-
+  const [contactsEditor, setContactsEditor] = useState(false);
+  const [contactsFormValues, setContactsFormValues] = useState({ address: '', phone: '', email: '' });
 
   React.useEffect(() => {
     (async () => {
@@ -50,18 +52,26 @@ const EditAboutUs = () => {
   }, []);
 
   const handleOpenEdit = (e) => {
-    setactiveEditor(true);
+    //console.log('targetBtn>>>>>>', e.target.id);
+    if (e.target.id === 'editTopBtn') {
+      setMainTextEditor(true);
+    } else if (e.target.id === 'editTopBtnClose') {
+      setMainTextEditor(false);
+    }
+    else if (e.target.id === 'editContactsBtn') {
+      setContactsEditor(true);
+    } else if (e.target.id === 'editContactsBtnClose') {
+      setContactsEditor(false);
+    }
   }
 
   const handleOnEdit = (e) => {
-
     setEditorValue(e.target.value);
     console.log('setEditorValue>>>>>>>>>>', editorValue);
     const value = e.target.value;
     console.log('value>>>>>>>>>>', value);
     const changed = value === gotDataAbout.toptext;
     return changed ? setViewSave(true) : setViewSave(false);
-
   }
 
   const handleSaveTopText = async (e) => {
@@ -80,7 +90,7 @@ const EditAboutUs = () => {
         throw new Error('Данные не удалось изменить');
       const data = await res.json();
       console.log('data>>>>>>>>>>>>>>>', data);
-      setactiveEditor(false);
+      setMainTextEditor(false);
       setGotDataAbout(data)
     } catch (err) {
       console.log(err);
@@ -114,6 +124,20 @@ const EditAboutUs = () => {
       console.log('resFromDB>>>>>>>>>>', firstname);
       dispatch(addNewPerson({ id, firstname, lastname, position, personimage }));
       setAddToRoster(false);
+    } else if (e.target.id === 'uploadContacts') {
+      data.append('contacts', JSON.stringify(contactsFormValues));
+      console.log('data.getAll>>>>>>>', data.getAll('contacts'));
+      const res = await fetch('http://localhost:3010/admin/editabout/addcontacts', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(contactsFormValues)
+      });
+      const resFromDB = await res.json();
+      let { address, phone, email } = resFromDB;
+      dispatch(newContacts({ address, phone, email }));
+      setContactsEditor(false);
     }
   }
 
@@ -138,6 +162,17 @@ const EditAboutUs = () => {
     }
   }
 
+  const handleOnInputContacts = (e) => {
+    console.log('e.target.value>>>>>>>>>>', e.target.id);
+    const value = e.target.value;
+    if (e.target.id === 'Address') {
+      setContactsFormValues({ ...contactsFormValues, address: value });
+    } else if (e.target.id === 'Phone') {
+      setContactsFormValues({ ...contactsFormValues, phone: value });
+    } else if (e.target.id === 'Email') {
+      setContactsFormValues({ ...contactsFormValues, email: value });
+    }
+  }
 
   return (
     <>
@@ -159,31 +194,56 @@ const EditAboutUs = () => {
           fontSize: '25px',
         }}>Edit something</Typography>
         <Box sx={{
-          display: 'flex',
-          gap: '10px',
-          alignItems: 'end',
-          width: '60%',
-          mx: 'auto'
+          //display: 'flex',
+          //gap: '10px',
+          //alignItems: 'center',
+          //width: '100%',
+          //mx: 'auto'
         }}>
-          {!activeEditor ? (
+          {!mainTextEditor ? (
             <>
-              <Typography variant="h5" align="left" color="text.secondary" paragraph>
-                {gotDataAbout.toptext}
-              </Typography>
-              <Button variant="contained" onClick={handleOpenEdit}>Edit</Button>
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}>
+                <Box sx={{}}>
+                  <Typography variant="h5" align="left" color="text.secondary" paragraph
+                    sx={{ maxWidth: '500px' }}>
+                    {gotDataAbout.toptext}
+                  </Typography>
+                </Box>
+                <Button id="editTopBtn" variant="contained" onClick={handleOpenEdit}>Edit</Button>
+              </Box>
             </>
           ) :
             <>
-              <TextareaAutosize
-                name="editForm"
-                aria-label="minimum height"
-                minRows={4}
-                placeholder="Your Text here..."
-                style={{ width: 350 }}
-                defaultValue={gotDataAbout.toptext}
-                onChange={handleOnEdit}
-              />
-              <Button variant="contained" disabled={viewSave} onClick={handleSaveTopText}>Save</Button>
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}>
+                <TextareaAutosize
+                  name="editForm"
+                  aria-label="minimum height"
+                  minRows={4}
+                  placeholder="Your Text here..."
+                  style={{ width: 350 }}
+                  defaultValue={gotDataAbout.toptext}
+                  onChange={handleOnEdit}
+                />
+                <Box sx={{
+                  mt: '30px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  gap: '30px',
+                }}>
+                  <Button variant="contained" disabled={viewSave} onClick={handleSaveTopText}>Save</Button>
+                  <Button id="editTopBtnClose" variant="contained" onClick={handleOpenEdit}>Close</Button>
+                </Box>
+              </Box>
             </>
           }
         </Box>
@@ -219,22 +279,24 @@ const EditAboutUs = () => {
           mb: '50px',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center'
+          alignItems: 'center',       
         }}>
           <Typography sx={{
             textAlign: 'center',
             fontSize: '25px',
-            py: '30px',
-            mx: 'auto'
+            py: '30px',            
           }}>Our Team</Typography>
           <Box sx={{
             display: 'flex',
-            flexDirection: 'column',
-            gap: '20px',
+            flexWrap: 'wrap',
           }}>
-            {newRosterTeam.map((item, index) => {
-              return <Box key={index} >
-                <CardItem id={item.id} 
+            {newRosterTeam?.map((item, index) => {
+              return <Box sx={{
+                display: 'flex',                
+                flexBasis: '50%',
+                my: '10px',
+              }} key={index} >
+                <CardItem id={item.id}
                   firstname={item.firstname}
                   lastname={item.lastname}
                   position={item.position}
@@ -251,7 +313,11 @@ const EditAboutUs = () => {
                   width: '55px',
                   height: '55px',
                 }}>
-                <PersonAddAlt1Icon />
+                <PersonAddAlt1Icon sx={{
+                  mt: '25px',
+                  width: '55px',
+                  height: '55px',
+                }} />
               </IconButton>
             </>
           ) :
@@ -279,7 +345,6 @@ const EditAboutUs = () => {
                       Select Person Photo
                       <input name="loading_personPhoto"
                         hidden
-                        require
                         accept="image/*"
                         type="file"
                         onChange={e => { setFile(e.target.files[0]) }}
@@ -289,41 +354,71 @@ const EditAboutUs = () => {
                   <TextField onChange={handleOnInputDataPerson} id="firstName" label="FirstName" variant="outlined" />
                   <TextField onChange={handleOnInputDataPerson} id="lastName" label="LastName" variant="outlined" />
                   <TextField onChange={handleOnInputDataPerson} id="position" label="Position" variant="outlined" />
-                  <Button variant="contained"
-                    component="label"
-                    id='uploadPersonPhoto'
-                    onClick={upload}>
-                    Apply
-                  </Button>
+                  <Box sx={{
+                    display: 'flex',
+                    gap: '10px',
+                  }}>
+                    <Button variant="contained"
+                      component="label"
+                      id='uploadPersonPhoto'
+                      onClick={upload}>
+                      Apply
+                    </Button>
+                    <Button variant="contained"
+                      component="label"
+                      onClick={() => changeStatusAddCardForm('close')}>
+                      Close
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
             </>}
         </Box>
-
         <Box sx={{ mb: '50px' }}>
           <Typography sx={{
             textAlign: 'center',
             fontSize: '25px',
-            py: '30px'
+            mb: '30px'
           }}>Edit contacts</Typography>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '50%',
-            gap: '70px',
-          }}>
+          <Box >
             <Box sx={{
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
             }}>
-              <Typography>Address</Typography>
-              <Typography>Phone</Typography>
-              <Typography>Email</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'end', gap: '10px' }}>
-              <Button variant="contained">Save</Button>
-              <Button variant="contained">Edit</Button>
+              {
+                !contactsEditor ? (
+                  <>
+                    <Button id="editContactsBtn" variant="contained" onClick={handleOpenEdit}>Edit</Button>
+                  </>
+                ) :
+                  <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    gap: '30px',
+                  }}>
+                    <TextField onChange={handleOnInputContacts} id="Address" label="Address" variant="outlined" />
+                    <TextField onChange={handleOnInputContacts} id="Phone" label="Phone" variant="outlined" />
+                    <TextField onChange={handleOnInputContacts} id="Email" label="Email" variant="outlined" />
+                    <Box sx={{
+                      display: 'flex',
+                      gap: '37px',
+                      mx: 'auto',
+                      //mt: '30px',
+                    }}>
+                      <Box sx={{
+                        display: 'flex',
+                        width: '100%',
+                        justifyContent: 'space-between',
+                        gap: '30px',
+                      }}>
+                        <Button variant="contained" id='uploadContacts' onClick={upload}>Save</Button>
+                        <Button id="editContactsBtnClose" variant="contained" onClick={handleOpenEdit}>Close</Button>
+                      </Box>
+                    </Box>
+                  </Box>
+              }
             </Box>
           </Box>
         </Box>
@@ -333,3 +428,6 @@ const EditAboutUs = () => {
 }
 
 export default EditAboutUs
+
+
+

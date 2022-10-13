@@ -4,12 +4,14 @@ import thunk from "redux-thunk";
 import userReducer from "./userReducer";
 import { newsReducer } from './newsReducer';
 import aboutReducer from "./aboutReducer";
+import contactsReducer from "./contactsReducer";
 
 
 const rootReducer = combineReducers({
     user: userReducer,
     news: newsReducer,
     about: aboutReducer,
+    contacts: contactsReducer,
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
