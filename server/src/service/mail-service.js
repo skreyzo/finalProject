@@ -11,8 +11,6 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendActivationMail = async (to, link) => {
-  console.log('~ link!!!!!!!!!!!!!!!', link)
-  console.log('~ to?????????????', to)
   await transporter.sendMail({
     from: process.env.SMTP_USER,
     to,

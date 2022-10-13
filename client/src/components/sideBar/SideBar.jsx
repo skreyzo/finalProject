@@ -31,7 +31,7 @@ const Sidebar = ({mode,setMode}) => {
     // const classes = useStyles()
     
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+    <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" }, marginTop: "50px" }}>
       <Box width="50px" borderRadius="20px" bgcolor="none" mt="50px" position="fixed">
         <List>
           <ListItem disablePadding >

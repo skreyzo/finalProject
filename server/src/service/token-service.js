@@ -13,7 +13,7 @@ const generateTokens = (payload) => {
 const validateAccessToken = (token) => {
   try {
     const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET); // верификация токена
-    console.log('~ userData verify access=========>>>>>>>>', userData)
+    // console.log('~ userData verify access=========>>>>>>>>', userData)
     return userData;
   } catch (error) {
     return null;
@@ -23,7 +23,7 @@ const validateAccessToken = (token) => {
 const validateRefreshToken = (token) => {
   try {
     const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
-    console.log('~ userData verify=========>>>>>>>>', userData)
+    // console.log('~ userData verify=========>>>>>>>>', userData)
     return userData;
   } catch (error) {
     return null;
@@ -31,20 +31,24 @@ const validateRefreshToken = (token) => {
 };
 
 const saveToken = async (userId, refreshToken) => {
-  console.log('~ refreshToken>>>>>>>>>', refreshToken)
-  console.log('~ userId>>>>>', userId)
+  // console.log('~ refreshToken>>>>>>>>>', refreshToken)
+  // console.log('~ userId>>>>>', userId)
   const tokenData = await Token.findOne({ where: { userId } });
+  console.log('~ tokenData----', tokenData)
   if (tokenData) {
     tokenData.refreshToken = refreshToken;
     return tokenData.save();
+  } else {
+    console.log('~ refreshToken', refreshToken)
+    console.log('~ userId', userId)
+    const token = await Token.create({refreshToken: '123', userId: userId});
+    console.log('40 token=service>>>>>>>>>>', token)
+    return token;
   }
-  const token = await Token.create({ userId, refreshToken });
-  console.log('40 token=service>>>>>>>>>>', token)
-  return token;
 };
 
 const removeToken = async (refreshToken) => {
-  console.log('~ refreshToken-----to del------>>>', refreshToken)
+  // console.log('~ refreshToken-----to del------>>>', refreshToken)
   const tokenData = await Token.destroy({ where: { refreshToken } });
   return tokenData;
 };

@@ -3,6 +3,9 @@ import React, {useState} from 'react';
 import Input from "../../utils/input/Input";
 import {useDispatch} from "react-redux";
 import {signIn} from "../../actions/user";
+import { Typography, Button } from "@mui/material";
+
+import styles from "./signIn.module.css";
 
 const SignIn = () => {
     const [email, setEmail] = useState("")
@@ -16,11 +19,17 @@ const SignIn = () => {
     // }
 
     return (
-        <div className='authorization'>
-            <div className="authorization__header">Авторизация</div>
+        <div className={styles.authorization}>
+            <Typography  
+                style={{color: "#007FFF", marginLeft: "20%"}}
+                className="registration__header"
+                variant="h4"
+            >  
+            Please log in
+            </Typography> 
             <Input value={email} setValue={setEmail} type="email" label="Enter your email..."/>
             <Input value={password} setValue={setPassword} type="password" label="Enter your password..."/>
-            <button className="authorization__btn" onClick={() => dispatch(signIn(email, password))} /* onSubmit={resetValueInput} */>SignIn</button>
+            <Button style={{marginLeft: "60%"}} variant="outlined" className="registration__btn" onClick={() => dispatch(signIn(email, password))}>Log In</Button>
         </div>
     );
 };
