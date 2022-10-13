@@ -254,12 +254,6 @@ const AddEvent = () => {
             ))}
           </Grid>
         </Box>
-
-        <Typography variant="h5" align="left" color="text.secondary" paragraph>
-          {listOfEvent.map((el) => {
-            return;
-          })}
-        </Typography>
       </Box>
     </>
   );

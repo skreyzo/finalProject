@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    getGreeting,
-} = require("../controllers/homeControllers");
+    getUserInfo,
+    putUserInfo,
+} = require("../controllers/profileControllers");
 
 
 router
   .route("/")
-  .get(getGreeting)  
+  .get(getUserInfo)
+  .put(putUserInfo)
   
 module.exports = router;

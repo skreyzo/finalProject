@@ -9,7 +9,7 @@ const {
 
 router
   .route("/")
-  .get(getEvent,)
+  .get(getEvent)
 
 router
   .route("/:id")
