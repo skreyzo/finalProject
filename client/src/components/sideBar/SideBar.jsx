@@ -19,6 +19,7 @@ import {
   Switch,
 } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./sideBar.module.css";
 
 // const useStyles = styles(() => ({
@@ -35,7 +36,8 @@ const Sidebar = ({mode,setMode}) => {
       <Box width="50px" borderRadius="20px" bgcolor="none" mt="50px" position="fixed" zIndex="99">
         <List>
           <ListItem disablePadding >
-            <ListItemButton className={styles.ListItemButton} component="a" href="/">
+            <ListItemButton className={styles.ListItemButton} 
+            component={Link} to="/">
               <ListItemIcon >
                 <Home className={styles.icon__sideBare}/>
               </ListItemIcon>
@@ -43,7 +45,8 @@ const Sidebar = ({mode,setMode}) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton className={styles.ListItemButton} component="a" href="/news">
+            <ListItemButton className={styles.ListItemButton} 
+            component={Link} to="/news">
               <ListItemIcon>
                 <Article className={styles.icon__sideBare}/>
               </ListItemIcon>
@@ -51,7 +54,7 @@ const Sidebar = ({mode,setMode}) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton className={styles.ListItemButton} component="a" href="/events">
+            <ListItemButton className={styles.ListItemButton} component={Link} to="/events">
               <ListItemIcon>
                 <Group className={styles.icon__sideBare}/>
               </ListItemIcon>
@@ -59,7 +62,7 @@ const Sidebar = ({mode,setMode}) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton className={styles.ListItemButton} component="a" href="/education">
+            <ListItemButton className={styles.ListItemButton} component={Link} to="/education">
               <ListItemIcon>
                 <Storefront className={styles.icon__sideBare}/>
               </ListItemIcon>
@@ -67,7 +70,7 @@ const Sidebar = ({mode,setMode}) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton className={styles.ListItemButton} component="a" href="/aboutUs">
+            <ListItemButton className={styles.ListItemButton} component={Link} to="/aboutUs">
               <ListItemIcon>
                 <Person className={styles.icon__sideBare}/>
               </ListItemIcon>
@@ -75,22 +78,13 @@ const Sidebar = ({mode,setMode}) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton className={styles.ListItemButton} component="a" href="/donate">
+            <ListItemButton className={styles.ListItemButton} component={Link} to="/donate">
               <ListItemIcon>
                 <Settings className={styles.icon__sideBare}/>
               </ListItemIcon>
               {/* <ListItemText primary="Settings" /> */}
             </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton className={styles.ListItemButton} component="a" href="#simple-list">
-              <ListItemIcon>
-                <AccountBox className={styles.icon__sideBare}/>
-              </ListItemIcon>
-             {/*  <ListItemText primary="Profile" /> */}
-            </ListItemButton>
-          </ListItem>
-          
+          </ListItem>          
         </List>
       </Box>
     </Box>
