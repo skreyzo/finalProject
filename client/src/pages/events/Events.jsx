@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { initEvents } from "../../reducers/eventReducer";
 import { Link } from "react-router-dom";
 
 import Button from "@mui/material/Button";
@@ -15,6 +16,8 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 const Events = () => {
   const localhost = "http://localhost:3010/";
+  const dispatch = useDispatch();
+  const eventStore = useSelector((store) => store.event.event);
 
   const [event, setEvent] = useState([]);
 
@@ -26,13 +29,14 @@ const Events = () => {
       });
       const data = (await res.json()) || [];
       //console.log("data:", data);
-      setEvent(data);      
+      setEvent(data); 
+      dispatch(initEvents(data));  
     })();
   }, []);
 
   return (
     <>
-      {event.map((el) => (
+      {eventStore.map((el) => (
         
         <Card sx={{ display: "flex", margin: "50px" }} key={el.id}>
           <CardMedia
@@ -57,18 +61,18 @@ const Events = () => {
             </CardContent>
             <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
               <Typography component="div" variant="h6">
-                {`date: ${el.date}`}
+                {`Event date: ${el.dataTime}`}
               </Typography>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
               <Typography component="div" variant="h6">
-                {`address: ${el.address}`}
+                {`Address: ${el.address}`}
               </Typography>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
               <Stack direction="row" spacing={2}>
                 <Typography component="div" variant="h6">
-                  {`tickets: ${el.ticket}`}
+                  {`Tickets: ${el.ticket}`}
                 </Typography>
                 <Typography component="div" variant="h6">
                   {`price: ${el.price}`}

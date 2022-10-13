@@ -23,7 +23,7 @@ const AboutUs = () => {
         credentials: "include",
       });
       const data = (await res.json()) || [];
-      //console.log('data:', data);
+      console.log('data:', data);
       setgotData(data);
       setNameMainPhoto(localhost + data.mainphotolink);
 
@@ -32,7 +32,7 @@ const AboutUs = () => {
         credentials: "include",
       });
       const dataOurTeam = (await resOurTeam.json()) || [];
-      //console.log('dataOurTeam>>>>>>>>>>>>>>>', dataOurTeam);
+      console.log('dataOurTeam>>>>>>>>>>>>>>>', dataOurTeam);
       dispatch(addPersons(dataOurTeam));
     })();
   }, []);

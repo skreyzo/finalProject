@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { initEvents, addEvent, delEvent } from "../../reducers/eventReducer";
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -10,7 +11,6 @@ import styles from "./addevent.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -21,18 +21,17 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Unstable_Grid2";
 
 const AddEvent = () => {
-  const localhost = "http://localhost:3010";
+  const localhost = "http://localhost:3010";   
 
+  //!Redux
+  const dispatch = useDispatch();
+  const event = useSelector((store) => store.event.event);
 
   const [valueDataTime, setValueDataTime] = useState(dayjs(new Date()));
   const handleChange = (newValue) => {
     const {$L,$u, $d} = newValue;
     setValueDataTime($d);
-  };    
-
-  //!Redux
-  const dispatch = useDispatch();
-  const event = useSelector((store) => store.event.event);
+  };
 
   const [eventValue, setEventValue] = useState({
     title: "",
@@ -56,16 +55,16 @@ const AddEvent = () => {
         credentials: "include",
       });
       const dataEvent = (await res.json()) || [];
+      console.log('dataEvent>>>>>>>>>>>>>>>', dataEvent);
       //! dispatch({ type: "initState", payload: { data } });
-      setListOfEvent(dataEvent);
-      dispatch({ type: "INIT_EVENT", payload: { dataEvent } });
+      dispatch(initEvents(dataEvent));
+      setListOfEvent(dataEvent);      
     })();
   }, []);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     //!redux
-    dispatch({ type: "ADD_EVENT", payload: { eventValue } });
     try {
       const data = new FormData();
       data.append("loading_eventPhoto", filePhotoEvent);
@@ -74,9 +73,8 @@ const AddEvent = () => {
       data.append("ticket", eventValue.ticket);
       data.append("price", eventValue.price);
       data.append("address", eventValue.address);
-
       data.append("dataTime", valueDataTime);
-      console.log(data)
+      //console.log(data)
 
       const response = await fetch("http://localhost:3010/admin/addevent", {
         method: "POST",
@@ -86,6 +84,13 @@ const AddEvent = () => {
         //body: JSON.stringify(eventValue),
         body: data,
       });
+      ///////////////////////////////////////////
+      const result = await response.json();
+      console.log('result>>>>>>>>>>', result);
+      // let { id, firstname, lastname, position, personimage } = resFromDB;
+      // console.log('resFromDB>>>>>>>>>>', firstname);
+      dispatch(addEvent(result));
+
       setEventValue({
         title: "",
         description: "",
@@ -108,7 +113,7 @@ const AddEvent = () => {
         },
         body: JSON.stringify({ id }),
       });
-      if (response.ok) dispatch({ type: "DELETE_EVENT", payload: { id } });
+      if (response.ok) dispatch(delEvent(id));
     } catch (err) {
       console.log(err);
     }
@@ -224,7 +229,7 @@ const AddEvent = () => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack spacing={3}>
                   <DateTimePicker
-                    label="Date&Time picker"
+                    label="Create a date event"
                     value={valueDataTime}
                     onChange={handleChange}
                     renderInput={(params) => <TextField {...params} />}
@@ -268,13 +273,13 @@ const AddEvent = () => {
                   <br />
                   Price: {el.price}
                   <br />
-                  <Button
+                  {/* <Button
                     size="small"
                     component={Link}
                     to={`/admin/addevent/${el.id}`}
                   >
                     Details
-                  </Button>
+                  </Button> */}
                   <Button
                     size="small"
                     color="error"
