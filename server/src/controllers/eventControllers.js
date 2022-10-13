@@ -6,12 +6,24 @@ exports.getEvent = async (req, res) => {
 };
 
 exports.getTheEvent = async (req, res) => {
-    console.log('req.params========>', req.params)
+    //console.log('req.params========>', req.params)
     const eventId = req.params.id;
-    console.log('eventId========>', eventId)
+    //console.log('eventId========>', eventId)
     const theEvent = await Event.findAll({
         where: { id: eventId },
         raw: true,
     });
     res.json(theEvent);
+};
+
+exports.regEvent = async (req, res) => {
+    console.log('req.body========>', req.body)
+    const { ticketQT } = req.body
+    console.log('ticketQT========>', ticketQT)
+    //console.log('eventId========>', eventId)
+/*     const theEvent = await Event.findAll({
+        where: { id: eventId },
+        raw: true,
+    }); */
+    res.json(ticketQT);
 };

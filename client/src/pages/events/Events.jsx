@@ -18,6 +18,7 @@ const Events = () => {
 
   const [event, setEvent] = useState([]);
 
+
   React.useEffect(() => {
     (async () => {
       const res = await fetch("http://localhost:3010/eventpage", {

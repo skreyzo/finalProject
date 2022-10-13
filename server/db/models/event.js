@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      this.hasMany(models.Order, { foreignKey: 'EventId' });
       // define association here
     }
   }
@@ -21,8 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING,
     dataTime: DataTypes.STRING,
     coordinat: DataTypes.STRING,
-    eventphotolink: DataTypes.STRING,
-    eventdate: DataTypes.STRING
+    eventphotolink: DataTypes.STRING,    
   }, {
     sequelize,
     modelName: 'Event',

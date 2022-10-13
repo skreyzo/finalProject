@@ -12,7 +12,7 @@ module.exports = {
       address: '221b, Baker Street, London',
       coordinat: '',
       eventphotolink: '/img/Без названия.jpg',
-      eventdate: '',
+      dataTime: '10/13/2022 01:58 PM',
       createdAt: new Date(),
       updatedAt: new Date(),
       },
