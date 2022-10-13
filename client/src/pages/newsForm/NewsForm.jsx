@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import styles from "./NewsForm.module.css";
 
 export default function NewsForm() {
   const [values, setValue] = useState({ title: "", body: "" });
@@ -41,39 +44,44 @@ export default function NewsForm() {
 
   return (
     <>
-      <form onSubmit={onSubmitHandler}>
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
-            Title
-          </label>
-          <input
-            className="form-control"
-            id="exampleFormControlInput1"
-            onChange={onChangeHandler}
-            type="text"
-            name="title"
-            value={values.title}
-            placeholder="Title..."
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlTextarea1" className="form-label">
-            Description
-          </label>
-          <textarea
-            className="form-control"
-            onChange={onChangeHandler}
-            type="text"
-            name="body"
-            value={values.body}
-            placeholder="Description..."
-            rows="3"
-          ></textarea>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
-      </form>
+
+
+      <div className={styles.container}>
+        <h1>Add a new post</h1>
+        <form onSubmit={onSubmitHandler}>
+          <div className="mb-3">
+            <label htmlFor="exampleFormControlInput1" className="form-label">
+              Title
+            </label>
+            <input
+              className="form-control"
+              id="exampleFormControlInput1"
+              onChange={onChangeHandler}
+              type="text"
+              name="title"
+              value={values.title}
+              placeholder="Title..."
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="exampleFormControlTextarea1" className="form-label">
+              Description
+            </label>
+            <textarea
+              className="form-control"
+              onChange={onChangeHandler}
+              type="text"
+              name="body"
+              value={values.body}
+              placeholder="Description..."
+              rows="3"
+            ></textarea>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }
