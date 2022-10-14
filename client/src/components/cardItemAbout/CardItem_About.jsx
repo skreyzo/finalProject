@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { delPerson } from "../../reducers/aboutReducer";
 
 const CardItem = (props) => {
+  console.log('props', props);
   const localhost = 'http://localhost:3010';
   const dispatch = useDispatch();
 
@@ -32,14 +33,21 @@ const CardItem = (props) => {
       <Card sx={{
         height: '100%',
         width: '100%',
-        position: 'relative',
+        // position: 'relative',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        px: '45px'
       }}>
         <CardMedia
           component="img"
           image={localhost + props.image}
           alt="photo"
+          sx={{
+            width: '200px',
+            height: '200px',
+            borderRadius: '50%',
+          }}
           />
         <CardContent >
           <Box sx={{
@@ -52,6 +60,9 @@ const CardItem = (props) => {
             </Typography>
             <Typography gutterBottom variant="h5" component="div">
               {props.lastname}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="div">
+              {props.email}
             </Typography>
             <Typography variant="h6" color="text.secondary">
               {props.position}

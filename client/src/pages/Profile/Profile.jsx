@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import CardItem from '../../components/cardItemAbout/CardItem_About';
+import styles from "./profile.module.css";
+
 import { initEvents } from "../../reducers/eventReducer";
 import { Link } from "react-router-dom";
 
@@ -10,6 +14,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -26,7 +31,10 @@ const Profile = () => {
   //const eventUserStore = useSelector((store) => store.event.event);
 
   const [eventUser, setEventUser] = useState([]);
-  
+
+  console.log("eventUser=========>", eventUser);
+  const [person, setPerson] = useState({});
+
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -34,23 +42,45 @@ const Profile = () => {
         method: "GET",
         credentials: "include",
       });
-      
-      //console.log("data:", await result.json());
       const arrais = await result.json()
       setEventUser(arrais);
       console.log("eventUser:", eventUser);
     };
-    fetchData();
+    
+    const resUser = await fetch('http://localhost:3010/profile/', {
+        method: "GET",
+        credentials: "include",
+      });
+      const userData = (await resUser.json()) || [];
+      console.log('data:', userData);
+      const { id, firstName, lastName, email, userphotolink } = userData
+      setPerson({ id, firstName, lastName, email, userphotolink });
+    });
+    fetchData();    
   }, []);
-
-  console.log("eventUser=========>", eventUser);
 
   return (
     <>
   {/* {eventUser.map((el) => ( <div>{localhost + el.eventphotolink}</div> ))} */}
   <Grid container>
   <Grid item xs>
-    content
+          <Box>
+        <Box sx={{
+          display: 'flex',
+          flexBasis: '50%',
+          my: '10px',
+          color: '#000',
+        }}>
+          <CardItem
+            id={person.id}
+            firstname={person.firstName}
+            lastname={person.lastName}
+            email={person.email}
+            image={person.userphotolink}
+            // editpage={editPage} 
+            />
+      </Box>  
+ </Box>
   </Grid>
   <Divider orientation="vertical" flexItem>
     
@@ -95,70 +125,6 @@ const Profile = () => {
     </Card> ))}
   </Grid>
 </Grid>
-
-
-
-
-
-
-
-      {/* {eventUser.map((el) => (
-         
-        
-        <Card sx={{ display: "flex", margin: "100px" }} key={el.id}>
-          <CardMedia
-            component="img"
-            sx={{ width: 351 }}
-            image={localhost + el.eventphotolink}
-            alt="There is a photo here"
-          />
-
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography component="div" variant="h5">
-                {el.title}
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                component="div"
-              >
-                {`${el.description.slice(0, 250)}...`}
-              </Typography>
-            </CardContent>
-            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-              <Typography component="div" variant="h6">
-                {`Event date: ${el.dataTime}`}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-              <Typography component="div" variant="h6">
-                {`Address: ${el.address}`}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-              <Stack direction="row" spacing={2}>
-                <Typography component="div" variant="h6">
-                  {`Tickets: ${el.ticket}`}
-                </Typography>
-                <Typography component="div" variant="h6">
-                  {`price: ${el.price}`}
-                </Typography>
-                <Typography component="div" variant="h6">
-                  {`totalprice: ${el['Orders.totalprice']}`}
-                </Typography>
-                <Typography component="div" variant="h6">
-                  {`ticketQT: ${el['Orders.ticketQT']}`}
-                </Typography>
-                <Button size="small" component={Link} to={`/events/${el.id}`}>
-                  Details
-                </Button>
-              </Stack>
-            </Box>
-          </Box>
-        </Card>
-      ))} */}
-    
     </>
   );
 };

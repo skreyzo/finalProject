@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { addPersons, addNewPerson } from "../../reducers/aboutReducer";
+import { addPersons, addNewPerson, delPerson } from "../../reducers/aboutReducer";
 import { newContacts } from "../../reducers/contactsReducer";
 import styles from "./editaboutus.module.css";
 import Box from '@mui/material/Box';
@@ -11,6 +11,7 @@ import CardItem from '../../components/cardItemAbout/CardItem_About';
 import { IconButton } from '@mui/material';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { TextField } from '@mui/material';
+import Container from '@mui/material/Container';
 
 const EditAboutUs = () => {
   const localhost = 'http://localhost:3010';
@@ -173,258 +174,288 @@ const EditAboutUs = () => {
     }
   }
 
+  const delCard = async (id) => {
+    const res = await fetch('http://localhost:3010/admin/editabout/delperson', {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ id })
+    });
+    if (res.status === 200) {
+      dispatch(delPerson(id));
+    }
+  }
+
   return (
     <>
-      <Typography sx={{
-        textAlign: 'center',
-        fontSize: '25px',
-        mb: '15px',
-      }}>Редактирование страницы About Us</Typography>
-
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '50px',
-        mx: 'auto',
-        alignItems: 'center'
-      }}>
+      <Container maxWidth={false} disableGutters={true}
+        sx={{
+          maxWidth: '1200px',
+          mx: '',
+          px: '10px',
+        }}>
         <Typography sx={{
           textAlign: 'center',
           fontSize: '25px',
-        }}>Edit something</Typography>
-        <Box sx={{
-          //display: 'flex',
-          //gap: '10px',
-          //alignItems: 'center',
-          //width: '100%',
-          //mx: 'auto'
-        }}>
-          {!mainTextEditor ? (
-            <>
-              <Box sx={{
-                display: 'flex',
-                alignItems: 'center',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}>
-                <Box sx={{}}>
-                  <Typography variant="h5" align="left" color="text.secondary" paragraph
-                    sx={{ maxWidth: '500px' }}>
-                    {gotDataAbout.toptext}
-                  </Typography>
-                </Box>
-                <Button id="editTopBtn" variant="contained" onClick={handleOpenEdit}>Edit</Button>
-              </Box>
-            </>
-          ) :
-            <>
-              <Box sx={{
-                display: 'flex',
-                alignItems: 'center',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}>
-                <TextareaAutosize
-                  name="editForm"
-                  aria-label="minimum height"
-                  minRows={4}
-                  placeholder="Your Text here..."
-                  style={{ width: 350 }}
-                  defaultValue={gotDataAbout.toptext}
-                  onChange={handleOnEdit}
-                />
-                <Box sx={{
-                  mt: '30px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  gap: '30px',
-                }}>
-                  <Button variant="contained" disabled={viewSave} onClick={handleSaveTopText}>Save</Button>
-                  <Button id="editTopBtnClose" variant="contained" onClick={handleOpenEdit}>Close</Button>
-                </Box>
-              </Box>
-            </>
-          }
-        </Box>
-
-        <div className={styles.aboutMainPicture} >
-          <img src={`${localhost + nameMainPhoto}`} />
-        </div>
-        <Box sx={{
-          display: 'flex',
-          gap: '37px',
-          width: '60%',
-          mx: 'auto'
-        }}>
-
-          <Button variant="contained" component="label" >
-            Select Main Photo
-            <input name="loading_teamPhoto"
-              hidden
-              accept="image/*"
-              type="file"
-              onChange={e => { setFile(e.target.files[0]) }}
-            />
-          </Button>
-          <Button variant="contained"
-            component="label"
-            id='uploadMainPhoto'
-            onClick={upload}>
-            Upload
-          </Button>
-        </Box>
+          mb: '15px',
+        }}>      </Typography>
 
         <Box sx={{
-          mb: '50px',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',       
+          gap: '50px',
+          mx: 'auto',
+          alignItems: 'center'
         }}>
           <Typography sx={{
             textAlign: 'center',
             fontSize: '25px',
-            py: '30px',            
-          }}>Our Team</Typography>
+          }}>Edit data on About page</Typography>
           <Box sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '50px',
-            px: '50px',
-            justifyContent: 'center',
+            //display: 'flex',
+            //gap: '10px',
+            //alignItems: 'center',
+            //width: '100%',
+            //mx: 'auto'
           }}>
-            {newRosterTeam?.map((item, index) => {
-              return <Box sx={{
-                display: 'flex',                
-                flexBasis: '50%',
-                my: '10px',              
-              }} key={index} >
-                <CardItem id={item.id}
-                  firstname={item.firstname}
-                  lastname={item.lastname}
-                  position={item.position}
-                  image={item.personimage}
-                  editpage={editPage}
-                />
-              </Box>
-            })}
-          </Box>
-          {!addToRoster ? (
-            <>
-              <IconButton onClick={() => changeStatusAddCardForm('open')} color="primary"
-                sx={{
-                  width: '55px',
-                  height: '55px',
-                }}>
-                <PersonAddAlt1Icon sx={{
-                  mt: '25px',
-                  width: '55px',
-                  height: '55px',
-                }} />
-              </IconButton>
-            </>
-          ) :
-            <>
-              <Box sx={{
-                margin: '50px',
-              }}>
-                <Typography variant="h5" align="left" color="text.secondary" paragraph>
-                  Добавление нового сотрудника
-                </Typography>
-
+            {!mainTextEditor ? (
+              <>
                 <Box sx={{
                   display: 'flex',
-                  flexDirection: 'column',
-                  gap: '30px',
                   alignItems: 'center',
-                  //width: '60%',
-                  mx: 'auto'
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
                 }}>
-                  <Box sx={{
-                    display: 'flex',
-                    gap: '10px',
-                  }}>
-                    <Button variant="contained" component="label" >
-                      Select Person Photo
-                      <input name="loading_personPhoto"
-                        hidden
-                        accept="image/*"
-                        type="file"
-                        onChange={e => { setFile(e.target.files[0]) }}
-                      />
-                    </Button>
+                  <Box sx={{}}>
+                    <Typography variant="h5" align="left" color="text.secondary" paragraph
+                      sx={{ maxWidth: '500px' }}>
+                      {gotDataAbout.toptext}
+                    </Typography>
                   </Box>
-                  <TextField onChange={handleOnInputDataPerson} id="firstName" label="FirstName" variant="outlined" />
-                  <TextField onChange={handleOnInputDataPerson} id="lastName" label="LastName" variant="outlined" />
-                  <TextField onChange={handleOnInputDataPerson} id="position" label="Position" variant="outlined" />
-                  <Box sx={{
-                    display: 'flex',
-                    gap: '10px',
-                  }}>
-                    <Button variant="contained"
-                      component="label"
-                      id='uploadPersonPhoto'
-                      onClick={upload}>
-                      Apply
-                    </Button>
-                    <Button variant="contained"
-                      component="label"
-                      onClick={() => changeStatusAddCardForm('close')}>
-                      Close
-                    </Button>
-                  </Box>
+                  <Button id="editTopBtn" variant="contained" onClick={handleOpenEdit}>Edit</Button>
                 </Box>
-              </Box>
-            </>}
-        </Box>
-        <Box sx={{ mb: '50px' }}>
-          <Typography sx={{
-            textAlign: 'center',
-            fontSize: '25px',
-            mb: '30px'
-          }}>Edit contacts</Typography>
-          <Box >
-            <Box sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}>
-              {
-                !contactsEditor ? (
-                  <>
-                    <Button id="editContactsBtn" variant="contained" onClick={handleOpenEdit}>Edit</Button>
-                  </>
-                ) :
+              </>
+            ) :
+              <>
+                <Box sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}>
+                  <TextareaAutosize
+                    name="editForm"
+                    aria-label="minimum height"
+                    minRows={4}
+                    placeholder="Your Text here..."
+                    style={{ width: 350 }}
+                    defaultValue={gotDataAbout.toptext}
+                    onChange={handleOnEdit}
+                  />
                   <Box sx={{
+                    mt: '30px',
                     display: 'flex',
-                    flexDirection: 'column',
                     justifyContent: 'space-between',
                     gap: '30px',
                   }}>
-                    <TextField onChange={handleOnInputContacts} id="Address" label="Address" variant="outlined" />
-                    <TextField onChange={handleOnInputContacts} id="Phone" label="Phone" variant="outlined" />
-                    <TextField onChange={handleOnInputContacts} id="Email" label="Email" variant="outlined" />
+                    <Button variant="contained" disabled={viewSave} onClick={handleSaveTopText}>Save</Button>
+                    <Button id="editTopBtnClose" variant="contained" onClick={handleOpenEdit}>Close</Button>
+                  </Box>
+                </Box>
+              </>
+            }
+          </Box>
+
+          <div className={styles.aboutMainPicture} >
+            <img src={`${localhost + nameMainPhoto}`} />
+          </div>
+          <Box sx={{
+            display: 'flex',
+            gap: '37px',
+          }}>
+            <Button variant="contained" component="label" >
+              Select Main Photo
+              <input name="loading_teamPhoto"
+                hidden
+                accept="image/*"
+                type="file"
+                onChange={e => { setFile(e.target.files[0]) }}
+              />
+            </Button>
+            <Button variant="contained"
+              component="label"
+              id='uploadMainPhoto'
+              onClick={upload}>
+              Upload
+            </Button>
+          </Box>
+
+          <Box sx={{
+            mb: '50px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+            <Typography sx={{
+              textAlign: 'center',
+              fontSize: '25px',
+              py: '30px',
+            }}>Our Team</Typography>
+            <Box sx={{
+              display: 'flex',                
+              flexBasis: '50%',
+              flexWrap: 'wrap',  
+              gap: '50px', 
+              my: '25px',
+              // display: 'flex',
+              // flexDirection: 'row',
+              // flexWrap: 'wrap',
+              // width: '100%',
+              // alignItems: 'flex-start',
+              justifyContent: 'center'
+            }}>
+              {newRosterTeam?.map((item, index) => {
+                return <Box sx={{
+                  display: 'flex',
+                  position: 'relative',                
+                //flexBasis: '50%',
+                my: '10px',  
+                  // flex: '33.33%',
+                  // //maxWidth: '33.33%', 
+                  // justifyContent: 'space-between'
+                }} key={index} >
+                  <CardItem id={item.id}
+                    firstname={item.firstname}
+                    lastname={item.lastname}
+                    position={item.position}
+                    image={item.personimage}
+                    editpage={editPage} />
+                </Box>
+              })}
+
+            </Box>
+            {!addToRoster ? (
+              <>
+                <IconButton onClick={() => changeStatusAddCardForm('open')} color="primary"
+                  sx={{
+                    width: '55px',
+                    height: '55px',
+                  }}>
+                  <PersonAddAlt1Icon sx={{
+                    mt: '25px',
+                    width: '55px',
+                    height: '55px',
+                  }} />
+                </IconButton>
+              </>
+            ) :
+              <>
+                <Box sx={{
+                  margin: '50px',
+                }}>
+                  <Typography variant="h5" align="left" color="text.secondary" paragraph>
+                    Добавление нового сотрудника
+                  </Typography>
+
+                  <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '30px',
+                    alignItems: 'center',
+                    //width: '60%',
+                    mx: 'auto'
+                  }}>
                     <Box sx={{
                       display: 'flex',
-                      gap: '37px',
-                      mx: 'auto',
-                      //mt: '30px',
+                      gap: '10px',
                     }}>
-                      <Box sx={{
-                        display: 'flex',
-                        width: '100%',
-                        justifyContent: 'space-between',
-                        gap: '30px',
-                      }}>
-                        <Button variant="contained" id='uploadContacts' onClick={upload}>Save</Button>
-                        <Button id="editContactsBtnClose" variant="contained" onClick={handleOpenEdit}>Close</Button>
-                      </Box>
+                      <Button variant="contained" component="label" >
+                        Select Person Photo
+                        <input name="loading_personPhoto"
+                          hidden
+                          accept="image/*"
+                          type="file"
+                          onChange={e => { setFile(e.target.files[0]) }}
+                        />
+                      </Button>
+                    </Box>
+                    <TextField onChange={handleOnInputDataPerson} id="firstName" label="FirstName" variant="outlined" />
+                    <TextField onChange={handleOnInputDataPerson} id="lastName" label="LastName" variant="outlined" />
+                    <TextField onChange={handleOnInputDataPerson} id="position" label="Position" variant="outlined" />
+                    <Box sx={{
+                      display: 'flex',
+                      gap: '10px',
+                    }}>
+                      <Button variant="contained"
+                        component="label"
+                        id='uploadPersonPhoto'
+                        onClick={upload}>
+                        Apply
+                      </Button>
+                      <Button variant="contained"
+                        component="label"
+                        onClick={() => changeStatusAddCardForm('close')}>
+                        Close
+                      </Button>
                     </Box>
                   </Box>
-              }
+                </Box>
+              </>}
+          </Box>
+          <Box sx={{ mb: '50px' }}>
+            <Typography sx={{
+              textAlign: 'center',
+              fontSize: '25px',
+              mb: '30px'
+            }}>Edit contacts</Typography>
+            <Box >
+              <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}>
+                {
+                  !contactsEditor ? (
+                    <>
+                      <Button id="editContactsBtn" variant="contained" onClick={handleOpenEdit}>Edit</Button>
+                    </>
+                  ) :
+                    <Box sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      gap: '30px',
+                    }}>
+                      <TextField onChange={handleOnInputContacts} id="Address" label="Address" variant="outlined" />
+                      <TextField onChange={handleOnInputContacts} id="Phone" label="Phone" variant="outlined" />
+                      <TextField onChange={handleOnInputContacts} id="Email" label="Email" variant="outlined" />
+                      <Box sx={{
+                        display: 'flex',
+                        gap: '37px',
+                        mx: 'auto',
+                        //mt: '30px',
+                      }}>
+                        <Box sx={{
+                          display: 'flex',
+                          width: '100%',
+                          justifyContent: 'space-between',
+                          gap: '30px',
+                        }}>
+                          <Button variant="contained" id='uploadContacts' onClick={upload}>Save</Button>
+                          <Button id="editContactsBtnClose" variant="contained" onClick={handleOpenEdit}>Close</Button>
+                        </Box>
+                      </Box>
+                    </Box>
+                }
+              </Box>
             </Box>
           </Box>
         </Box>
-      </Box>
+
+
+      </Container>
+
     </>
   )
 }
