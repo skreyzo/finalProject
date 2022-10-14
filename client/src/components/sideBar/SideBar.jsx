@@ -1,14 +1,12 @@
+import styles from "./sideBar.module.css";
 
-import {
-  AccountBox,
-  Article,
-  Group,
-  Home,
-  ModeNight,
-  Person,
-  Settings,
-  Storefront,
-} from "@mui/icons-material";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import AnnouncementOutlinedIcon from '@mui/icons-material/AnnouncementOutlined';
+import LocalActivityOutlinedIcon from '@mui/icons-material/LocalActivityOutlined';
+import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
+import Diversity2OutlinedIcon from '@mui/icons-material/Diversity2Outlined';
+import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
+
 import {
   Box,
   List,
@@ -20,7 +18,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./sideBar.module.css";
+
 
 // const useStyles = styles(() => ({
 //     root: {
@@ -39,7 +37,7 @@ const Sidebar = ({mode,setMode}) => {
             <ListItemButton className={styles.ListItemButton} 
             component={Link} to="/">
               <ListItemIcon >
-                <Home className={styles.icon__sideBare}/>
+                <HomeOutlinedIcon className={styles.icon__sideBare}/>
               </ListItemIcon>
              {/*  <ListItemText primary="Homepage" /> */}
             </ListItemButton>
@@ -48,7 +46,7 @@ const Sidebar = ({mode,setMode}) => {
             <ListItemButton className={styles.ListItemButton} 
             component={Link} to="/news">
               <ListItemIcon>
-                <Article className={styles.icon__sideBare}/>
+                <AnnouncementOutlinedIcon className={styles.icon__sideBare}/>
               </ListItemIcon>
              {/*  <ListItemText primary="Pages" /> */}
             </ListItemButton>
@@ -56,7 +54,7 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton className={styles.ListItemButton} component={Link} to="/events">
               <ListItemIcon>
-                <Group className={styles.icon__sideBare}/>
+                <LocalActivityOutlinedIcon className={styles.icon__sideBare}/>
               </ListItemIcon>
              {/*  <ListItemText primary="Groups" /> */}
             </ListItemButton>
@@ -64,7 +62,7 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton className={styles.ListItemButton} component={Link} to="/education">
               <ListItemIcon>
-                <Storefront className={styles.icon__sideBare}/>
+                <SchoolOutlinedIcon className={styles.icon__sideBare}/>
               </ListItemIcon>
              {/*  <ListItemText primary="Marketplace" /> */}
             </ListItemButton>
@@ -72,7 +70,7 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton className={styles.ListItemButton} component={Link} to="/aboutUs">
               <ListItemIcon>
-                <Person className={styles.icon__sideBare}/>
+                <Diversity2OutlinedIcon className={styles.icon__sideBare}/>
               </ListItemIcon>
              {/*  <ListItemText primary="Friends" /> */}
             </ListItemButton>
@@ -80,7 +78,7 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton className={styles.ListItemButton} component={Link} to="/donate">
               <ListItemIcon>
-                <Settings className={styles.icon__sideBare}/>
+                <CurrencyExchangeOutlinedIcon className={styles.icon__sideBare}/>
               </ListItemIcon>
               {/* <ListItemText primary="Settings" /> */}
             </ListItemButton>
