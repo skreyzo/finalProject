@@ -49,9 +49,9 @@ const NewsAdmin = ({ el, delNewsHandler }) => {
           </Button>
           
           <form action={`admin/editnewspage/${el.id}`}>
-            <Button type="submit" size="small">
+            {/* <Button type="submit" size="small">
               Edit
-            </Button>
+            </Button> */}
           </form>
         </CardActions>
         </Item>
