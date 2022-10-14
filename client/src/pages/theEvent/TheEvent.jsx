@@ -13,16 +13,16 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Unstable_Grid2";
+import style from "./theEvent.module.css";
 
 const TheEvent = () => {
-
   const localhost = "http://localhost:3010/";
   let { id } = useParams();
   const [theEvent, setTheEvent] = useState({});
-  console.log('paramId======>', id)
+  console.log("paramId======>", id);
 
   //registration to event states
-  const [regInfo, setRegInfo] = useState({ ticketQT: 0 })
+  const [regInfo, setRegInfo] = useState({ ticketQT: 0 });
 
   React.useEffect(() => {
     (async () => {
@@ -30,20 +30,20 @@ const TheEvent = () => {
         method: "GET",
         credentials: "include",
       });
-      const [data] = (await res.json()) || [];      
-      setTheEvent(data);          
+      const [data] = (await res.json()) || [];
+      setTheEvent(data);
     })();
   }, []);
-  
+
   const onChangeRegHandler = (event) => {
-    console.log('event.target=======>', event.target.value)
+    console.log("event.target=======>", event.target.value);
     setRegInfo({ ticketQT: event.target.value });
-  }; 
-  
+  };
+
   const onSubmitRegHandler = async (event) => {
     event.preventDefault();
     try {
-/*       const data = new FormData();
+      /*       const data = new FormData();
       console.log('regInfo============>', regInfo)
       data.append("ticketQT", regInfo);
       console.log('data============>', data) */
@@ -52,15 +52,15 @@ const TheEvent = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        }, 
+        },
         body: JSON.stringify(regInfo),
-       // body: data,
+        // body: data,
       });
       setRegInfo({
-        ticketQT: 0,        
+        ticketQT: 0,
       });
 
-/*       const res = await fetch(`http://localhost:3010/eventpage/${id}`, {
+      /*       const res = await fetch(`http://localhost:3010/eventpage/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,16 +78,36 @@ const TheEvent = () => {
   };
 
   return (
-    <>    
-    <div >
-      <img src={`${localhost + theEvent.eventphotolink}`} alt="There is a photo here" />
-    </div>
+    <>
+      <div className={style.text}>
+        <Typography variant="h5" color="text.secondary">
+          <h1>{theEvent.title}</h1>
+        </Typography>
+      </div>
 
-    <Typography variant="h5" align="left" color="text.secondary" paragraph>
-      {theEvent.description}
-    </Typography>
+      <div>
+        <img
+          className={style.img}
+          src={`${localhost + theEvent.eventphotolink}`}
+          alt="There is a photo here"
+        />
+      </div>
+      <div className={style.text}>
+        <Typography variant="h5" align="left" color="text.secondary" paragraph>
+          {theEvent.description}
+        </Typography>
+        <Typography variant="h5" align="left" color="text.secondary" paragraph>
+          Price: {theEvent.price}
+        </Typography>
+        <Typography variant="h5" align="left" color="text.secondary" paragraph>
+          Place: {theEvent.address}
+        </Typography>
+        <Typography variant="h5" align="left" color="text.secondary" paragraph>
+          Date: {theEvent.dataTime}
+        </Typography>
+      </div>
 
-    <Typography
+      {/* <Typography
         sx={{
           textAlign: "center",
           fontSize: "25px",
@@ -124,62 +144,62 @@ const TheEvent = () => {
             mx: "auto",
           }}
         >
-          <form onSubmit={onSubmitRegHandler}>
-            <TextField
-              id="outlined-basic"
-              label="ticketQT..."
-              style={{ width: 200 }}
-              type="number"
-              variant="outlined"
-              margin="normal"
-              name="ticketQT"
-              onChange={onChangeRegHandler}
-              value={regInfo.ticketQT}
-            />
+//           <form onSubmit={onSubmitRegHandler}>
+//             <TextField
+//               id="outlined-basic"
+//               label="ticketQT..."
+//               style={{ width: 200 }}
+//               type="number"
+//               variant="outlined"
+//               margin="normal"
+//               name="ticketQT"
+//               onChange={onChangeRegHandler}
+//               value={regInfo.ticketQT}
+//             /> */}
 
-{/*             <br />
-            <Box
-              sx={{
-                display: "flex",
-                gap: "37px",
-                width: "-60%",
-                mx: "auto",
-              }}
-            >
+      {/*             <br />
+//             <Box
+//               sx={{
+//                 display: "flex",
+//                 gap: "37px",
+//                 width: "-60%",
+//                 mx: "auto",
+//               }}
+//             >
 
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Stack spacing={3}>
-                  <DateTimePicker
-                    label="Date&Time picker"
-                    value={valueDataTime}
-                    onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </Stack>
-              </LocalizationProvider>
-              <Button variant="contained" component="label">
-                Select Event Photo
-                <input
-                  name="eventphotolink"
-                  hidden
+//               <LocalizationProvider dateAdapter={AdapterDayjs}>
+//                 <Stack spacing={3}>
+//                   <DateTimePicker
+//                     label="Date&Time picker"
+//                     value={valueDataTime}
+//                     onChange={handleChange}
+//                     renderInput={(params) => <TextField {...params} />}
+//                   />
+//                 </Stack>
+//               </LocalizationProvider>
+//               <Button variant="contained" component="label">
+//                 Select Event Photo
+//                 <input
+//                   name="eventphotolink"
+//                   hidden
 
-                  accept="image/*"
-                  type="file"
-                  onChange={(e) => {
-                    setFilePhotoEvent(e.target.files[0]);
-                  }}
-                />
-              </Button>
-            </Box>
-            <br /> */}
+//                   accept="image/*"
+//                   type="file"
+//                   onChange={(e) => {
+//                     setFilePhotoEvent(e.target.files[0]);
+//                   }}
+//                 />
+//               </Button>
+//             </Box>
+//             <br /> */}
 
-            <Button variant="contained" type="submit" margin="normal">
-              Save
-            </Button>
-          </form>
+      {/* //             <Button variant="contained" type="submit" margin="normal">
+//               Save
+//             </Button> */}
+      {/* </form>
         </Box>
-      </Box>
-  </>  
+      </Box> */}
+    </>
   );
 };
 

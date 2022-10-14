@@ -44,18 +44,18 @@ const News = (news) => {
           {news.body}
           </Typography>
         </CardContent>
-            <CardActions>
+            {/* <CardActions> */}
 
 
 
     
           
-          <form action={`/news/${news.id}`}>
+          {/* <form action={`/news/${news.id}`}>
             <Button type="submit" size="small">
               Details
-            </Button>
-          </form>
-        </CardActions>
+            </Button> */}
+          {/* </form> */}
+        {/* </CardActions> */}
         </Item>
           </Grid>
         </Grid>
