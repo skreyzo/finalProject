@@ -14,10 +14,9 @@ function App() {
       <BrowserRouter>
         <Container maxWidth={false} disableGutters={true}
           sx={{
-            className: 'footer',
-            maxWidth: '100vw',
-            mx: "auto",
-            // px: '10px',
+            maxWidth: '1200px',
+            mx: '',
+            px: '10px',
             wordWrap: 'break-word',
           }}>
           <Box sx={{
@@ -32,10 +31,10 @@ function App() {
               flexBasis: 'auto',
             }}>
               <Main />
-            </Box>
-            <Footer sx={{}} />
+            </Box>            
           </Box>
         </Container>
+        <Footer />
 
       </BrowserRouter>
     </Provider>

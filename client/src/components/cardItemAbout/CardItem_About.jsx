@@ -32,14 +32,22 @@ const CardItem = (props) => {
       <Card sx={{
         height: '100%',
         width: '100%',
-        position: 'relative',
+        // position: 'relative',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        px: '45px'
       }}>
         <CardMedia
           component="img"
           image={localhost + props.image}
           alt="photo"
+          sx={{
+            //display: inlineBlock,
+            width: '200px',
+            height: '200px',
+            borderRadius: '50%',
+          }}
           />
         <CardContent >
           <Box sx={{

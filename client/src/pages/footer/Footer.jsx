@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { defContacts } from "../../reducers/contactsReducer";
 import styles from "./footer.module.css";
 import { Link } from 'react-router-dom';
+import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 // import FacebookIcon from '@mui/icons-material/Facebook';
@@ -22,74 +23,96 @@ const Footer = () => {
         credentials: "include",
       });
       const data = (await res.json()) || [];
-      const {address, phone, email} = data;
-      const contacts = {address, phone, email};
+      const { address, phone, email } = data;
+      const contacts = { address, phone, email };
       console.log('contactsFooterDB', contacts)
       dispatch((defContacts(contacts)));
       //setDataContacts(contacts);     
     })();
   }, []);
   return (
+
     <div className={styles.footer}>
-      <Box sx={{
-        display: 'flex',
-        alignItems: 'center'
-      }}>
+      <Container maxWidth={false} disableGutters={true}
+        sx={{
+          maxWidth: '1200px',
+          mx: '',
+          px: '10px',
+          wordWrap: 'break-word',
+        }}>
         <Box sx={{
           display: 'flex',
-          flex: '50%',
-          // flexDirection: 'column',
+          alignItems: 'center'
         }}>
           <Box sx={{
             display: 'flex',
             flex: '50%',
-            flexDirection: 'column',
+            // flexDirection: 'column',
           }}>
-            <Link className={styles.link} to='/contact'>Contact us</Link>
-            <Link className={styles.link} to='/join'>Join us</Link>
+            <Box sx={{
+              display: 'flex',
+              flex: '50%',
+              flexDirection: 'column',
+            }}>
+              <Link className={styles.link} to='/contact'>About Us</Link>
+              <Link className={styles.link} to='/join'>Join us</Link>
+              <Typography>For vollunteers</Typography>
+              <Typography>Ladership</Typography>
+              <Typography>Information for hosts</Typography>
+              <Typography>Our Mission</Typography>
+              <Typography>Workaway Blog</Typography>
+              <Typography>Privacy policy</Typography>
+              <Typography>FAQ</Typography>              
+            </Box>
+            <Box sx={{
+              display: 'flex',
+              flex: '50%',
+              flexDirection: 'column',
+            }}>
+              <Typography>{contacts.address}</Typography>
+              <Typography>{contacts.phone}</Typography>
+              <Typography>{contacts.email}</Typography>
+            </Box>
           </Box>
           <Box sx={{
             display: 'flex',
             flex: '50%',
-            flexDirection: 'column',
+            alignItems: 'end',
+            justifyContent: 'end',          
           }}>
-            <Typography>{contacts.address}</Typography>
-            <Typography>{contacts.phone}</Typography>
-            <Typography>{contacts.email}</Typography>
+            <Box sx={{
+              display: 'flex',
+              gap: '10px',
+              flexDirection: 'column', 
+            }}>
+              <Typography>FOLLOW US</Typography>
+              <Box sx={{
+                display: 'flex',
+                flex: '50%',
+                gap: '10px',
+              }}>
+                <span className={styles.icon}>
+                  <img src="http://localhost:3010/img/facebook.svg" alt="" />
+                </span>
+                <span className={styles.icon}>
+                  <img src="http://localhost:3010/img/telegram.svg" alt="" />
+                </span>
+                <span className={styles.icon}>
+                  <img src="http://localhost:3010/img/instagram.svg" alt="" />
+                </span>
+              </Box>
+            </Box>            
           </Box>
         </Box>
         <Box sx={{
-          display: 'flex',
-          flex: '50%',
-          gap: '10px',
-          flexDirection: 'column',
+          textAlign: 'center',
+          mt: '15px'
         }}>
-          <Box sx={{
-            display: 'flex',
-            flex: '50%',
-            gap: '10px',
-            justifyContent: 'end',            
-          }}>
-            <span className={styles.icon}>
-              <img src="http://localhost:3010/img/facebook.svg" alt="" />
-            </span>
-            <span className={styles.icon}>
-              <img src="http://localhost:3010/img/telegram.svg" alt="" />
-            </span>
-            <span className={styles.icon}>
-              <img src="http://localhost:3010/img/instagram.svg" alt="" />
-            </span>
-          </Box>          
-        </Box>
-      </Box>
-      <Box sx={{
-        textAlign: 'center',
-        mt: '15px'
-    }}>
-            <Typography >
+          <Typography >
             © Copyright 2022 Community Co. All rights reserved. Community Co®
-            </Typography>
-          </Box>
+          </Typography>
+        </Box>
+      </Container>
 
     </div>
   );

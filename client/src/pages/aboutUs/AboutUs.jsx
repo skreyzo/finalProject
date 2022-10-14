@@ -55,19 +55,16 @@ const AboutUs = () => {
       }}>
 
         <Box sx={{
-          display: 'flex',                
-          flexBasis: '50%',
-          //my: '10px',  
-          // display: 'flex',
-          fleWrap: 'wrap',  
-          gap: '50px', 
-          my: '150px',      
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '50px',
+          px: '50px',
+          justifyContent: 'center',  
+          my: '70px', 
         }}>
           {newRosterTeam.map((item, index) => {
             return <Box sx={{
-              display: 'flex',                
-                flexBasis: '50%',
-                my: '10px',  
+              flex: '33.33%', 
             }} 
               key={index} >
               <CardItem id={item.id}
