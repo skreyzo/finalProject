@@ -4,12 +4,16 @@ const router = express.Router();
 const {
     getUserInfo,
     putUserInfo,
+    buyTicket,
 } = require("../controllers/profileControllers");
 
 
 router
-  .route("/")
+/*   .route("/")
   .get(getUserInfo)
-  .put(putUserInfo)
+  .put(putUserInfo) */
+
+  .route("/")
+  .get(buyTicket)
   
 module.exports = router;
