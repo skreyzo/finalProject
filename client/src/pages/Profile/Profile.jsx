@@ -13,6 +13,11 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Unstable_Grid2";
+import { CardActionArea, CardActions } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import MuiGrid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
+
 
 const Profile = () => {
 
@@ -21,28 +26,83 @@ const Profile = () => {
   //const eventUserStore = useSelector((store) => store.event.event);
 
   const [eventUser, setEventUser] = useState([]);
-  console.log("eventUser=========>", eventUser);
+  
 
   React.useEffect(() => {
-    (async () => {
-      const res = await fetch("http://localhost:3010/eventpage", {
+    const fetchData = async () => {
+      const result = await fetch("http://localhost:3010/profile", {
         method: "GET",
         credentials: "include",
       });
-      const data = (await res.json()) || [];
-      console.log("data:", data);
-      setEventUser(data); 
-      //dispatch(initEvents(data));
-      console.log("eventUser:", eventUser);  
-    })();
+      
+      //console.log("data:", await result.json());
+      const arrais = await result.json()
+      setEventUser(arrais);
+      console.log("eventUser:", eventUser);
+    };
+    fetchData();
   }, []);
 
-  
+  console.log("eventUser=========>", eventUser);
 
   return (
     <>
-  
-      {eventUser.map((el) => (
+  {/* {eventUser.map((el) => ( <div>{localhost + el.eventphotolink}</div> ))} */}
+  <Grid container>
+  <Grid item xs>
+    content
+  </Grid>
+  <Divider orientation="vertical" flexItem>
+    
+  </Divider>
+  <Grid item xs>
+    {eventUser.map((el) => (  <Card sx={{ maxWidth: 345 , margin: "100px"}} key={el.id}>
+      
+      <CardActionArea component={Link} to={`/events/${el.id}`}>
+        <CardMedia
+          component="img"
+          height="140"
+          image={localhost + el.eventphotolink}
+          alt="green iguana"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+           {el.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          {`${el.description.slice(0, 50)}...`}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          {`Event date: ${el.dataTime}`}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          {`Address: ${el.address}`}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          {`ticketQT: ${el['Orders.ticketQT']}`}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          {`totalprice: ${el['Orders.totalprice']}`}
+          </Typography>          
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="error">
+          Delete
+        </Button>
+      </CardActions>
+      
+    </Card> ))}
+  </Grid>
+</Grid>
+
+
+
+
+
+
+
+      {/* {eventUser.map((el) => (
          
         
         <Card sx={{ display: "flex", margin: "100px" }} key={el.id}>
@@ -84,6 +144,12 @@ const Profile = () => {
                 <Typography component="div" variant="h6">
                   {`price: ${el.price}`}
                 </Typography>
+                <Typography component="div" variant="h6">
+                  {`totalprice: ${el['Orders.totalprice']}`}
+                </Typography>
+                <Typography component="div" variant="h6">
+                  {`ticketQT: ${el['Orders.ticketQT']}`}
+                </Typography>
                 <Button size="small" component={Link} to={`/events/${el.id}`}>
                   Details
                 </Button>
@@ -91,7 +157,7 @@ const Profile = () => {
             </Box>
           </Box>
         </Card>
-      ))}
+      ))} */}
     
     </>
   );
