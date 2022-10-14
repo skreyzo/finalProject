@@ -20,11 +20,15 @@
   color: inherit;
   pointer-events: none;
 }
+.icon:hover{  
+  /* transition: all .15s ease; */
+  transition: transform 250ms linear;
+  transform: scale(1.2);
+}
 
 .footer{
 background-color: #333;
 color: #FFF;
-padding: 25px 50px;
+padding: 25px 0px;
 }
-
 

@@ -107,7 +107,7 @@ const TheEvent = () => {
         </Typography>
       </div>
 
-      {/* <Typography
+      <Typography
         sx={{
           textAlign: "center",
           fontSize: "25px",
@@ -144,61 +144,61 @@ const TheEvent = () => {
             mx: "auto",
           }}
         >
-//           <form onSubmit={onSubmitRegHandler}>
-//             <TextField
-//               id="outlined-basic"
-//               label="ticketQT..."
-//               style={{ width: 200 }}
-//               type="number"
-//               variant="outlined"
-//               margin="normal"
-//               name="ticketQT"
-//               onChange={onChangeRegHandler}
-//               value={regInfo.ticketQT}
-//             /> */}
+           <form onSubmit={onSubmitRegHandler}>
+             <TextField
+               id="outlined-basic"
+             label="ticketQT..."
+               style={{ width: 200 }}
+               type="number"
+               variant="outlined"
+               margin="normal"
+               name="ticketQT"
+               onChange={onChangeRegHandler}
+               value={regInfo.ticketQT}
+            /> 
 
       {/*             <br />
-//             <Box
-//               sx={{
-//                 display: "flex",
-//                 gap: "37px",
-//                 width: "-60%",
-//                 mx: "auto",
-//               }}
-//             >
+             <Box
+               sx={{
+                 display: "flex",
+                 gap: "37px",
+                 width: "-60%",
+                 mx: "auto",
+               }}
+             >
 
-//               <LocalizationProvider dateAdapter={AdapterDayjs}>
-//                 <Stack spacing={3}>
-//                   <DateTimePicker
-//                     label="Date&Time picker"
-//                     value={valueDataTime}
-//                     onChange={handleChange}
-//                     renderInput={(params) => <TextField {...params} />}
-//                   />
-//                 </Stack>
-//               </LocalizationProvider>
-//               <Button variant="contained" component="label">
-//                 Select Event Photo
-//                 <input
-//                   name="eventphotolink"
-//                   hidden
+               <LocalizationProvider dateAdapter={AdapterDayjs}>
+                 <Stack spacing={3}>
+                   <DateTimePicker
+                     label="Date&Time picker"
+                     value={valueDataTime}
+                     onChange={handleChange}
+                     renderInput={(params) => <TextField {...params} />}
+                   />
+                 </Stack>
+               </LocalizationProvider>
+               <Button variant="contained" component="label">
+                 Select Event Photo
+                 <input
+                   name="eventphotolink"
+                   hidden
 
-//                   accept="image/*"
-//                   type="file"
-//                   onChange={(e) => {
-//                     setFilePhotoEvent(e.target.files[0]);
-//                   }}
-//                 />
-//               </Button>
-//             </Box>
-//             <br /> */}
+                   accept="image/*"
+                   type="file"
+                   onChange={(e) => {
+                     setFilePhotoEvent(e.target.files[0]);
+                   }}
+                 />
+               </Button>
+             </Box>
+             <br /> */}
 
-      {/* //             <Button variant="contained" type="submit" margin="normal">
-//               Save
-//             </Button> */}
-      {/* </form>
+             <Button variant="contained" type="submit" margin="normal">
+             Save
+            </Button> 
+      </form>
         </Box>
-      </Box> */}
+      </Box> 
     </>
   );
 };
