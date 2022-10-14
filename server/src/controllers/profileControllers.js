@@ -41,4 +41,10 @@ exports.buyTicket = async (req, res) => {
   }
 };
 
+exports.userdata = async (req, res) => {
+  const userData = await User.findOne({ where: { id: 2 }, raw: true });
+  console.log("userData>>>>>>>>>>>", userData);
+  res.json(userData);
+};
+
 

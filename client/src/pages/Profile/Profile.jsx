@@ -43,28 +43,89 @@ const Profile = () => {
         credentials: "include",
       });
       const arrais = await result.json()
-      setEventUser(arrais);      
+      setEventUser(arrais);
       console.log("eventUser:", eventUser);
-    };
-    
-/*     const resUser = await fetch('http://localhost:3010/profile/', {
+
+      const resUser = await fetch('http://localhost:3010/profile/userdata', {
         method: "GET",
         credentials: "include",
       });
       const userData = (await resUser.json()) || [];
-      console.log('data:', userData);
+      console.log('userData:', userData);
       const { id, firstName, lastName, email, userphotolink } = userData
       setPerson({ id, firstName, lastName, email, userphotolink });
-    }); */
-
-    fetchData();    
+    };
+    fetchData();
   }, []);
 
   return (
     <>
-  {/* {eventUser.map((el) => ( <div>{localhost + el.eventphotolink}</div> ))} */}
-  <Grid container>
-{/*   <Grid item xs>
+      <Box sx={{
+        display: 'flex',        
+        //my: '10px',
+        color: '#000',
+        justifyContent: 'center'
+      }}>
+        <Box sx={{
+          display: 'flex',
+          my: '10px',
+          color: '#000',
+          flexBasis: '50%',
+          justifyContent: 'center'          
+        }}>
+          <CardItem
+            id={person.id}
+            firstname={person.firstName}
+            lastname={person.lastName}
+            email={person.email}
+            image={person.userphotolink}
+          // editpage={editPage} 
+          />
+        </Box>
+
+        <Grid sx={{ justifyContent: 'center', display: "flex", alignItems: "center", flexDirection: "column" }} >
+          {eventUser.map((el) => (<Card sx={{ maxWidth: 345}} key={el.id}>
+            <CardActionArea component={Link} to={`/events/${el.id}`}>
+              <CardMedia
+                component="img"
+                height="140"
+                image={localhost + el.eventphotolink}
+                alt="green iguana"
+              />
+              <CardContent >
+                <Typography gutterBottom variant="h5" component="div">
+                  {el.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {`${el.description.slice(0, 50)}...`}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {`Event date: ${el.dataTime}`}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {`Address: ${el.address}`}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {`ticketQT: ${el['Orders.ticketQT']}`}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {`totalprice: ${el['Orders.totalprice']}`}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button size="small" color="error">
+                Delete
+              </Button>
+            </CardActions>
+
+          </Card>))}
+        </Grid>
+
+      </Box>
+      {/* {eventUser.map((el) => ( <div>{localhost + el.eventphotolink}</div> ))} */}
+      {/* <Grid container> */}
+      {/*   <Grid item xs>
            <Box>
         <Box sx={{
           display: 'flex',
@@ -86,7 +147,7 @@ const Profile = () => {
   <Divider orientation="vertical" flexItem>
     
   </Divider> */}
-{/*   <Grid item xs>
+      {/*   <Grid item xs>
     {eventUser.map((el) => (  <Card sx={{ maxWidth: 345 , margin: "100px"}} key={el.id}>
       
       <CardActionArea component={Link} to={`/events/${el.id}`}>
@@ -125,45 +186,8 @@ const Profile = () => {
       
     </Card> ))}
   </Grid> */}
-</Grid>
-<Grid sx={{ display: "flex", alignItems: "center", flexDirection: "column"}} >
-    {eventUser.map((el) => (  <Card sx={{ maxWidth: 345 , margin: "100px"}} key={el.id}>      
-      <CardActionArea component={Link} to={`/events/${el.id}`}>
-        <CardMedia
-          component="img"
-          height="140"
-          image={localhost + el.eventphotolink}
-          alt="green iguana"
-        />
-        <CardContent >
-          <Typography gutterBottom variant="h5" component="div">
-           {el.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-          {`${el.description.slice(0, 50)}...`}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-          {`Event date: ${el.dataTime}`}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-          {`Address: ${el.address}`}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-          {`ticketQT: ${el['Orders.ticketQT']}`}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-          {`totalprice: ${el['Orders.totalprice']}`}
-          </Typography>          
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="error">
-          Delete
-        </Button>
-      </CardActions>
-      
-    </Card> ))}
-  </Grid>
+      {/* </Grid> */}
+
     </>
   );
 };
