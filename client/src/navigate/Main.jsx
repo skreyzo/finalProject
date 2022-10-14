@@ -64,7 +64,7 @@ const Main = () => {
 
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("refreshToken")) {
       console.log("в сторе токен есть!!!!");
       dispatch(auth());
     } else {

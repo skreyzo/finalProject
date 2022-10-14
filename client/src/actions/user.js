@@ -30,7 +30,8 @@ export const signIn = (email, password) => {
                 password
             })
             dispatch(setUser(response.data.user))
-            localStorage.setItem('token', response.data.refreshToken)
+            localStorage.setItem('refreshToken', response.data.refreshToken)
+            
              console.log('~ response.data======+++++++========++++++=====', response.data)
             
         } catch (e) {
@@ -40,21 +41,25 @@ export const signIn = (email, password) => {
 }
 
  export const logout = async() => {
-    await axios.post(`${API_URL}/logout`);
+    await axios.post(`${API_URL}/logout`, {refreshToken: localStorage.getItem('refreshToken')});
     console.log('logout=========', logout)
-    localStorage.removeItem('token');            
+    localStorage.removeItem('refreshToken');            
 }
 
 export const auth =  () => {
     return async dispatch => {
         try {
-            const response = await axios.get(`${API_URL}/refresh`,
-            {credentials: 'include', headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}}
+            // const response = await axios.get(`${API_URL}/refresh`,
+            // {credentials: 'include', headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}}
+            // )
+            const response = await axios.post(`${API_URL}/refresh`,
+            {credentials: 'include', refreshToken: localStorage.getItem('refreshToken'), headers:{Authorization:`Bearer ${localStorage.getItem('refreshToken')}`}}
             )
             // const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true})
             console.log('~ response 1231231231211312', response)
             dispatch(setUser(response.data.user))
-            localStorage.setItem('token', response.data.accessToken)
+            // localStorage.setItem('accessToken', response.data.accessToken)
+            localStorage.setItem('refreshToken', response.data.refreshToken)
             console.log('~ response.data.accessToken>>>>>>>>>>>', response.data.accessToken)
         } catch (e) {
 

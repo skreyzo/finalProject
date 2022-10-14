@@ -11,10 +11,11 @@ router.post(
   body('password').isLength({ min: 8, max: 32 }), // валидация password по длине строки, от 8 до 32 символов
   registrationUser,
 );
-router.post('/login', loginUser);
+router.post('/login', authMiddleware, loginUser);
 router.post('/logout', logoutUser);
 router.get('/activate/:link', activateUser);
 // router.get('/refresh', refreshUserToken);
-router.get('/refresh', authMiddleware, refreshUserToken);
+// router.get('/refresh', authMiddleware, refreshUserToken);
+router.post('/refresh', authMiddleware, refreshUserToken);
 
 module.exports = router;
