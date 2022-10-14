@@ -35,7 +35,7 @@ exports.regEvent = async (req, res) => {
     UserId: 2,
     EventId: eventId,
   });
-
+  
   const ticketLeft = toEvent.ticket - ticketQT;
   console.log("ticketLeft========>", ticketLeft);
   const sellTicket = await Event.update(
@@ -43,9 +43,9 @@ exports.regEvent = async (req, res) => {
     { where: { id: eventId } }
   );
 
-  const listEventUser = await Event.findAll({
-    where: { id: 2 },
-    include: [{ model: User, trough: Order }],
+  const listEventUser = await Order.findAll({
+    where: { UserId: 2 },
+    /* include: [{ model: User, trough: Order }], */
     raw: true,
   });
   console.log("listEventUser========>", listEventUser);
