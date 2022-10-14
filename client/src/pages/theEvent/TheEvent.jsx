@@ -47,7 +47,7 @@ const TheEvent = () => {
       console.log('regInfo============>', regInfo)
       data.append("ticketQT", regInfo);
       console.log('data============>', data) */
-      //console.log('regInfo============>', regInfo)
+      console.log('regInfo============>', regInfo)
       const response = await fetch(`http://localhost:3010/eventpage/${id}`, {
         method: "POST",
         headers: {
@@ -107,7 +107,7 @@ const TheEvent = () => {
         </Typography>
       </div>
 
-      <Typography
+{/*       <Typography
         sx={{
           textAlign: "center",
           fontSize: "25px",
@@ -115,7 +115,7 @@ const TheEvent = () => {
         }}
       >
         Add Event Page
-      </Typography>
+      </Typography> */}
 
       <Box
         sx={{
@@ -132,7 +132,7 @@ const TheEvent = () => {
             fontSize: "25px",
           }}
         >
-          Edit something
+          Let's take part!
         </Typography>
 
         <Box
@@ -156,45 +156,9 @@ const TheEvent = () => {
                onChange={onChangeRegHandler}
                value={regInfo.ticketQT}
             /> 
-
-      {/*             <br />
-             <Box
-               sx={{
-                 display: "flex",
-                 gap: "37px",
-                 width: "-60%",
-                 mx: "auto",
-               }}
-             >
-
-               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                 <Stack spacing={3}>
-                   <DateTimePicker
-                     label="Date&Time picker"
-                     value={valueDataTime}
-                     onChange={handleChange}
-                     renderInput={(params) => <TextField {...params} />}
-                   />
-                 </Stack>
-               </LocalizationProvider>
-               <Button variant="contained" component="label">
-                 Select Event Photo
-                 <input
-                   name="eventphotolink"
-                   hidden
-
-                   accept="image/*"
-                   type="file"
-                   onChange={(e) => {
-                     setFilePhotoEvent(e.target.files[0]);
-                   }}
-                 />
-               </Button>
-             </Box>
-             <br /> */}
-
+            <br />
              <Button variant="contained" type="submit" margin="normal">
-             Save
+             participate
             </Button> 
       </form>
         </Box>

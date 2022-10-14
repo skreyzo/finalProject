@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./home.module.css";
 
-import { Box, CardMedia, Button, Link} from "@mui/material";
+import { Box, CardMedia, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import Image from 'mui-image'
 
 import Typography from "@mui/material/Typography";
@@ -72,7 +73,7 @@ const Home = () => {
           </div>
         </div>
         <div className={styles.desc}>
-          <Button variant="outlined">Read more news</Button>
+          <Button variant="outlined" component={Link} to={`/news`}>Read more news</Button>
           <p>As National Inclusion Week draws closer (26 September-2 October), Inclusive Employers, as the founders of National Inclusion, want to ensure organisations have all they need to celebrate, showcase and progress your inclusion journey.
           Here we share some of our consultants top tips for making the most of the week.
 
@@ -100,7 +101,7 @@ const Home = () => {
           <p>Join the hundreds of business owners who have already used the social media monetisation system to create amazing results!
 
           A full day of free business training for business owners looking to stop wasting money on ads that don't convert and to stop posting content for the sake of it. This simple 4-step system will give you the structure you need to successfully monetise your social media.</p>
-          <Button variant="outlined">More events</Button>
+          <Button variant="outlined" component={Link} to={`/events`}>More events</Button>
         </div>
       </Box>
     </>

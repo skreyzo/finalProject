@@ -116,41 +116,41 @@ const NavBar = ({ mode, setMode }) => {
                 >
                   Logout
                 </Link>
+                <Link
+                  style={{
+                    color: "#007FFF",
+                    textDecoration: "none",
+                    marginLeft: "20px",
+                    fontSize: "18px",
+                    fontWeight: "700",
+                  }}
+                  to="/profile/2"
+                >
+                  Profile
+                </Link>
               </Box>
             </>
           )}
-          <Link
-            style={{
-              color: "#007FFF",
-              textDecoration: "none",
-              marginLeft: "20px",
-              fontSize: "18px",
-              fontWeight: "700",
-            }}
-            to="/profile/2"
-          >
-            Profile
-          </Link>
 
-          {/*  {isAdmin && ( */}
-          <>
-            <Box>
-              <Link
-                style={{
-                  color: "#007FFF",
-                  textDecoration: "none",
-                  marginLeft: "20px",
-                  fontSize: "18px",
-                  fontWeight: "700",
-                }}
-                // className={styles.nav_link}
-                to="/admin"
-              >
-                Admin
-              </Link>
-            </Box>
-          </>
-          {/*  )} */}
+          {isAdmin && (
+            <>
+              <Box>
+                <Link
+                  style={{
+                    color: "#007FFF",
+                    textDecoration: "none",
+                    marginLeft: "20px",
+                    fontSize: "18px",
+                    fontWeight: "700",
+                  }}
+                  // className={styles.nav_link}
+                  to="/admin"
+                >
+                  Admin
+                </Link>
+              </Box>
+            </>
+          )}
         </StyledToolbar>
       </Container>
     </AppBar>

@@ -17,11 +17,11 @@ exports.getTheEvent = async (req, res) => {
 };
 
 exports.regEvent = async (req, res) => {
-  //console.log('req.body========>', req.body)
+  console.log('req.body========>', req.body)
   const { ticketQT } = req.body;
-  //console.log('ticketQT========>', ticketQT)
+  console.log('ticketQT========>', ticketQT)
   const eventId = req.params.id;
-  //console.log('eventId========>', eventId)
+  console.log('eventId========>', eventId)
   const toEvent = await Event.findOne({
     where: { id: eventId },
     raw: true,
